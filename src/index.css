@@ -591,10 +591,6 @@
     field-sizing: content;
   }
 
-  .aspect-\[2\/1\] {
-    aspect-ratio: 2;
-  }
-
   .aspect-square {
     aspect-ratio: 1;
   }
@@ -610,10 +606,6 @@
 
   .h-\[1px\] {
     height: 1px;
-  }
-
-  .h-full {
-    height: 100%;
   }
 
   .max-h-\[85vh\] {
@@ -700,10 +692,6 @@
 
   .grid-cols-10 {
     grid-template-columns: repeat(10, minmax(0, 1fr));
-  }
-
-  .grid-rows-1 {
-    grid-template-rows: repeat(1, minmax(0, 1fr));
   }
 
   .flex-col {

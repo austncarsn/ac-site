@@ -17,20 +17,6 @@ export function ProjectDetailModal({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-[calc(100%-2rem)] max-w-[900px] max-h-[85vh] overflow-y-auto p-0">
         <div style={{ padding: 'var(--space-8) var(--space-6)' }} className="md:p-12">
-          {/* Color Block Preview */}
-          <div 
-            className="aspect-[2/1] w-full overflow-hidden rounded-[6px] grid grid-cols-6 grid-rows-1"
-            style={{ marginBottom: 'var(--space-8)' }}
-          >
-            {project.previewColors.map((color, index) => (
-              <div
-                key={index}
-                style={{ backgroundColor: color }}
-                className="w-full h-full"
-              />
-            ))}
-          </div>
-
           {/* Header */}
           <DialogHeader style={{ marginBottom: 'var(--space-8)' }}>
             <DialogTitle style={{ marginBottom: 'var(--space-3)' }}>
