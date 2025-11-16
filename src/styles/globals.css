@@ -3,6 +3,37 @@
 /* Import Instrument Serif from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
+@layer utilities {
+  /* Project card hover colors - refined palette */
+  :root {
+    /* Sophisticated color palette for project hovers (RGB format) */
+    --project-color-indigo: 99, 102, 241;      /* #6366F1 */
+    --project-color-purple: 147, 51, 234;      /* #9333EA */
+    --project-color-pink: 236, 72, 153;        /* #EC4899 */
+    --project-color-rose: 244, 63, 94;         /* #F43F5E */
+    --project-color-amber: 245, 158, 11;       /* #F59E0B */
+    --project-color-emerald: 16, 185, 129;     /* #10B981 */
+    --project-color-cyan: 6, 182, 212;         /* #06B6D4 */
+    --project-color-slate: 100, 116, 139;      /* #64748B */
+    
+    /* Brand purple as RGB */
+    --project-color-brand: 107, 78, 255;       /* #6B4EFF */
+    
+    /* Hover opacity values */
+    --hover-opacity-light: 0.06;
+    --hover-opacity-light-active: 0.10;
+    --hover-border-opacity: 0.15;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hover-opacity-light: 0.08;
+      --hover-opacity-light-active: 0.12;
+      --hover-border-opacity: 0.10;
+    }
+  }
+}
+
 @layer base {
   :root {
     /* Brand Colors */
@@ -84,33 +115,33 @@
 
 /* Typography */
 @layer base {
-  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+  :where(:not([class*='text-'])) {
     h1 {
-      font-size: 112px;
-      line-height: 120px;
-      font-weight: 400;
+      font-size: clamp(64px, 8vw, 112px);
+      line-height: 1.071;
       letter-spacing: -0.04em;
+      font-weight: 400;
     }
 
     h2 {
-      font-size: 80px;
-      line-height: 88px;
-      font-weight: 400;
+      font-size: clamp(52px, 6vw, 80px);
+      line-height: 1.1;
       letter-spacing: -0.03em;
+      font-weight: 400;
     }
 
     h3 {
-      font-size: 44px;
-      line-height: 52px;
-      font-weight: 400;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 1.182;
       letter-spacing: -0.02em;
+      font-weight: 400;
     }
 
     h4 {
-      font-size: 28px;
-      line-height: 36px;
-      font-weight: 400;
+      font-size: clamp(20px, 2.5vw, 28px);
+      line-height: 1.286;
       letter-spacing: -0.015em;
+      font-weight: 500;
     }
 
     p {

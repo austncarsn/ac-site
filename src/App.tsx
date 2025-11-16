@@ -5,6 +5,7 @@ import { WorkSection } from './src/components/sections/WorkSection';
 import { SystemsSection } from './src/components/sections/SystemsSection';
 import { EssaysSection } from './src/components/sections/EssaysSection';
 import { AboutSection } from './src/components/sections/AboutSection';
+import { ResumeSection } from './src/components/sections/ResumeSection';
 import { ContactSection } from './src/components/sections/ContactSection';
 import { Toaster } from './src/components/ui/sonner';
 
@@ -18,6 +19,7 @@ export default function App() {
         <SystemsSection />
         <EssaysSection />
         <AboutSection />
+        <ResumeSection />
         <ContactSection />
       </main>
       <Footer />

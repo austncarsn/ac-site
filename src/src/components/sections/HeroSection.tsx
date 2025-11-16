@@ -98,22 +98,17 @@ export function HeroSection() {
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-2 w-full"
           style={{ 
-            gap: 'var(--space-12)',
-            paddingTop: 'var(--space-16)',
-            paddingBottom: 'var(--space-16)',
+            gap: 'var(--space-16)',
+            paddingTop: 'var(--space-20)',
+            paddingBottom: 'var(--space-20)',
           }}
         >
           {/* Hero Content */}
           <div className="flex flex-col justify-center">
             <motion.h1 
               variants={contentVariants}
-              className="uppercase"
               style={{ 
-                marginBottom: 'var(--space-8)',
-                fontSize: 'clamp(48px, 8vw, 96px)',
-                lineHeight: '1',
-                letterSpacing: '-0.02em',
-                fontWeight: '300',
+                marginBottom: 'var(--space-6)',
                 willChange: 'opacity, transform',
                 transform: 'translateZ(0)',
               }}
@@ -123,9 +118,12 @@ export function HeroSection() {
             
             <motion.p
               variants={descriptionVariants}
-              className="max-w-[620px]"
+              className="max-w-[620px] text-[32px] leading-[44px]"
               style={{ 
-                marginBottom: 'var(--space-12)',
+                marginBottom: 'var(--space-10)',
+                opacity: 0.6,
+                fontWeight: 400,
+                letterSpacing: '-0.02em',
                 willChange: 'opacity, transform',
                 transform: 'translateZ(0)',
               }}
@@ -139,9 +137,11 @@ export function HeroSection() {
               whileHover={!isMobile ? { opacity: 0.6 } : undefined}
               whileTap={{ scale: 0.98, opacity: 0.6 }}
               transition={{ duration: isMobile ? 0.15 : 0.2, ease: EASE_OUT_QUART }}
-              className="transition-opacity border-b border-foreground self-start cursor-pointer touch-manipulation no-highlight"
+              className="transition-opacity border-b border-foreground self-start cursor-pointer touch-manipulation no-highlight text-[17px]"
               style={{ 
-                paddingBottom: 'var(--space-1)',
+                paddingBottom: 'var(--space-2)',
+                fontWeight: 400,
+                letterSpacing: '-0.01em',
                 WebkitTapHighlightColor: 'transparent',
                 willChange: 'opacity, transform',
               }}

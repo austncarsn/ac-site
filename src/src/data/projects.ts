@@ -76,7 +76,7 @@ export const PROJECTS: readonly Project[] = [
       'Features design token integration, contrast checking, and systematic color palette generation with real-time feedback.',
     ],
     previewColors: ['#FF3B5C', '#00F5FF', '#FFEB3B', '#00E676', '#FF6B00', '#E040FB'],
-    hoverColor: '#FFB3C1',
+    hoverColor: '236, 72, 153', // Pink RGB
     tags: ['Color Systems', 'Design Tokens', 'Contrast', 'Interactive'],
     impact: 'Structured exploration of color palettes and accessibility',
     liveUrl: 'https://color-rodeo.vercel.app',
@@ -99,7 +99,7 @@ export const PROJECTS: readonly Project[] = [
       'Features rich interactive content, modern typography, and thoughtful motion design to enhance learning experiences.',
     ],
     previewColors: ['#00E676', '#2E7D32', '#81C784', '#4CAF50'],
-    hoverColor: '#A5D6A7',
+    hoverColor: '16, 185, 129', // Emerald RGB
     tags: ['Education', 'Interactive Content', 'Biology', 'Motion Design'],
     impact: 'Web-native approach to educational content delivery',
     liveUrl: 'https://biology-virtual-textbook.vercel.app',
@@ -122,7 +122,7 @@ export const PROJECTS: readonly Project[] = [
       'Provides teams with production-ready components and documentation. Intended to integrate with Storybook for interactive component exploration.',
     ],
     previewColors: ['#6B4EFF', '#2D2D2D', '#8C8C8C', '#BFBFBF'],
-    hoverColor: '#B8A3FF',
+    hoverColor: '107, 78, 255', // Brand Purple RGB
     tags: ['Design Systems', 'Tokens', 'Components', 'Documentation'],
     impact: 'Systematic approach to design language and component architecture',
     liveUrl: 'https://korwindesignsystem.vercel.app',
@@ -145,7 +145,7 @@ export const PROJECTS: readonly Project[] = [
       'Features searchable patterns with live examples, designed to support consistent visual systems across different projects.',
     ],
     previewColors: ['#0A0A0A', '#404040', '#8C8C8C', '#D9D9D9'],
-    hoverColor: '#E0E0E0',
+    hoverColor: '100, 116, 139', // Slate RGB
     tags: ['Patterns', 'Background Systems', 'Texture Library', 'Utilities'],
     impact: 'Reusable pattern system for consistent visual design',
     liveUrl: 'https://patterngallery.vercel.app',
@@ -168,7 +168,7 @@ export const PROJECTS: readonly Project[] = [
       'Features carefully crafted animations optimized for performance and visual impact, designed to be plug-and-play for various projects.',
     ],
     previewColors: ['#7C4DFF', '#E040FB', '#00BCD4', '#00F5FF'],
-    hoverColor: '#C5A3FF',
+    hoverColor: '147, 51, 234', // Purple RGB
     tags: ['Animation', 'Motion Systems', 'Scroll Choreography', 'Library'],
     impact: 'Reusable scroll animation patterns for compelling experiences',
     liveUrl: 'https://scroll-animation-library.vercel.app',
@@ -191,7 +191,7 @@ export const PROJECTS: readonly Project[] = [
       'Features modular SVG components that can be composed into unique botanical illustrations and decorative elements.',
     ],
     previewColors: ['#FF3B5C', '#FFB3C1', '#C8E6C9', '#81C784'],
-    hoverColor: '#FFD4DC',
+    hoverColor: '244, 63, 94', // Rose RGB
     tags: ['SVG Systems', 'Illustration', 'Label Design', 'Components'],
     impact: 'Scalable illustration system for decorative applications',
     liveUrl: 'https://floral-design-svg.vercel.app',
@@ -214,7 +214,7 @@ export const PROJECTS: readonly Project[] = [
       'Built with a focus on cinematic presentation, sophisticated typography hierarchy, and compelling narrative flow.',
     ],
     previewColors: ['#0A0A0A', '#6B4EFF', '#FFC107', '#1A1A1A'],
-    hoverColor: '#B8A3FF',
+    hoverColor: '99, 102, 241', // Indigo RGB
     tags: ['Storytelling', 'Layout Systems', 'Typography', 'Cinematic'],
     impact: 'Narrative-driven approach to interface design',
     liveUrl: 'https://cameo-web.vercel.app',
@@ -237,7 +237,7 @@ export const PROJECTS: readonly Project[] = [
       'Built with attention to typography and grid systems, creating an elegant showcase that honors the craft of graphic design.',
     ],
     previewColors: ['#0A0A0A', '#FFFFFF', '#6B4EFF', '#D9D9D9'],
-    hoverColor: '#E8E0FF',
+    hoverColor: '6, 182, 212', // Cyan RGB
     tags: ['Gallery', 'Print-Inspired Layouts', 'Image Systems', 'Typography'],
     impact: 'Visual archive with editorial presentation',
     liveUrl: 'https://graphicdesigngallery.vercel.app',

@@ -63,6 +63,7 @@
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     --color-black: #000;
+    --color-white: #fff;
     --spacing: .25rem;
     --container-lg: 32rem;
     --text-sm: .875rem;
@@ -409,56 +410,56 @@
     color: #fff;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h1 {
+  :where(:not([class*="text-"])) h1 {
     letter-spacing: -.04em;
-    font-size: 112px;
+    font-size: clamp(64px, 8vw, 112px);
     font-weight: 400;
-    line-height: 120px;
+    line-height: 1.071;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h2 {
+  :where(:not([class*="text-"])) h2 {
     letter-spacing: -.03em;
-    font-size: 80px;
+    font-size: clamp(52px, 6vw, 80px);
     font-weight: 400;
-    line-height: 88px;
+    line-height: 1.1;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h3 {
+  :where(:not([class*="text-"])) h3 {
     letter-spacing: -.02em;
-    font-size: 44px;
+    font-size: clamp(32px, 4vw, 44px);
     font-weight: 400;
-    line-height: 52px;
+    line-height: 1.182;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h4 {
+  :where(:not([class*="text-"])) h4 {
     letter-spacing: -.015em;
-    font-size: 28px;
-    font-weight: 400;
-    line-height: 36px;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 500;
+    line-height: 1.286;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) p {
+  :where(:not([class*="text-"])) p {
     letter-spacing: -.01em;
     font-size: 24px;
     font-weight: 400;
     line-height: 36px;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label {
+  :where(:not([class*="text-"])) label {
     letter-spacing: 0;
     font-size: 18px;
     font-weight: 400;
     line-height: 28px;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
+  :where(:not([class*="text-"])) button {
     letter-spacing: -.01em;
     font-size: 20px;
     font-weight: 400;
     line-height: 32px;
   }
 
-  :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) input, :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) textarea {
+  :where(:not([class*="text-"])) input, :where(:not([class*="text-"])) textarea {
     letter-spacing: 0;
     font-size: 20px;
     font-weight: 400;
@@ -571,6 +572,10 @@
     z-index: 50;
   }
 
+  .mx-auto {
+    margin-inline: auto;
+  }
+
   .block {
     display: block;
   }
@@ -587,6 +592,10 @@
     display: none;
   }
 
+  .inline-flex {
+    display: inline-flex;
+  }
+
   .field-sizing-content {
     field-sizing: content;
   }
@@ -598,6 +607,10 @@
   .size-4 {
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
+  }
+
+  .h-5 {
+    height: calc(var(--spacing) * 5);
   }
 
   .h-9 {
@@ -618,6 +631,10 @@
 
   .min-h-screen {
     min-height: 100vh;
+  }
+
+  .w-5 {
+    width: calc(var(--spacing) * 5);
   }
 
   .w-\[calc\(100\%-2rem\)\] {
@@ -686,6 +703,14 @@
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -730,8 +755,28 @@
     gap: calc(var(--spacing) * 2);
   }
 
+  .gap-3 {
+    gap: calc(var(--spacing) * 3);
+  }
+
   .gap-4 {
     gap: calc(var(--spacing) * 4);
+  }
+
+  .gap-6 {
+    gap: calc(var(--spacing) * 6);
+  }
+
+  .gap-8 {
+    gap: calc(var(--spacing) * 8);
+  }
+
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
+  }
+
+  .gap-16 {
+    gap: calc(var(--spacing) * 16);
   }
 
   .gap-\[21px\] {
@@ -742,6 +787,18 @@
     --tw-space-y-reverse: 0;
     margin-block-start: calc(calc(var(--spacing) * 0) * var(--tw-space-y-reverse));
     margin-block-end: calc(calc(var(--spacing) * 0) * calc(1 - var(--tw-space-y-reverse)));
+  }
+
+  :where(.space-y-2 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
+  }
+
+  :where(.space-y-3 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-y-reverse)));
   }
 
   :where(.space-y-4 > :not(:last-child)) {
@@ -838,6 +895,10 @@
     border-color: #0000;
   }
 
+  .bg-\[var\(--color-brand-purple\)\] {
+    background-color: var(--color-brand-purple);
+  }
+
   .bg-background {
     background-color: oklch(1 0 0);
   }
@@ -928,6 +989,28 @@
     line-height: var(--tw-leading, var(--text-sm--line-height));
   }
 
+  .text-\[17px\] {
+    font-size: 17px;
+  }
+
+  .text-\[32px\] {
+    font-size: 32px;
+  }
+
+  .text-\[44px\] {
+    font-size: 44px;
+  }
+
+  .leading-\[44px\] {
+    --tw-leading: 44px;
+    line-height: 44px;
+  }
+
+  .leading-\[52px\] {
+    --tw-leading: 52px;
+    line-height: 52px;
+  }
+
   .leading-none {
     --tw-leading: 1;
     line-height: 1;
@@ -963,6 +1046,10 @@
 
   .text-primary {
     color: oklch(.205 0 0);
+  }
+
+  .text-white {
+    color: var(--color-white);
   }
 
   .uppercase {
@@ -1121,6 +1208,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:bg-\[var\(--color-brand-purple-dark\)\]:hover {
+      background-color: var(--color-brand-purple-dark);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:underline:hover {
       text-decoration-line: underline;
     }
@@ -1135,6 +1228,13 @@
   @media (hover: hover) {
     .hover\:opacity-100:hover {
       opacity: 1;
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:shadow-xl:hover {
+      --tw-shadow: 0 20px 25px -5px var(--tw-shadow-color, #0000001a), 0 8px 10px -6px var(--tw-shadow-color, #0000001a);
+      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
 
@@ -1266,6 +1366,12 @@
   }
 
   @media (width >= 48rem) {
+    .md\:block {
+      display: block;
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:flex {
       display: flex;
     }
@@ -1280,6 +1386,12 @@
   @media (width >= 48rem) {
     .md\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:grid-cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
   }
 
@@ -1304,6 +1416,12 @@
   @media (width >= 48rem) {
     .md\:justify-between {
       justify-content: space-between;
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:gap-6 {
+      gap: calc(var(--spacing) * 6);
     }
   }
 
@@ -1386,6 +1504,12 @@
     }
   }
 
+  @media (width >= 64rem) {
+    .lg\:gap-16 {
+      gap: calc(var(--spacing) * 16);
+    }
+  }
+
   @media (prefers-color-scheme: dark) {
     .dark\:bg-input\/30 {
       background-color: color-mix(in oklab, oklch(.922 0 0) 30%, transparent);
@@ -1409,6 +1533,29 @@
   .\[\&_svg\:not\(\[class\*\=\'size-\'\]\)\]\:size-4 svg:not([class*="size-"]) {
     width: calc(var(--spacing) * 4);
     height: calc(var(--spacing) * 4);
+  }
+
+  :root {
+    --project-color-indigo: 99, 102, 241;
+    --project-color-purple: 147, 51, 234;
+    --project-color-pink: 236, 72, 153;
+    --project-color-rose: 244, 63, 94;
+    --project-color-amber: 245, 158, 11;
+    --project-color-emerald: 16, 185, 129;
+    --project-color-cyan: 6, 182, 212;
+    --project-color-slate: 100, 116, 139;
+    --project-color-brand: 107, 78, 255;
+    --hover-opacity-light: .06;
+    --hover-opacity-light-active: .1;
+    --hover-border-opacity: .15;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hover-opacity-light: .08;
+      --hover-opacity-light-active: .12;
+      --hover-border-opacity: .1;
+    }
   }
 
   .container-main {
