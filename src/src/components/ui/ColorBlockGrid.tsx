@@ -13,6 +13,20 @@ const VIBRANT_PALETTE = [
   '#FF6B00', '#E040FB', '#00BCD4', '#FFC107', '#7C4DFF',
 ] as const;
 
+// Gradient variations for each vibrant color (lava lamp effect)
+const VIBRANT_GRADIENTS = [
+  ['#6B4EFF', '#8B6FFF', '#5940CC'], // Purple variations
+  ['#FF3B5C', '#FF5C7A', '#E0305A'], // Red/Pink variations
+  ['#00F5FF', '#33F7FF', '#00D4E6'], // Cyan variations
+  ['#FFEB3B', '#FFF066', '#E6D435'], // Yellow variations
+  ['#00E676', '#33EB8F', '#00CC6A'], // Green variations
+  ['#FF6B00', '#FF8533', '#E66100'], // Orange variations
+  ['#E040FB', '#E666FC', '#CC3AE0'], // Magenta variations
+  ['#00BCD4', '#33C9DB', '#00A8BD'], // Teal variations
+  ['#FFC107', '#FFCD38', '#E6AD06'], // Amber variations
+  ['#7C4DFF', '#956EFF', '#6F44E6'], // Indigo variations
+] as const;
+
 // Grid configuration
 const GRID_COLS = 10;
 const MONOCHROME_ROWS = 3;
@@ -113,9 +127,22 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
         {colorBlocks.map((color, index) => {
           const row = Math.floor(index / GRID_COLS);
           const col = index % GRID_COLS;
+          const isLastRow = row === MONOCHROME_ROWS;
           
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
+          
+          // Generate unique lava lamp animation params for each block
+          const lavaSpeed = 15 + (index % 7) * 2; // 15-27 seconds
+          const lavaDelay = (index % 5) * 3; // 0-12 second delay
+          const rotationAngle = (index % 4) * 90; // 0, 90, 180, 270 degrees
+          
+          // Create gradient for last row blocks
+          let gradient = '';
+          if (isLastRow) {
+            const gradientColors = VIBRANT_GRADIENTS[col];
+            gradient = `radial-gradient(circle at 30% 30%, ${gradientColors[0]}, ${gradientColors[1]}, ${gradientColors[2]})`;
+          }
           
           return (
             <motion.div
@@ -124,6 +151,17 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               animate={
                 prefersReducedMotion
                   ? undefined
+                  : isLastRow
+                  ? {
+                      backgroundPosition: [
+                        '0% 0%',
+                        '100% 100%',
+                        '0% 100%',
+                        '100% 0%',
+                        '0% 0%',
+                      ],
+                      backgroundSize: ['150% 150%', '180% 180%', '150% 150%'],
+                    }
                   : {
                       opacity: [1, 0.85, 0.92, 0.88, 1],
                     }
@@ -131,6 +169,23 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               transition={
                 prefersReducedMotion
                   ? undefined
+                  : isLastRow
+                  ? {
+                      backgroundPosition: {
+                        duration: lavaSpeed,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        delay: lavaDelay,
+                      },
+                      backgroundSize: {
+                        duration: lavaSpeed * 0.8,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        delay: lavaDelay,
+                      },
+                    }
                   : {
                       duration: 8,
                       ease: "easeInOut",
@@ -141,9 +196,9 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               }
               className="aspect-square rounded-[6px]"
               style={{ 
-                backgroundColor: color,
-                willChange: prefersReducedMotion ? 'auto' : 'opacity',
-                transform: 'translateZ(0)',
+                background: isLastRow ? gradient : color,
+                willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
+                transform: `translateZ(0) rotate(${isLastRow ? rotationAngle : 0}deg)`,
               }}
               aria-hidden="true"
             />
@@ -166,9 +221,22 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
         {mobileColorBlocks.map((color, index) => {
           const row = Math.floor(index / MOBILE_GRID_COLS);
           const col = index % MOBILE_GRID_COLS;
+          const isLastRow = row === 1; // Second row in mobile (vibrant colors)
           
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
+          
+          // Generate unique lava lamp animation params for each block
+          const lavaSpeed = 15 + (index % 7) * 2; // 15-27 seconds
+          const lavaDelay = (index % 5) * 3; // 0-12 second delay
+          const rotationAngle = (index % 4) * 90; // 0, 90, 180, 270 degrees
+          
+          // Create gradient for last row blocks
+          let gradient = '';
+          if (isLastRow) {
+            const gradientColors = VIBRANT_GRADIENTS[col];
+            gradient = `radial-gradient(circle at 30% 30%, ${gradientColors[0]}, ${gradientColors[1]}, ${gradientColors[2]})`;
+          }
           
           return (
             <motion.div
@@ -177,6 +245,17 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               animate={
                 prefersReducedMotion
                   ? undefined
+                  : isLastRow
+                  ? {
+                      backgroundPosition: [
+                        '0% 0%',
+                        '100% 100%',
+                        '0% 100%',
+                        '100% 0%',
+                        '0% 0%',
+                      ],
+                      backgroundSize: ['150% 150%', '180% 180%', '150% 150%'],
+                    }
                   : {
                       opacity: [1, 0.85, 0.92, 0.88, 1],
                     }
@@ -184,6 +263,23 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               transition={
                 prefersReducedMotion
                   ? undefined
+                  : isLastRow
+                  ? {
+                      backgroundPosition: {
+                        duration: lavaSpeed,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        delay: lavaDelay,
+                      },
+                      backgroundSize: {
+                        duration: lavaSpeed * 0.8,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "reverse",
+                        delay: lavaDelay,
+                      },
+                    }
                   : {
                       duration: 8,
                       ease: "easeInOut",
@@ -194,9 +290,9 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               }
               className="aspect-square rounded-[6px]"
               style={{ 
-                backgroundColor: color,
-                willChange: prefersReducedMotion ? 'auto' : 'opacity',
-                transform: 'translateZ(0)',
+                background: isLastRow ? gradient : color,
+                willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
+                transform: `translateZ(0) rotate(${isLastRow ? rotationAngle : 0}deg)`,
               }}
               aria-hidden="true"
             />

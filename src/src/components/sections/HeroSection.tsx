@@ -128,7 +128,7 @@ export function HeroSection() {
                 transform: 'translateZ(0)',
               }}
             >
-              Interface systems architect who builds production-ready design systems — where precision meets creativity, and code feels like poetry (mostly)
+              Interface systems architect who builds production-ready design systems that combine technical precision with creative excellence
             </motion.p>
 
             <motion.button
