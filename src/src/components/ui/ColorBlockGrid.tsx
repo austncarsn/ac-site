@@ -19,7 +19,7 @@ const VIBRANT_GRADIENTS = [
   ['#E040FB', '#E666FC', '#CC3AE0'], // Magenta variations
   ['#FF5722', '#FF7043', '#E64A19'], // Deep Orange variations
   ['#9C27B0', '#AB47BC', '#8E24AA'], // Deep Purple variations
-  ['#7C4DFF', '#956EFF', '#6F44E6'], // Indigo variations
+  ['#FF1744', '#FF4569', '#E6143D'], // Crimson variations
 ] as const;
 
 // Grid configuration
@@ -262,10 +262,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '8px',
-                boxShadow: 'inset 0 3px 15px rgba(0, 0, 0, 0.12), inset 0 -2px 12px rgba(255, 255, 255, 0.5)',
-                border: '1px solid rgba(0, 0, 0, 0.06)',
-                outline: '1px solid rgba(255, 255, 255, 0.4)',
-                outlineOffset: '-1px',
+                border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"
             />
@@ -360,10 +357,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '8px',
-                boxShadow: 'inset 0 3px 15px rgba(0, 0, 0, 0.12), inset 0 -2px 12px rgba(255, 255, 255, 0.5)',
-                border: '1px solid rgba(0, 0, 0, 0.06)',
-                outline: '1px solid rgba(255, 255, 255, 0.4)',
-                outlineOffset: '-1px',
+                border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"
             />
