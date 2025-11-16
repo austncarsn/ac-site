@@ -499,6 +499,10 @@
 }
 
 @layer utilities {
+  .pointer-events-none {
+    pointer-events: none;
+  }
+
   .visible {
     visibility: visible;
   }
@@ -557,10 +561,6 @@
 
   .left-\[50\%\] {
     left: 50%;
-  }
-
-  .-z-10 {
-    z-index: calc(10 * -1);
   }
 
   .z-40 {

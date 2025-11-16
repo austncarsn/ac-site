@@ -45,15 +45,18 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
     >
       {/* Hover Background */}
       <motion.div
-        className="absolute inset-0 -z-10 rounded-[6px]"
+        className="absolute inset-0 rounded-[6px] pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 0.08 : 0 }}
         transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
-        style={{ backgroundColor: project.hoverColor }}
+        style={{ 
+          backgroundColor: project.hoverColor,
+          zIndex: 0,
+        }}
       />
       
       {/* Project Info */}
-      <div style={{ padding: 'var(--space-6) 0' }}>
+      <div style={{ padding: 'var(--space-6) 0', position: 'relative', zIndex: 1 }}>
         <div className="flex items-baseline justify-between" style={{ marginBottom: 'var(--space-2)', gap: 'var(--space-6)' }}>
           <h3 className="tracking-tight">
             {project.name}
