@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+/* Import Instrument Serif from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+
+@layer base {
+  :root {
+    /* Brand Colors */
+    --color-brand-purple: #6B4EFF;
+    --color-brand-purple-dark: #5940CC;
+    --color-brand-purple-light: #8B7FFF;
+
+    /* Light theme */
+    --background: #FFFFFF;
+    --foreground: #0A0A0A;
+    --border: rgba(10, 10, 10, 0.1);
+    --muted: rgba(10, 10, 10, 0.05);
+    --accent: var(--color-brand-purple);
+
+    /* 8-Point Grid Spacing System */
+    --space-1: 4px;    /* 0.5 step - Tight spacing, borders */
+    --space-2: 8px;    /* 1 step - Minimal gaps */
+    --space-3: 12px;   /* 1.5 step - Small spacing */
+    --space-4: 16px;   /* 2 steps - Default spacing */
+    --space-5: 20px;   /* 2.5 steps - Medium-small */
+    --space-6: 24px;   /* 3 steps - Medium spacing */
+    --space-8: 32px;   /* 4 steps - Large spacing */
+    --space-10: 40px;  /* 5 steps - Extra large */
+    --space-12: 48px;  /* 6 steps - Section spacing */
+    --space-14: 56px;  /* 7 steps - Large sections */
+    --space-16: 64px;  /* 8 steps - Major sections */
+    --space-18: 72px;  /* 9 steps - Extra major */
+    --space-20: 80px;  /* 10 steps - Page sections */
+    --space-24: 96px;  /* 12 steps - Hero sections */
+    --space-32: 128px; /* 16 steps - Massive sections */
+    --space-36: 144px; /* 18 steps - Maximum spacing */
+
+    /* Semantic Spacing Aliases */
+    --spacing-xs: var(--space-2);   /* 8px */
+    --spacing-sm: var(--space-3);   /* 12px */
+    --spacing-md: var(--space-6);   /* 24px */
+    --spacing-lg: var(--space-8);   /* 32px */
+    --spacing-xl: var(--space-14);  /* 56px */
+    --spacing-2xl: var(--space-24); /* 96px */
+    --spacing-3xl: var(--space-36); /* 144px */
+
+    /* Border Radius */
+    --radius: 6px;
+
+    /* Container & Layout */
+    --container-padding: var(--space-8);     /* 32px */
+    --container-padding-mobile: var(--space-6); /* 24px */
+    --header-height: var(--space-16);        /* 64px */
+    --section-spacing: var(--space-36);      /* 144px desktop */
+    --section-spacing-mobile: var(--space-24); /* 96px mobile */
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0A0A0A;
+      --foreground: #FFFFFF;
+      --border: rgba(255, 255, 255, 0.1);
+      --muted: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-purple);
+    color: white;
+  }
+}
+
+/* Typography */
+@layer base {
+  :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+    h1 {
+      font-size: 112px;
+      line-height: 120px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    h2 {
+      font-size: 80px;
+      line-height: 88px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    h3 {
+      font-size: 44px;
+      line-height: 52px;
+      font-weight: 500;
+      letter-spacing: -0.015em;
+    }
+
+    h4 {
+      font-size: 28px;
+      line-height: 36px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    p {
+      font-size: 24px;
+      line-height: 36px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+    }
+
+    label {
+      font-size: 18px;
+      line-height: 28px;
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    button {
+      font-size: 20px;
+      line-height: 32px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    input, textarea {
+      font-size: 20px;
+      line-height: 32px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+  }
+
+  /* Responsive typography */
+  @media (max-width: 768px) {
+    :where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+      h1 {
+        font-size: 64px;
+        line-height: 72px;
+      }
+
+      h2 {
+        font-size: 52px;
+        line-height: 60px;
+      }
+
+      h3 {
+        font-size: 36px;
+        line-height: 44px;
+      }
+
+      h4 {
+        font-size: 24px;
+        line-height: 32px;
+      }
+
+      p {
+        font-size: 21px;
+        line-height: 32px;
+      }
+
+      button {
+        font-size: 19px;
+        line-height: 28px;
+      }
+    }
+  }
+}
+
+/* Utilities */
+@layer utilities {
+  .container-main {
+    width: 100%;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+  }
+
+  @media (max-width: 768px) {
+    .container-main {
+      padding-left: var(--container-padding-mobile);
+      padding-right: var(--container-padding-mobile);
+    }
+  }
+
+  .section-padding {
+    padding-top: var(--section-spacing);
+    padding-bottom: var(--section-spacing);
+  }
+
+  @media (max-width: 768px) {
+    .section-padding {
+      padding-top: var(--section-spacing-mobile);
+      padding-bottom: var(--section-spacing-mobile);
+    }
+  }
+
+  /* Text utilities for common patterns */
+  .text-meta {
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0.4;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .text-caption {
+    font-size: 16px;
+    opacity: 0.4;
+  }
+
+  .text-small {
+    font-size: 18px;
+    opacity: 0.5;
+  }
+
+  .text-body-small {
+    font-size: 20px;
+    line-height: 32px;
+    opacity: 0.7;
+  }
+
+  .text-body-medium {
+    font-size: 22px;
+    line-height: 34px;
+    opacity: 0.7;
+  }
+
+  /* Link utilities */
+  .link-subtle {
+    opacity: 0.7;
+    transition: opacity 300ms;
+  }
+
+  .link-subtle:hover {
+    opacity: 0.6;
+  }
+
+  /* Font smoothing utility */
+  .font-smooth {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
