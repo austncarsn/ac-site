@@ -12,13 +12,13 @@ const MONOCHROME_PALETTE = [
 const VIBRANT_GRADIENTS = [
   ['#6B4EFF', '#8B6FFF', '#5940CC'], // Purple variations
   ['#FF3B5C', '#FF5C7A', '#E0305A'], // Red/Pink variations
-  ['#00F5FF', '#33F7FF', '#00D4E6'], // Cyan variations
+  ['#FF6B00', '#FF8533', '#E66100'], // Orange variations
   ['#FFEB3B', '#FFF066', '#E6D435'], // Yellow variations
   ['#00E676', '#33EB8F', '#00CC6A'], // Green variations
-  ['#FF6B00', '#FF8533', '#E66100'], // Orange variations
-  ['#E040FB', '#E666FC', '#CC3AE0'], // Magenta variations
-  ['#00BCD4', '#33C9DB', '#00A8BD'], // Teal variations
   ['#FFC107', '#FFCD38', '#E6AD06'], // Amber variations
+  ['#E040FB', '#E666FC', '#CC3AE0'], // Magenta variations
+  ['#FF5722', '#FF7043', '#E64A19'], // Deep Orange variations
+  ['#9C27B0', '#AB47BC', '#8E24AA'], // Deep Purple variations
   ['#7C4DFF', '#956EFF', '#6F44E6'], // Indigo variations
 ] as const;
 
@@ -202,9 +202,15 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
             ? `radial-gradient(circle at 30% 30%, ${gradientColors[0]}, ${gradientColors[1]}, ${gradientColors[2]})`
             : null;
           
-          // Lava lamp animation params
-          const lavaSpeed = 18 + (col % 5) * 2;
-          const lavaDelay = (col % 4) * 2;
+          // Create subtle vertical gradient for vibrant colors (lighter top, darker bottom)
+          const verticalGradient = isLastRow
+            ? `linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%)`
+            : null;
+          
+          // Combine gradients for vibrant blocks
+          const finalBackground = isLastRow && gradient && verticalGradient
+            ? `${verticalGradient}, ${gradient}`
+            : color;
           
           return (
             <motion.div
@@ -250,11 +256,16 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                       delay: waveDelay,
                     }
               }
-              className="aspect-square rounded-[6px]"
+              className="aspect-square"
               style={{ 
-                background: gradient || color,
+                background: finalBackground,
                 willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
                 transform: 'translateZ(0)',
+                borderRadius: '8px',
+                boxShadow: 'inset 0 3px 15px rgba(0, 0, 0, 0.12), inset 0 -2px 12px rgba(255, 255, 255, 0.5)',
+                border: '1px solid rgba(0, 0, 0, 0.06)',
+                outline: '1px solid rgba(255, 255, 255, 0.4)',
+                outlineOffset: '-1px',
               }}
               aria-hidden="true"
             />
@@ -289,9 +300,15 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
             ? `radial-gradient(circle at 30% 30%, ${gradientColors[0]}, ${gradientColors[1]}, ${gradientColors[2]})`
             : null;
           
-          // Lava lamp animation params
-          const lavaSpeed = 18 + (col % 5) * 2;
-          const lavaDelay = (col % 4) * 2;
+          // Create subtle vertical gradient for vibrant colors (lighter top, darker bottom)
+          const verticalGradient = isLastRow
+            ? `linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%)`
+            : null;
+          
+          // Combine gradients for vibrant blocks
+          const finalBackground = isLastRow && gradient && verticalGradient
+            ? `${verticalGradient}, ${gradient}`
+            : color;
           
           return (
             <motion.div
@@ -337,11 +354,16 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                       delay: waveDelay,
                     }
               }
-              className="aspect-square rounded-[6px]"
+              className="aspect-square"
               style={{ 
-                background: gradient || color,
+                background: finalBackground,
                 willChange: prefersReducedMotion ? 'auto' : isLastRow ? 'background-position, background-size' : 'opacity',
                 transform: 'translateZ(0)',
+                borderRadius: '8px',
+                boxShadow: 'inset 0 3px 15px rgba(0, 0, 0, 0.12), inset 0 -2px 12px rgba(255, 255, 255, 0.5)',
+                border: '1px solid rgba(0, 0, 0, 0.06)',
+                outline: '1px solid rgba(255, 255, 255, 0.4)',
+                outlineOffset: '-1px',
               }}
               aria-hidden="true"
             />
