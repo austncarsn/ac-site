@@ -201,7 +201,7 @@ export function Navigation() {
       </motion.nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {mobileMenuOpen && (
           <>
             {/* Backdrop */}
@@ -211,34 +211,40 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ 
-                duration: prefersReducedMotion ? duration.instant : duration.fast,
-                ease: EASE_OUT_QUART,
+                duration: 0.25,
+                ease: [0.25, 0.1, 0.25, 1],
               }}
               onClick={() => setMobileMenuOpen(false)}
               style={{
                 willChange: 'opacity',
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
                 transform: 'translateZ(0)',
+                WebkitTransform: 'translateZ(0)',
               }}
             />
 
             {/* Menu Panel */}
             <motion.div
-              className="fixed left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border z-40 md:hidden"
+              className="fixed left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border z-40 md:hidden"
               style={{ 
                 top: 'var(--header-height)',
                 willChange: 'opacity, transform',
+                backfaceVisibility: 'hidden',
+                WebkitBackfaceVisibility: 'hidden',
                 transform: 'translateZ(0)',
+                WebkitTransform: 'translateZ(0)',
               }}
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              exit={{ opacity: 0, y: -8 }}
               transition={{ 
-                duration: prefersReducedMotion ? duration.instant : duration.fast,
-                ease: EASE_OUT_EXPO,
+                duration: 0.3,
+                ease: [0.16, 1, 0.3, 1],
               }}
             >
               <div className="container-main" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-12)' }}>
-                <nav className="flex flex-col" style={{ gap: 'var(--space-2)' }}>
+                <nav className="flex flex-col" style={{ gap: 'var(--space-1)' }}>
                   {navItems.map((item, index) => {
                     const sectionId = item.href.substring(1);
                     const isActive = activeSection === sectionId;
@@ -248,12 +254,12 @@ export function Navigation() {
                         key={item.label}
                         href={item.href}
                         onClick={(e) => handleNavClick(e, item.href)}
-                        initial={{ opacity: 0, x: -16 }}
+                        initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ 
-                          delay: prefersReducedMotion ? 0 : index * 0.04,
-                          duration: prefersReducedMotion ? duration.instant : duration.fast,
-                          ease: EASE_OUT_EXPO,
+                          delay: index * 0.035,
+                          duration: 0.4,
+                          ease: [0.16, 1, 0.3, 1],
                         }}
                         className="flex items-center justify-between hover:opacity-100 transition-all group touch-manipulation border-b border-border/30"
                         style={{
@@ -263,10 +269,12 @@ export function Navigation() {
                           opacity: isActive ? 1 : 0.5,
                           paddingTop: 'var(--space-6)',
                           paddingBottom: 'var(--space-6)',
-                          transitionDuration: '0.2s',
-                          transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                          transitionDuration: '0.25s',
+                          transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                           WebkitTapHighlightColor: 'transparent',
                           willChange: 'opacity',
+                          backfaceVisibility: 'hidden',
+                          WebkitBackfaceVisibility: 'hidden',
                         }}
                       >
                         <span>{item.label}</span>
@@ -276,14 +284,16 @@ export function Navigation() {
                               initial={{ scale: 0, opacity: 0 }}
                               animate={{ scale: 1, opacity: 1 }}
                               transition={{ 
-                                duration: prefersReducedMotion ? duration.instant : duration.fast,
-                                ease: EASE_OUT_EXPO,
+                                duration: 0.35,
+                                ease: [0.16, 1, 0.3, 1],
                               }}
                               className="rounded-full bg-brand-purple"
                               style={{ 
                                 width: '6px', 
                                 height: '6px',
                                 willChange: 'transform, opacity',
+                                backfaceVisibility: 'hidden',
+                                WebkitBackfaceVisibility: 'hidden',
                               }}
                             />
                           )}
@@ -297,8 +307,8 @@ export function Navigation() {
                             strokeLinecap="round"
                             className="opacity-0 group-hover:opacity-30 transition-opacity"
                             style={{ 
-                              transitionDuration: '0.2s',
-                              transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                              transitionDuration: '0.25s',
+                              transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                             }}
                           >
                             <path d="M6 12L10 8L6 4" />

@@ -6,8 +6,444 @@ export function ResumeSection() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   const handleDownloadPDF = () => {
-    // Trigger print dialog which will be styled for single-page resume
-    window.print();
+    // Open a new window with the print-optimized resume
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      printWindow.document.write(`
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Austin Carson - Resume</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      @page {
+        margin: 0.5in 0.6in;
+        size: letter;
+      }
+      
+      body {
+        font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+        background: white;
+        color: #0A0A0A;
+        line-height: 1.4;
+        padding: 32px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-optical-sizing: auto;
+      }
+      
+      .resume-container {
+        max-width: 100%;
+      }
+      
+      h1 {
+        font-size: 32px;
+        line-height: 38px;
+        margin-bottom: 6px;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+      }
+      
+      h2 {
+        font-size: 20px;
+        line-height: 26px;
+        margin-bottom: 12px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      
+      h3 {
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 4px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      
+      h4 {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 6px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      
+      p, li {
+        font-size: 11px;
+        line-height: 16px;
+        font-weight: 400;
+        letter-spacing: -0.005em;
+      }
+      
+      .subtitle {
+        font-size: 18px;
+        line-height: 24px;
+        opacity: 0.8;
+        margin-bottom: 10px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      
+      .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 14px;
+        font-size: 10px;
+        line-height: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      
+      .contact-info span,
+      .contact-info a {
+        opacity: 0.4;
+        color: #0A0A0A;
+        text-decoration: none;
+        font-weight: 400;
+      }
+      
+      .divider {
+        border-top: 1px solid rgba(10, 10, 10, 0.1);
+        margin: 14px 0;
+      }
+      
+      .summary {
+        font-size: 13px;
+        line-height: 20px;
+        margin-bottom: 20px;
+        opacity: 0.85;
+        font-weight: 400;
+        letter-spacing: -0.005em;
+      }
+      
+      .section {
+        margin-bottom: 20px;
+      }
+      
+      .section-title {
+        font-size: 20px;
+        line-height: 26px;
+        margin-bottom: 12px;
+        font-weight: 400;
+        letter-spacing: -0.01em;
+      }
+      
+      .competencies {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+      
+      .competency h4 {
+        margin-bottom: 8px;
+      }
+      
+      .competency ul {
+        list-style: none;
+      }
+      
+      .competency li {
+        margin-bottom: 4px;
+        opacity: 0.8;
+      }
+      
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+      
+      .job {
+        margin-bottom: 16px;
+      }
+      
+      .job-title {
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 4px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      
+      .job-meta {
+        font-size: 10px;
+        line-height: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        opacity: 0.4;
+        margin-bottom: 10px;
+        font-weight: 400;
+      }
+      
+      .job ul {
+        list-style: none;
+        padding-left: 0;
+      }
+      
+      .job li {
+        margin-bottom: 5px;
+        opacity: 0.8;
+      }
+      
+      .project {
+        margin-bottom: 14px;
+      }
+      
+      .project-title {
+        font-size: 15px;
+        line-height: 20px;
+        margin-bottom: 4px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      
+      .project-meta {
+        font-size: 10px;
+        line-height: 14px;
+        opacity: 0.4;
+        margin-bottom: 7px;
+        font-weight: 400;
+      }
+      
+      .project ul {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 7px;
+      }
+      
+      .project li {
+        margin-bottom: 4px;
+        opacity: 0.8;
+      }
+      
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      
+      .tag {
+        border: 1px solid rgba(10, 10, 10, 0.1);
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 9px;
+        line-height: 13px;
+        opacity: 0.5;
+        font-weight: 400;
+      }
+      
+      @media print {
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="resume-container">
+      <!-- Header -->
+      <header>
+        <h1>Austin Carson</h1>
+        <div class="subtitle">Product Designer & Front-End Developer</div>
+        <div class="contact-info">
+          <span>Seattle, Washington</span>
+          <a href="mailto:austinscarson@gmail.com">austinscarson@gmail.com</a>
+          <a href="https://www.linkedin.com/in/austin-carson">linkedin.com/in/austin-carson</a>
+          <a href="tel:+12066204803">(206) 620-4803</a>
+        </div>
+      </header>
+
+      <div class="divider"></div>
+
+      <!-- Summary -->
+      <div class="summary">
+        Product designer and front-end developer specializing in design systems, component architecture, and user-centered interfaces. Expertise spans Figma-to-code workflows, React development, and systematic design thinking. Creates cohesive digital experiences through thoughtful interaction design, accessible components, and performance-optimized front-end implementation. Bridges design and engineering to deliver polished, scalable products.
+      </div>
+
+      <!-- Core Competencies -->
+      <div class="section">
+        <h2 class="section-title">Core Competencies</h2>
+        <div class="competencies">
+          <div class="competency">
+            <h4>Product Design</h4>
+            <ul>
+              <li>User Interface & Experience Design</li>
+              <li>Design Systems & Component Libraries</li>
+              <li>Prototyping & User Flow Mapping</li>
+              <li>Responsive & Mobile-First Design</li>
+              <li>Accessibility (WCAG) & Inclusive Design</li>
+            </ul>
+          </div>
+          <div class="competency">
+            <h4>Frontend Development</h4>
+            <ul>
+              <li>React, Next.js, TypeScript, Tailwind CSS</li>
+              <li>Component Architecture & State Management</li>
+              <li>Theme Systems & Design Tokens</li>
+              <li>Performance Optimization & Web Vitals</li>
+            </ul>
+          </div>
+          <div class="competency">
+            <h4>Design Tools & Workflow</h4>
+            <ul>
+              <li>Figma, Adobe Creative Suite, Sketch</li>
+              <li>Version Control (Git) & Collaboration</li>
+              <li>SVG Optimization & Icon Systems</li>
+              <li>Design-to-Development Handoff</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two Column Layout -->
+      <div class="two-column">
+        <!-- Left Column - Experience & Education -->
+        <div>
+          <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="job">
+              <h3 class="job-title">Product Designer & Developer</h3>
+              <div class="job-meta">Freelance · Remote · 2023 to Present</div>
+              <ul>
+                <li>Designed and developed user interfaces for web applications with focus on intuitive interaction patterns and visual consistency.</li>
+                <li>Built reusable component libraries in React with comprehensive documentation and accessibility compliance.</li>
+                <li>Collaborated with clients to translate business requirements into user-centered design solutions and functional prototypes.</li>
+                <li>Implemented design systems with tokenized color, typography, and spacing for brand consistency across platforms.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <h3 class="job-title">Client & Product Specialist</h3>
+              <div class="job-meta">Swarovski Crystal · Seattle, WA · 2024 to July 2025</div>
+              <ul>
+                <li>Designed customer journey experiences that increased engagement and conversion by ~20%.</li>
+                <li>Optimized visual merchandising layouts applying UX principles and behavioral design insights.</li>
+                <li>Developed product presentation strategies emphasizing storytelling, clarity, and brand alignment.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="section">
+            <h2 class="section-title">Education</h2>
+            <div>
+              <h3 class="job-title">B.S. in Biological Sciences</h3>
+              <div class="job-meta">Southern Methodist University · 2020</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column - Projects -->
+        <div>
+          <div class="section">
+            <h2 class="section-title">Key Projects & Portfolio</h2>
+
+            <div class="project">
+              <h3 class="project-title">Korwin Design System</h3>
+              <div class="project-meta">Design System · 2025</div>
+              <ul>
+                <li>Centralized design system and component library for consistent UI across projects with design tokens and documentation.</li>
+                <li>Built production-ready components with Storybook integration for interactive component exploration.</li>
+              </ul>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">Tailwind CSS</span>
+                <span class="tag">Design Tokens</span>
+                <span class="tag">Storybook</span>
+              </div>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Color Rodeo</h3>
+              <div class="project-meta">Tool / Playground · 2025</div>
+              <ul>
+                <li>Playful color system playground for exploring palettes and contrast with design token integration and real-time feedback.</li>
+                <li>Features systematic color palette generation and contrast checking for accessibility compliance.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Cell Biology Virtual Textbook</h3>
+              <div class="project-meta">Education · 2025</div>
+              <ul>
+                <li>Interactive, web-native biology textbook with modern layouts and motion design to enhance learning experiences.</li>
+                <li>Rich interactive content with thoughtful typography to make complex biological concepts accessible.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Cameo Web</h3>
+              <div class="project-meta">Web Experience · 2025</div>
+              <ul>
+                <li>Cinematic landing and profile concept exploring storytelling through layout systems and typography hierarchy.</li>
+                <li>Sophisticated presentation with compelling narrative flow and interface design experimentation.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Scroll Animation Library</h3>
+              <div class="project-meta">Animation Library · 2025</div>
+              <ul>
+                <li>Collection of scroll-based animation experiments optimized for performance and visual impact.</li>
+                <li>Reusable motion system library with plug-and-play scroll choreography patterns.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Floral Design SVG</h3>
+              <div class="project-meta">SVG / Illustration · 2025</div>
+              <ul>
+                <li>SVG-based floral illustration system with modular components for icons, labels, and decorative frames.</li>
+                <li>Scalable illustration library for brand applications with botanical composition tools.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Pattern Gallery</h3>
+              <div class="project-meta">Gallery / Utility · 2025</div>
+              <ul>
+                <li>Curated gallery of patterns and surfaces for reuse across interfaces and brands as texture library resource.</li>
+                <li>Searchable patterns with live examples for consistent visual systems across projects.</li>
+              </ul>
+            </div>
+
+            <div class="project">
+              <h3 class="project-title">Graphic Design Gallery</h3>
+              <div class="project-meta">Gallery · 2025</div>
+              <ul>
+                <li>Visual archive of graphic design work with print-inspired layouts and image systems.</li>
+                <li>Elegant showcase with editorial typography and grid systems honoring the craft of graphic design.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      // Auto-trigger print dialog after page loads
+      window.onload = function() {
+        setTimeout(function() {
+          window.print();
+        }, 250);
+      };
+    </script>
+  </body>
+</html>
+      `);
+      printWindow.document.close();
+    }
   };
 
   return (
