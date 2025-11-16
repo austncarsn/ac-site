@@ -20,7 +20,7 @@ export function ProjectDetailModal({
         <div className="p-12">
           {/* Header */}
           <DialogHeader className="mb-12">
-            <DialogTitle className="mb-3" style={{ fontSize: '40px', fontWeight: 500, letterSpacing: '-0.02em' }}>
+            <DialogTitle className="mb-3" style={{ fontSize: '40px', fontWeight: 400, letterSpacing: '-0.02em' }}>
               {project.name}
             </DialogTitle>
             <DialogDescription style={{ fontSize: '18px', opacity: 0.5, fontWeight: 400 }}>
@@ -62,7 +62,7 @@ export function ProjectDetailModal({
               {/* Impact */}
               {project.impact && (
                 <div>
-                  <p className="mb-3" style={{ fontSize: '13px', fontWeight: 500, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  <p className="mb-3" style={{ fontSize: '13px', fontWeight: 400, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                     Impact
                   </p>
                   <p style={{ fontSize: '20px', lineHeight: '32px', opacity: 0.7 }}>{project.impact}</p>
@@ -71,7 +71,7 @@ export function ProjectDetailModal({
 
               {/* Technologies */}
               <div>
-                <p className="mb-3" style={{ fontSize: '13px', fontWeight: 500, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                <p className="mb-3" style={{ fontSize: '13px', fontWeight: 400, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                   Technologies
                 </p>
                 <p style={{ fontSize: '20px', lineHeight: '32px', opacity: 0.7 }}>{project.techStack}</p>

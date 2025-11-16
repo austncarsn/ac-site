@@ -407,30 +407,30 @@
   }
 
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h1 {
-    letter-spacing: -.03em;
+    letter-spacing: -.04em;
     font-size: 112px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 120px;
   }
 
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h2 {
-    letter-spacing: -.025em;
+    letter-spacing: -.03em;
     font-size: 80px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 88px;
   }
 
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h3 {
-    letter-spacing: -.015em;
+    letter-spacing: -.02em;
     font-size: 44px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 52px;
   }
 
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) h4 {
-    letter-spacing: -.01em;
+    letter-spacing: -.015em;
     font-size: 28px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 36px;
   }
 
@@ -444,14 +444,14 @@
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) label {
     letter-spacing: 0;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 28px;
   }
 
   :where(:not(:has([class*=" text-"]), :not(:has([class^="text-"])))) button {
     letter-spacing: -.01em;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 32px;
   }
 
@@ -1415,28 +1415,32 @@
     text-transform: uppercase;
     letter-spacing: .1em;
     font-size: 13px;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .text-caption {
     opacity: .4;
     font-size: 16px;
+    font-weight: 400;
   }
 
   .text-small {
     opacity: .5;
     font-size: 18px;
+    font-weight: 400;
   }
 
   .text-body-small {
     opacity: .7;
     font-size: 20px;
+    font-weight: 400;
     line-height: 32px;
   }
 
   .text-body-medium {
     opacity: .7;
     font-size: 22px;
+    font-weight: 400;
     line-height: 34px;
   }
 
