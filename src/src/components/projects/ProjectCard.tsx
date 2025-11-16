@@ -21,6 +21,19 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
     }
   };
 
+  const handleTouchStart = () => {
+    if (isMobile) {
+      setIsHovered(true);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (isMobile) {
+      // Keep the color visible briefly during tap
+      setTimeout(() => setIsHovered(false), 150);
+    }
+  };
+
   return (
     <motion.article
       className="group cursor-pointer rounded-[6px] relative overflow-hidden"
@@ -36,6 +49,8 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
       onKeyDown={handleKeyDown}
       onMouseEnter={() => !isMobile && setIsHovered(true)}
       onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
       role="button"
       tabIndex={0}
       style={{ 
@@ -48,7 +63,7 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
         className="absolute inset-0 rounded-[6px] pointer-events-none"
         initial={{ opacity: 0 }}
         animate={{ opacity: isHovered ? 0.08 : 0 }}
-        transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+        transition={{ duration: isMobile ? 0.2 : 0.35, ease: EASE_OUT_EXPO }}
         style={{ 
           backgroundColor: project.hoverColor,
           zIndex: 0,
