@@ -3,6 +3,13 @@
 /* Import Instrument Serif from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 
+@theme {
+  /* Brand Colors - Teal */
+  --color-brand-purple: #14B8A6;
+  --color-brand-purple-dark: #0F9488;
+  --color-brand-purple-light: #2DD4BF;
+}
+
 @layer utilities {
   /* Project card hover colors - refined palette */
   :root {
@@ -36,11 +43,6 @@
 
 @layer base {
   :root {
-    /* Brand Colors */
-    --color-brand-purple: #6B4EFF;
-    --color-brand-purple-dark: #5940CC;
-    --color-brand-purple-light: #8B7FFF;
-
     /* Light theme */
     --background: #FFFFFF;
     --foreground: #0A0A0A;

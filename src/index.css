@@ -91,6 +91,8 @@
     --default-mono-font-family: var(--font-mono);
     --default-mono-font-feature-settings: var(--font-mono--font-feature-settings);
     --default-mono-font-variation-settings: var(--font-mono--font-variation-settings);
+    --color-brand-purple: #14b8a6;
+    --color-brand-purple-dark: #0f9488;
   }
 }
 
@@ -345,9 +347,6 @@
   }
 
   :root {
-    --color-brand-purple: #6b4eff;
-    --color-brand-purple-dark: #5940cc;
-    --color-brand-purple-light: #8b7fff;
     --background: #fff;
     --foreground: #0a0a0a;
     --border: #0a0a0a1a;
@@ -924,6 +923,10 @@
     .bg-black\/50 {
       background-color: color-mix(in oklab, var(--color-black) 50%, transparent);
     }
+  }
+
+  .bg-brand-purple {
+    background-color: var(--color-brand-purple);
   }
 
   .bg-foreground {
