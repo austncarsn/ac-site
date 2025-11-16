@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import { EASE_OUT_EXPO, EASE_OUT_QUART, DURATION, MOBILE_DURATION } from '../../lib/constants';
 
 const navItems = [
   { label: 'Work', href: '#work' },
@@ -13,9 +14,11 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   
   // Detect mobile
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const duration = isMobile ? MOBILE_DURATION : DURATION;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,14 +73,23 @@ export function Navigation() {
   return (
     <>
       <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${ 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all ${ 
           isScrolled 
             ? 'bg-background/80 backdrop-blur-md border-b border-border shadow-sm' 
             : 'bg-transparent'
         }`}
+        style={{
+          transitionDuration: isMobile ? '0.3s' : '0.5s',
+          transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+          willChange: 'background-color, border-color, box-shadow',
+          transform: 'translateZ(0)',
+        }}
         initial={{ y: -64 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ 
+          duration: prefersReducedMotion ? duration.fast : duration.slow,
+          ease: EASE_OUT_EXPO,
+        }}
       >
         <div className="container-main">
           <div className="flex items-center justify-between" style={{ height: 'var(--header-height)' }}>
@@ -94,7 +106,9 @@ export function Navigation() {
                 fontWeight: 400,
                 letterSpacing: '0.02em',
                 transitionDuration: isMobile ? '0.2s' : '0.3s',
+                transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
                 WebkitTapHighlightColor: 'transparent',
+                willChange: 'opacity, transform',
               }}
             >
               AC
@@ -111,12 +125,15 @@ export function Navigation() {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="relative transition-opacity duration-300 hover:opacity-100"
+                    className="relative transition-opacity hover:opacity-100"
                     style={{
                       fontSize: '17px',
                       fontWeight: 400,
                       letterSpacing: 0,
                       opacity: isActive ? 1 : 0.5,
+                      transitionDuration: '0.3s',
+                      transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                      willChange: 'opacity',
                     }}
                   >
                     {item.label}
@@ -124,12 +141,16 @@ export function Navigation() {
                       <motion.div
                         layoutId="activeSection"
                         className="absolute left-0 right-0 h-[1px] bg-foreground"
-                        style={{ bottom: 'calc(var(--space-6) * -1)' }}
+                        style={{ 
+                          bottom: 'calc(var(--space-6) * -1)',
+                          willChange: 'transform',
+                        }}
                         initial={false}
                         transition={{
                           type: "spring",
-                          stiffness: 380,
-                          damping: 30,
+                          stiffness: 340,
+                          damping: 28,
+                          mass: 0.8,
                         }}
                       />
                     )}
@@ -144,7 +165,9 @@ export function Navigation() {
               style={{ 
                 padding: 'var(--space-2)',
                 transitionDuration: isMobile ? '0.15s' : '0.3s',
+                transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
                 WebkitTapHighlightColor: 'transparent',
+                willChange: 'opacity',
               }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
@@ -182,25 +205,39 @@ export function Navigation() {
           <>
             {/* Backdrop */}
             <motion.div
-              className="fixed inset-0 bg-background/95 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 bg-background/98 backdrop-blur-md z-40 md:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ 
+                duration: prefersReducedMotion ? duration.instant : duration.fast,
+                ease: EASE_OUT_QUART,
+              }}
               onClick={() => setMobileMenuOpen(false)}
+              style={{
+                willChange: 'opacity',
+                transform: 'translateZ(0)',
+              }}
             />
 
             {/* Menu Panel */}
             <motion.div
-              className="fixed left-0 right-0 bg-background border-b border-border z-40 md:hidden"
-              style={{ top: 'var(--header-height)' }}
+              className="fixed left-0 right-0 bg-background/95 backdrop-blur-md border-b border-border z-40 md:hidden"
+              style={{ 
+                top: 'var(--header-height)',
+                willChange: 'opacity, transform',
+                transform: 'translateZ(0)',
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ 
+                duration: prefersReducedMotion ? duration.instant : duration.fast,
+                ease: EASE_OUT_EXPO,
+              }}
             >
-              <div className="container-main" style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-8)' }}>
-                <nav className="flex flex-col" style={{ gap: 'var(--space-8)' }}>
+              <div className="container-main" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-12)' }}>
+                <nav className="flex flex-col" style={{ gap: 'var(--space-2)' }}>
                   {navItems.map((item, index) => {
                     const sectionId = item.href.substring(1);
                     const isActive = activeSection === sectionId;
@@ -210,30 +247,62 @@ export function Navigation() {
                         key={item.label}
                         href={item.href}
                         onClick={(e) => handleNavClick(e, item.href)}
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -16 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.05 }}
-                        className="flex items-center justify-between hover:opacity-60 transition-opacity active:opacity-40 touch-manipulation"
+                        transition={{ 
+                          delay: prefersReducedMotion ? 0 : index * 0.04,
+                          duration: prefersReducedMotion ? duration.instant : duration.fast,
+                          ease: EASE_OUT_EXPO,
+                        }}
+                        className="flex items-center justify-between hover:opacity-100 transition-all group touch-manipulation border-b border-border/30"
                         style={{
-                          fontSize: '20px',
-                          fontWeight: 400,
-                          letterSpacing: '-0.01em',
+                          fontSize: '24px',
+                          fontWeight: 300,
+                          letterSpacing: '-0.02em',
                           opacity: isActive ? 1 : 0.5,
-                          paddingTop: 'var(--space-2)',
-                          paddingBottom: 'var(--space-2)',
+                          paddingTop: 'var(--space-6)',
+                          paddingBottom: 'var(--space-6)',
                           transitionDuration: '0.2s',
+                          transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
                           WebkitTapHighlightColor: 'transparent',
+                          willChange: 'opacity',
                         }}
                       >
                         <span>{item.label}</span>
-                        {isActive && (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="rounded-full bg-foreground"
-                            style={{ width: '6px', height: '6px' }}
-                          />
-                        )}
+                        <div className="flex items-center" style={{ gap: 'var(--space-4)' }}>
+                          {isActive && (
+                            <motion.div
+                              initial={{ scale: 0, opacity: 0 }}
+                              animate={{ scale: 1, opacity: 1 }}
+                              transition={{ 
+                                duration: prefersReducedMotion ? duration.instant : duration.fast,
+                                ease: EASE_OUT_EXPO,
+                              }}
+                              className="rounded-full bg-brand-purple"
+                              style={{ 
+                                width: '6px', 
+                                height: '6px',
+                                willChange: 'transform, opacity',
+                              }}
+                            />
+                          )}
+                          <motion.svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            className="opacity-0 group-hover:opacity-30 transition-opacity"
+                            style={{ 
+                              transitionDuration: '0.2s',
+                              transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
+                            }}
+                          >
+                            <path d="M6 12L10 8L6 4" />
+                          </motion.svg>
+                        </div>
                       </motion.a>
                     );
                   })}

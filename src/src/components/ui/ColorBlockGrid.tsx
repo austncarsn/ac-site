@@ -1,0 +1,208 @@
+import { motion, useReducedMotion } from 'motion/react';
+import { useMemo } from 'react';
+import { EASE_OUT_EXPO, EASE_OUT_CIRC, DURATION, MOBILE_DURATION, STAGGER } from '../../lib/constants';
+
+// Color palettes
+const MONOCHROME_PALETTE = [
+  '#0A0A0A', '#1A1A1A', '#2D2D2D', '#404040', '#595959',
+  '#737373', '#8C8C8C', '#A6A6A6', '#BFBFBF', '#D9D9D9',
+] as const;
+
+const VIBRANT_PALETTE = [
+  '#6B4EFF', '#FF3B5C', '#00F5FF', '#FFEB3B', '#00E676',
+  '#FF6B00', '#E040FB', '#00BCD4', '#FFC107', '#7C4DFF',
+] as const;
+
+// Grid configuration
+const GRID_COLS = 10;
+const MONOCHROME_ROWS = 3;
+const MOBILE_GRID_COLS = 6;
+
+function generateColorBlocks(): readonly string[] {
+  const blocks: string[] = [];
+  const monochromeCount = MONOCHROME_ROWS * GRID_COLS;
+  
+  // First 3 rows - monochrome
+  for (let i = 0; i < monochromeCount; i++) {
+    blocks.push(MONOCHROME_PALETTE[i % MONOCHROME_PALETTE.length]);
+  }
+  
+  // Last row - vibrant colors
+  for (let i = 0; i < GRID_COLS; i++) {
+    blocks.push(VIBRANT_PALETTE[i]);
+  }
+  
+  return blocks;
+}
+
+function generateMobileColorBlocks(): readonly string[] {
+  const blocks: string[] = [];
+  
+  // First row - monochrome (6 blocks)
+  for (let i = 0; i < MOBILE_GRID_COLS; i++) {
+    blocks.push(MONOCHROME_PALETTE[i % MONOCHROME_PALETTE.length]);
+  }
+  
+  // Second row - vibrant colors (6 blocks)
+  for (let i = 0; i < MOBILE_GRID_COLS; i++) {
+    blocks.push(VIBRANT_PALETTE[i]);
+  }
+  
+  return blocks;
+}
+
+interface ColorBlockGridProps {
+  isMobile?: boolean;
+}
+
+export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const colorBlocks = useMemo(() => generateColorBlocks(), []);
+  const mobileColorBlocks = useMemo(() => generateMobileColorBlocks(), []);
+  
+  const duration = isMobile ? MOBILE_DURATION : DURATION;
+
+  const gridVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: prefersReducedMotion ? 1 : 0.96,
+      filter: prefersReducedMotion ? 'none' : (isMobile ? 'blur(10px)' : 'blur(16px)'),
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
+      transition: {
+        duration: prefersReducedMotion ? duration.fast : (isMobile ? duration.slower : 1.8),
+        ease: EASE_OUT_EXPO,
+        staggerChildren: prefersReducedMotion ? 0 : STAGGER.tight,
+        delayChildren: prefersReducedMotion ? 0 : (isMobile ? 0.4 : 0.6),
+      },
+    },
+  };
+
+  const blockVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: prefersReducedMotion ? 1 : 0.92,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: prefersReducedMotion ? duration.fast : duration.slow,
+        ease: EASE_OUT_CIRC,
+      },
+    },
+  };
+
+  return (
+    <>
+      {/* Desktop Color Block Grid */}
+      <motion.div
+        variants={gridVariants}
+        className="hidden lg:grid grid-cols-10 auto-rows-fr"
+        style={{ 
+          gap: 'var(--space-6)',
+          willChange: 'opacity, transform',
+          transform: 'translateZ(0)',
+        }}
+        role="presentation"
+        aria-hidden="true"
+      >
+        {colorBlocks.map((color, index) => {
+          const row = Math.floor(index / GRID_COLS);
+          const col = index % GRID_COLS;
+          
+          // Optimized wave animation
+          const waveDelay = (row * 0.25) + (col * 0.06);
+          
+          return (
+            <motion.div
+              key={`color-block-${index}`}
+              variants={blockVariants}
+              animate={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      opacity: [1, 0.85, 0.92, 0.88, 1],
+                    }
+              }
+              transition={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      duration: 8,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      delay: waveDelay,
+                    }
+              }
+              className="aspect-square rounded-[6px]"
+              style={{ 
+                backgroundColor: color,
+                willChange: prefersReducedMotion ? 'auto' : 'opacity',
+                transform: 'translateZ(0)',
+              }}
+              aria-hidden="true"
+            />
+          );
+        })}
+      </motion.div>
+
+      {/* Mobile Color Block Grid */}
+      <motion.div
+        variants={gridVariants}
+        className="lg:hidden grid grid-cols-6 auto-rows-fr"
+        style={{ 
+          gap: 'var(--space-6)',
+          willChange: 'opacity, transform',
+          transform: 'translateZ(0)',
+        }}
+        role="presentation"
+        aria-hidden="true"
+      >
+        {mobileColorBlocks.map((color, index) => {
+          const row = Math.floor(index / MOBILE_GRID_COLS);
+          const col = index % MOBILE_GRID_COLS;
+          
+          // Optimized wave animation
+          const waveDelay = (row * 0.25) + (col * 0.06);
+          
+          return (
+            <motion.div
+              key={`mobile-color-block-${index}`}
+              variants={blockVariants}
+              animate={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      opacity: [1, 0.85, 0.92, 0.88, 1],
+                    }
+              }
+              transition={
+                prefersReducedMotion
+                  ? undefined
+                  : {
+                      duration: 8,
+                      ease: "easeInOut",
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      delay: waveDelay,
+                    }
+              }
+              className="aspect-square rounded-[6px]"
+              style={{ 
+                backgroundColor: color,
+                willChange: prefersReducedMotion ? 'auto' : 'opacity',
+                transform: 'translateZ(0)',
+              }}
+              aria-hidden="true"
+            />
+          );
+        })}
+      </motion.div>
+    </>
+  );
+}

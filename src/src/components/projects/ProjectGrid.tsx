@@ -17,13 +17,20 @@ export function ProjectGrid({
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[55px]">
+    <div 
+      className="flex flex-col border-t border-border"
+    >
       {projects.map((project) => (
-        <ProjectCard
+        <div
           key={project.id}
-          project={project}
-          onClick={() => onProjectClick(project)}
-        />
+          className="border-b border-border"
+          style={{ padding: 'var(--space-8) 0' }}
+        >
+          <ProjectCard
+            project={project}
+            onClick={() => onProjectClick(project)}
+          />
+        </div>
       ))}
     </div>
   );

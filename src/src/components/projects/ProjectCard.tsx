@@ -1,6 +1,5 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { motion } from 'motion/react';
-import { ImageWithFallback } from '../../../components/figma/ImageWithFallback';
 import { EASE_OUT_EXPO, DURATION } from '../../lib/constants';
 import type { Project } from '../../data/projects';
 
@@ -10,6 +9,8 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = memo(function ProjectCard({ project, onClick }: ProjectCardProps) {
+  const [isHovered, setIsHovered] = useState(false);
+  
   // Detect mobile for optimized interactions
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
   
@@ -22,7 +23,7 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
 
   return (
     <motion.article
-      className="group cursor-pointer"
+      className="group cursor-pointer rounded-[6px] relative overflow-hidden"
       initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
@@ -30,10 +31,11 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
         duration: isMobile ? 0.6 : DURATION.normal, 
         ease: EASE_OUT_EXPO 
       }}
-      whileHover={!isMobile ? { y: -4 } : undefined}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
       onKeyDown={handleKeyDown}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
       role="button"
       tabIndex={0}
       style={{ 
@@ -41,29 +43,17 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
         touchAction: 'manipulation',
       }}
     >
-      {/* Preview Image */}
-      <div 
-        className="aspect-[3/2] w-full overflow-hidden rounded-[6px] transition-opacity"
-        style={{ 
-          marginBottom: 'var(--space-6)',
-          transitionDuration: isMobile ? '0.3s' : '0.5s',
-        }}
-      >
-        <motion.div
-          whileHover={!isMobile ? { scale: 1.05 } : undefined}
-          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
-          className="h-full w-full"
-        >
-          <ImageWithFallback
-            src={project.previewImage}
-            alt={`${project.name} preview`}
-            className="h-full w-full object-cover"
-          />
-        </motion.div>
-      </div>
-
+      {/* Hover Background */}
+      <motion.div
+        className="absolute inset-0 -z-10 rounded-[6px]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 0.08 : 0 }}
+        transition={{ duration: 0.35, ease: EASE_OUT_EXPO }}
+        style={{ backgroundColor: project.hoverColor }}
+      />
+      
       {/* Project Info */}
-      <div>
+      <div style={{ padding: 'var(--space-6) 0' }}>
         <div className="flex items-baseline justify-between" style={{ marginBottom: 'var(--space-2)', gap: 'var(--space-6)' }}>
           <h3 className="tracking-tight">
             {project.name}
@@ -72,7 +62,7 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
             {project.year}
           </span>
         </div>
-        <p className="text-small">{project.category}</p>
+        <p className="text-small opacity-60">{project.category}</p>
       </div>
     </motion.article>
   );

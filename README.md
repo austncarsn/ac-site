@@ -1,7 +1,7 @@
 
-  # Project Reel Component
+  # AC WEBSITE
 
-  This is a code bundle for Project Reel Component. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/Project-Reel-Component.
+  This is a code bundle for AC WEBSITE. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/AC-WEBSITE.
 
   ## Running the code
 

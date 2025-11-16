@@ -26,7 +26,7 @@ export function AboutSection() {
           <AnimatedSection className="lg:col-span-7">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
               <p className="text-body-medium">
-                I build interface systems that bridge precision and creativity—turning complex 
+                I build interface systems that bridge precision and creativity, turning complex 
                 design requirements into production-ready code that scales.
               </p>
 

@@ -46,7 +46,8 @@ export type Project = Readonly<{
   year: string;
   role: string;
   description: string[];
-  previewImage: string;
+  previewColors: readonly string[];
+  hoverColor: string;
   tags: readonly string[];
   impact?: string;
   liveUrl?: string;
@@ -74,7 +75,8 @@ export const PROJECTS: readonly Project[] = [
       'A playful color-system playground for exploring palettes and contrast in a structured way. Built to help designers and developers experiment with color relationships.',
       'Features design token integration, contrast checking, and systematic color palette generation with real-time feedback.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1729992530956-912936b9785d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb2xvciUyMHBhbGV0dGUlMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYzMjYxMDM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#FF3B5C', '#00F5FF', '#FFEB3B', '#00E676', '#FF6B00', '#E040FB'],
+    hoverColor: '#FFB3C1',
     tags: ['Color Systems', 'Design Tokens', 'Contrast', 'Interactive'],
     impact: 'Structured exploration of color palettes and accessibility',
     liveUrl: 'https://color-rodeo.vercel.app',
@@ -96,7 +98,8 @@ export const PROJECTS: readonly Project[] = [
       'Interactive, web-native biology textbook experiments with modern layouts and motion for students. Designed to make complex biological concepts accessible and engaging.',
       'Features rich interactive content, modern typography, and thoughtful motion design to enhance learning experiences.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1761081478943-25e4f4b6354c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaW9sb2d5JTIwdGV4dGJvb2slMjBlZHVjYXRpb258ZW58MXx8fHwxNzYzMjYxMDM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#00E676', '#2E7D32', '#81C784', '#4CAF50'],
+    hoverColor: '#A5D6A7',
     tags: ['Education', 'Interactive Content', 'Biology', 'Motion Design'],
     impact: 'Web-native approach to educational content delivery',
     liveUrl: 'https://biology-virtual-textbook.vercel.app',
@@ -118,7 +121,8 @@ export const PROJECTS: readonly Project[] = [
       'Centralized design system and component library for consistent UI across projects. Built with a focus on design tokens, reusable components, and a cohesive design language.',
       'Provides teams with production-ready components and documentation. Intended to integrate with Storybook for interactive component exploration.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1756576357697-13dfc5fff61c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkZXNpZ24lMjBzeXN0ZW0lMjBpbnRlcmZhY2V8ZW58MXx8fHwxNzYzMTk3OTc2fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#6B4EFF', '#2D2D2D', '#8C8C8C', '#BFBFBF'],
+    hoverColor: '#B8A3FF',
     tags: ['Design Systems', 'Tokens', 'Components', 'Documentation'],
     impact: 'Systematic approach to design language and component architecture',
     liveUrl: 'https://korwindesignsystem.vercel.app',
@@ -140,7 +144,8 @@ export const PROJECTS: readonly Project[] = [
       'Curated gallery of patterns and surfaces that can be reused across interfaces and brands. Built as a texture library and background system resource.',
       'Features searchable patterns with live examples, designed to support consistent visual systems across different projects.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1682247059296-f078b06130e2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwYXR0ZXJuJTIwZGVzaWduJTIwZ3JpZHxlbnwxfHx8fDE3NjMyNjEwMzd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#0A0A0A', '#404040', '#8C8C8C', '#D9D9D9'],
+    hoverColor: '#E0E0E0',
     tags: ['Patterns', 'Background Systems', 'Texture Library', 'Utilities'],
     impact: 'Reusable pattern system for consistent visual design',
     liveUrl: 'https://patterngallery.vercel.app',
@@ -162,7 +167,8 @@ export const PROJECTS: readonly Project[] = [
       'Collection of scroll-based animation experiments to reuse across future sites. Built as a motion system library focused on scroll choreography.',
       'Features carefully crafted animations optimized for performance and visual impact, designed to be plug-and-play for various projects.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1641322126277-b5e8a8a83557?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhbmltYXRpb24lMjBjb2RlJTIwaW50ZXJmYWNlfGVufDF8fHx8MTc2MzI2MTAzOHww&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#7C4DFF', '#E040FB', '#00BCD4', '#00F5FF'],
+    hoverColor: '#C5A3FF',
     tags: ['Animation', 'Motion Systems', 'Scroll Choreography', 'Library'],
     impact: 'Reusable scroll animation patterns for compelling experiences',
     liveUrl: 'https://scroll-animation-library.vercel.app',
@@ -184,7 +190,8 @@ export const PROJECTS: readonly Project[] = [
       'SVG-based floral illustration system for icons, labels, and decorative frames. Built as a scalable illustration library for brand applications.',
       'Features modular SVG components that can be composed into unique botanical illustrations and decorative elements.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1584441332323-c0473240f3ba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmbG9yYWwlMjBzdmclMjBpbGx1c3RyYXRpb258ZW58MXx8fHwxNzYzMjYxMDM4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#FF3B5C', '#FFB3C1', '#C8E6C9', '#81C784'],
+    hoverColor: '#FFD4DC',
     tags: ['SVG Systems', 'Illustration', 'Label Design', 'Components'],
     impact: 'Scalable illustration system for decorative applications',
     liveUrl: 'https://floral-design-svg.vercel.app',
@@ -206,7 +213,8 @@ export const PROJECTS: readonly Project[] = [
       'Cinematic landing and profile concept playing with layout, typography, and narrative. Explores storytelling through interface design and layout systems.',
       'Built with a focus on cinematic presentation, sophisticated typography hierarchy, and compelling narrative flow.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1759752394243-9a1592d13f14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHdlYiUyMHBsYXRmb3JtfGVufDF8fHx8MTc2MzI2MTAzOXww&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#0A0A0A', '#6B4EFF', '#FFC107', '#1A1A1A'],
+    hoverColor: '#B8A3FF',
     tags: ['Storytelling', 'Layout Systems', 'Typography', 'Cinematic'],
     impact: 'Narrative-driven approach to interface design',
     liveUrl: 'https://cameo-web.vercel.app',
@@ -228,7 +236,8 @@ export const PROJECTS: readonly Project[] = [
       'Curated gallery of graphic design work as a visual archive. Features print-inspired layouts and image systems for showcasing design work.',
       'Built with attention to typography and grid systems, creating an elegant showcase that honors the craft of graphic design.',
     ],
-    previewImage: 'https://images.unsplash.com/photo-1652805363265-b8fbf9bbdfac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmFwaGljJTIwZGVzaWduJTIwcG9ydGZvbGlvfGVufDF8fHx8MTc2MzIyMTYxNnww&ixlib=rb-4.1.0&q=80&w=1080',
+    previewColors: ['#0A0A0A', '#FFFFFF', '#6B4EFF', '#D9D9D9'],
+    hoverColor: '#E8E0FF',
     tags: ['Gallery', 'Print-Inspired Layouts', 'Image Systems', 'Typography'],
     impact: 'Visual archive with editorial presentation',
     liveUrl: 'https://graphicdesigngallery.vercel.app',

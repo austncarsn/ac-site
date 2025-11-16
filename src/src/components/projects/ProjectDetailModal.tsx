@@ -1,5 +1,4 @@
 import type { JSX } from 'react';
-import { ImageWithFallback } from '../../../components/figma/ImageWithFallback';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '../ui/dialog';
 import type { Project } from '../../data/projects';
 
@@ -16,44 +15,40 @@ export function ProjectDetailModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[800px] max-h-[90vh] overflow-y-auto p-0">
-        <div className="p-12">
+      <DialogContent className="w-[calc(100%-2rem)] max-w-[900px] max-h-[85vh] overflow-y-auto p-0">
+        <div style={{ padding: 'var(--space-8) var(--space-6)' }} className="md:p-12">
+          {/* Color Block Preview */}
+          <div 
+            className="aspect-[2/1] w-full overflow-hidden rounded-[6px] grid grid-cols-6 grid-rows-1"
+            style={{ marginBottom: 'var(--space-8)' }}
+          >
+            {project.previewColors.map((color, index) => (
+              <div
+                key={index}
+                style={{ backgroundColor: color }}
+                className="w-full h-full"
+              />
+            ))}
+          </div>
+
           {/* Header */}
-          <DialogHeader className="mb-12">
-            <DialogTitle className="mb-3" style={{ fontSize: '40px', fontWeight: 400, letterSpacing: '-0.02em' }}>
+          <DialogHeader style={{ marginBottom: 'var(--space-8)' }}>
+            <DialogTitle style={{ marginBottom: 'var(--space-3)' }}>
               {project.name}
             </DialogTitle>
-            <DialogDescription style={{ fontSize: '18px', opacity: 0.5, fontWeight: 400 }}>
+            <DialogDescription style={{ opacity: 0.6 }}>
               {project.role} · {project.year}
             </DialogDescription>
           </DialogHeader>
 
           {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3" style={{ gap: 'var(--space-8) var(--space-12)' }}>
             {/* Main Content */}
-            <div className="lg:col-span-2">
-              {/* Images */}
-              {project.images && (
-                <div className="space-y-6 mb-12">
-                  {project.images.map((image, i) => (
-                    <div 
-                      key={i}
-                      className="aspect-video w-full overflow-hidden rounded-[6px]"
-                    >
-                      <ImageWithFallback
-                        src={image}
-                        alt={`${project.name} detail ${i + 1}`}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-              
+            <div className="lg:col-span-2 space-y-8">
               {/* Description */}
-              <div className="space-y-6">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
                 {project.description.map((desc, i) => (
-                  <p key={i} style={{ fontSize: '20px', lineHeight: '32px', opacity: 0.7 }}>
+                  <p key={i} style={{ opacity: 0.7 }}>
                     {desc}
                   </p>
                 ))}
@@ -62,34 +57,33 @@ export function ProjectDetailModal({
               {/* Impact */}
               {project.impact && (
                 <div>
-                  <p className="mb-3" style={{ fontSize: '13px', fontWeight: 400, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  <p className="text-caption uppercase" style={{ marginBottom: 'var(--space-3)', opacity: 0.4, letterSpacing: '0.1em' }}>
                     Impact
                   </p>
-                  <p style={{ fontSize: '20px', lineHeight: '32px', opacity: 0.7 }}>{project.impact}</p>
+                  <p style={{ opacity: 0.7 }}>{project.impact}</p>
                 </div>
               )}
 
               {/* Technologies */}
               <div>
-                <p className="mb-3" style={{ fontSize: '13px', fontWeight: 400, opacity: 0.4, textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                <p className="text-caption uppercase" style={{ marginBottom: 'var(--space-3)', opacity: 0.4, letterSpacing: '0.1em' }}>
                   Technologies
                 </p>
-                <p style={{ fontSize: '20px', lineHeight: '32px', opacity: 0.7 }}>{project.techStack}</p>
+                <p style={{ opacity: 0.7 }}>{project.techStack}</p>
               </div>
 
               {/* Links */}
               {(project.liveUrl || project.githubUrl) && (
-                <div className="flex gap-8 pt-8 border-t border-border">
+                <div className="flex border-t border-border" style={{ gap: 'var(--space-8)', paddingTop: 'var(--space-8)' }}>
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:opacity-60 transition-opacity duration-300 border-b border-foreground pb-[2px]"
+                      className="hover:opacity-60 transition-opacity border-b border-foreground"
                       style={{
-                        fontSize: '17px',
-                        fontWeight: 400,
-                        letterSpacing: 0,
+                        paddingBottom: '2px',
+                        transitionDuration: '0.3s',
                       }}
                     >
                       View live site
@@ -100,16 +94,57 @@ export function ProjectDetailModal({
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:opacity-60 transition-opacity duration-300 border-b border-foreground pb-[2px]"
+                      className="hover:opacity-60 transition-opacity border-b border-foreground"
                       style={{
-                        fontSize: '17px',
-                        fontWeight: 400,
-                        letterSpacing: 0,
+                        paddingBottom: '2px',
+                        transitionDuration: '0.3s',
                       }}
                     >
                       View code
                     </a>
                   )}
+                </div>
+              )}
+            </div>
+
+            {/* Sidebar - Meta Info */}
+            <div className="space-y-6">
+              {/* Category */}
+              <div>
+                <p className="text-caption uppercase" style={{ marginBottom: 'var(--space-2)', opacity: 0.4, letterSpacing: '0.1em' }}>
+                  Category
+                </p>
+                <p className="text-small" style={{ opacity: 0.7 }}>{project.category}</p>
+              </div>
+
+              {/* Status */}
+              <div>
+                <p className="text-caption uppercase" style={{ marginBottom: 'var(--space-2)', opacity: 0.4, letterSpacing: '0.1em' }}>
+                  Status
+                </p>
+                <p className="text-small" style={{ opacity: 0.7 }}>{project.status}</p>
+              </div>
+
+              {/* Tags */}
+              {project.tags && project.tags.length > 0 && (
+                <div>
+                  <p className="text-caption uppercase" style={{ marginBottom: 'var(--space-3)', opacity: 0.4, letterSpacing: '0.1em' }}>
+                    Tags
+                  </p>
+                  <div className="flex flex-wrap" style={{ gap: 'var(--space-2)' }}>
+                    {project.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="text-caption border border-border rounded-[6px]"
+                        style={{
+                          padding: 'var(--space-1) var(--space-3)',
+                          opacity: 0.6,
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
