@@ -13,6 +13,9 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  // Detect mobile
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,13 +85,16 @@ export function Navigation() {
             <motion.a
               href="#"
               onClick={(e) => handleNavClick(e, '#')}
-              className="relative hover:opacity-60 transition-opacity duration-300 flex items-center justify-center border border-foreground rounded-[6px]"
+              whileTap={{ scale: 0.95 }}
+              className="relative hover:opacity-60 transition-opacity flex items-center justify-center border border-foreground rounded-[6px] touch-manipulation"
               style={{
                 width: '40px',
                 height: '40px',
                 fontSize: '17px',
                 fontWeight: 400,
                 letterSpacing: '0.02em',
+                transitionDuration: isMobile ? '0.2s' : '0.3s',
+                WebkitTapHighlightColor: 'transparent',
               }}
             >
               AC
@@ -134,8 +140,12 @@ export function Navigation() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden hover:opacity-60 transition-opacity duration-300"
-              style={{ padding: 'var(--space-2)' }}
+              className="md:hidden hover:opacity-60 transition-opacity touch-manipulation active:opacity-40"
+              style={{ 
+                padding: 'var(--space-2)',
+                transitionDuration: isMobile ? '0.15s' : '0.3s',
+                WebkitTapHighlightColor: 'transparent',
+              }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -203,7 +213,7 @@ export function Navigation() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.05 }}
-                        className="flex items-center justify-between hover:opacity-60 transition-opacity duration-300"
+                        className="flex items-center justify-between hover:opacity-60 transition-opacity active:opacity-40 touch-manipulation"
                         style={{
                           fontSize: '20px',
                           fontWeight: 400,
@@ -211,6 +221,8 @@ export function Navigation() {
                           opacity: isActive ? 1 : 0.5,
                           paddingTop: 'var(--space-2)',
                           paddingBottom: 'var(--space-2)',
+                          transitionDuration: '0.2s',
+                          WebkitTapHighlightColor: 'transparent',
                         }}
                       >
                         <span>{item.label}</span>

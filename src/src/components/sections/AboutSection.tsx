@@ -26,14 +26,20 @@ export function AboutSection() {
           <AnimatedSection className="lg:col-span-7">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
               <p className="text-body-medium">
-                Tech engineer and interface systems architect with 8+ years building 
-                production-ready design systems and digital experiences.
+                I build interface systems that bridge precision and creativity—turning complex 
+                design requirements into production-ready code that scales.
               </p>
 
               <p className="text-body-small opacity-60">
-                My work sits at the intersection of design and engineering, helping organizations 
-                build scalable, accessible interface systems through meticulous craftsmanship and 
-                systematic thinking.
+                What inspires me is the challenge of creating systems that empower teams. I'm 
+                driven by the craft of building tools and components that make design and 
+                development feel seamless, intuitive, and joyful.
+              </p>
+
+              <p className="text-body-small opacity-60">
+                Always learning, always iterating. Currently exploring advanced animation 
+                systems, accessibility patterns, and the evolving landscape of design 
+                tooling and AI-augmented workflows.
               </p>
             </div>
           </AnimatedSection>
@@ -42,12 +48,12 @@ export function AboutSection() {
           <AnimatedSection delay={0.2} className="lg:col-span-5">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
               <InfoBlock
-                label="Currently"
-                content="Senior Interface Architect at Design Systems Co."
+                label="What I Do"
+                content="Design Systems · Component Architecture · Interface Engineering"
               />
               <InfoBlock
-                label="Focus"
-                content="React · TypeScript · Design Systems · Component Architecture"
+                label="Learning"
+                content="AI Tools · Advanced Animation · Accessibility · Developer Experience"
               />
             </div>
           </AnimatedSection>

@@ -9,6 +9,9 @@ export function ProjectFilters({
   selectedCategory: ProjectCategory | 'All';
   onCategoryChange: (category: ProjectCategory | 'All') => void;
 }) {
+  // Detect mobile for optimized interactions
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  
   if (categories.length <= 1) {
     return null;
   }
@@ -19,15 +22,17 @@ export function ProjectFilters({
         <button
           key={cat}
           onClick={() => onCategoryChange(cat)}
-          className={`transition-all duration-300 border-b pb-[2px] ${
+          className={`transition-all border-b pb-[2px] touch-manipulation ${
             selectedCategory === cat
               ? 'border-foreground opacity-100'
-              : 'border-transparent opacity-40 hover:opacity-100'
+              : 'border-transparent opacity-40 hover:opacity-100 active:opacity-100'
           }`}
           style={{
             fontSize: '17px',
             fontWeight: 400,
             letterSpacing: 0,
+            transitionDuration: isMobile ? '0.2s' : '0.3s',
+            WebkitTapHighlightColor: 'transparent',
           }}
         >
           {cat}

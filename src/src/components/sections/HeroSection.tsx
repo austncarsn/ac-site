@@ -46,75 +46,126 @@ export function HeroSection() {
     }
   };
 
-  // Animation variants
+  // Perfect easing curves - refined for premium feel
+  const perfectEase = [0.19, 1.0, 0.22, 1.0]; // Expo out - ultra smooth
+  const butterEase = [0.25, 0.46, 0.45, 0.94]; // Quad out - buttery smooth
+  const silkyEase = [0.33, 1, 0.68, 1]; // Circ out - silky smooth
+
+  // Detect mobile for optimized animations
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  
+  // Mobile-optimized durations (faster, less resource intensive)
+  const mobileDuration = {
+    content: 0.9,
+    description: 1.0,
+    button: 0.8,
+    grid: 1.2,
+    block: 0.6,
+  };
+  
+  const desktopDuration = {
+    content: 1.4,
+    description: 1.6,
+    button: 1.4,
+    grid: 2.0,
+    block: 0.8,
+  };
+  
+  const duration = isMobile ? mobileDuration : desktopDuration;
+
+  // Animation variants - optimized for performance
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: prefersReducedMotion ? 0 : STAGGER.slow,
-        delayChildren: prefersReducedMotion ? 0 : 0.2,
+        staggerChildren: prefersReducedMotion ? 0 : (isMobile ? 0.08 : 0.12),
+        delayChildren: prefersReducedMotion ? 0 : (isMobile ? 0.1 : 0.2),
       },
     },
   };
 
   const contentVariants = {
-    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20 },
+    hidden: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : (isMobile ? 16 : 24),
+      filter: prefersReducedMotion ? 'none' : (isMobile ? 'blur(6px)' : 'blur(12px)'),
+    },
     visible: {
       opacity: 1,
       y: 0,
+      filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? DURATION.fast : DURATION.normal,
-        ease: EASE_OUT_EXPO,
+        duration: prefersReducedMotion ? DURATION.fast : duration.content,
+        ease: perfectEase,
       },
     },
   };
 
   const descriptionVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0,
+      y: prefersReducedMotion ? 0 : (isMobile ? 12 : 16),
+      filter: prefersReducedMotion ? 'none' : (isMobile ? 'blur(4px)' : 'blur(10px)'),
+    },
     visible: {
       opacity: 0.6,
+      y: 0,
+      filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? DURATION.fast : DURATION.normal,
-        delay: prefersReducedMotion ? 0 : 0.2,
+        duration: prefersReducedMotion ? DURATION.fast : duration.description,
+        ease: perfectEase,
       },
     },
   };
 
   const buttonVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0,
+      y: prefersReducedMotion ? 0 : (isMobile ? 8 : 12),
+      filter: prefersReducedMotion ? 'none' : (isMobile ? 'blur(3px)' : 'blur(8px)'),
+    },
     visible: {
       opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? DURATION.fast : DURATION.normal,
-        delay: prefersReducedMotion ? 0 : 0.4,
+        duration: prefersReducedMotion ? DURATION.fast : duration.button,
+        ease: butterEase,
       },
     },
   };
 
   const gridVariants = {
-    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 0.96 },
+    hidden: { 
+      opacity: 0, 
+      scale: prefersReducedMotion ? 1 : 0.96,
+      filter: prefersReducedMotion ? 'none' : 'blur(16px)',
+    },
     visible: {
       opacity: 1,
       scale: 1,
+      filter: 'blur(0px)',
       transition: {
-        duration: prefersReducedMotion ? DURATION.fast : DURATION.slow,
-        delay: prefersReducedMotion ? 0 : 0.3,
-        ease: EASE_OUT_EXPO,
-        staggerChildren: prefersReducedMotion ? 0 : 0.008,
-        delayChildren: prefersReducedMotion ? 0 : 0.4,
+        duration: prefersReducedMotion ? DURATION.fast : duration.grid,
+        ease: perfectEase,
+        staggerChildren: prefersReducedMotion ? 0 : 0.01,
+        delayChildren: prefersReducedMotion ? 0 : 0.6,
       },
     },
   };
 
   const blockVariants = {
-    hidden: { opacity: 0, scale: prefersReducedMotion ? 1 : 0.85 },
+    hidden: { 
+      opacity: 0, 
+      scale: prefersReducedMotion ? 1 : 0.94,
+    },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: prefersReducedMotion ? DURATION.fast : 0.4,
-        ease: EASE_OUT_EXPO,
+        duration: prefersReducedMotion ? DURATION.fast : duration.block,
+        ease: silkyEase,
       },
     },
   };
@@ -142,7 +193,12 @@ export function HeroSection() {
             <motion.h1 
               variants={contentVariants}
               className="uppercase"
-              style={{ marginBottom: 'var(--space-8)' }}
+              style={{ 
+                marginBottom: 'var(--space-8)',
+                fontSize: 'clamp(48px, 8vw, 96px)',
+                lineHeight: '1',
+                letterSpacing: '-0.02em',
+              }}
             >
               Austin Carson
             </motion.h1>
@@ -158,11 +214,14 @@ export function HeroSection() {
             <motion.button
               variants={buttonVariants}
               onClick={scrollToWork}
-              whileHover={{ opacity: 0.6 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.2 }}
-              className="transition-opacity duration-300 border-b border-foreground self-start cursor-pointer"
-              style={{ paddingBottom: 'var(--space-1)' }}
+              whileHover={!isMobile ? { opacity: 0.6 } : undefined}
+              whileTap={{ scale: 0.98, opacity: 0.6 }}
+              transition={{ duration: isMobile ? 0.15 : 0.2, ease: butterEase }}
+              className="transition-opacity border-b border-foreground self-start cursor-pointer touch-manipulation"
+              style={{ 
+                paddingBottom: 'var(--space-1)',
+                WebkitTapHighlightColor: 'transparent',
+              }}
               aria-label="Scroll to view selected work"
             >
               View selected work
@@ -181,37 +240,27 @@ export function HeroSection() {
               const row = Math.floor(index / GRID_COLS);
               const col = index % GRID_COLS;
               
-              // Create subtle color variations for smooth transitions
-              const createColorVariations = (baseColor: string) => {
-                // Lighten and darken variations
-                return [
-                  baseColor,
-                  baseColor + 'f2', // slightly transparent
-                  baseColor + 'e6', // more transparent
-                  baseColor + 'f2',
-                  baseColor,
-                ];
-              };
-              
-              const colorVariations = createColorVariations(color);
-              const animationDelay = (row * 0.2) + (col * 0.1);
+              // Optimized color transition timing
+              const waveDelay = (row * 0.3) + (col * 0.08);
               
               return (
                 <motion.div
                   key={`color-block-${index}`}
                   variants={blockVariants}
                   animate={{
-                    backgroundColor: colorVariations,
+                    opacity: [1, 0.85, 0.92, 0.88, 1],
                   }}
                   transition={{
-                    duration: 6,
+                    duration: 8,
                     ease: "easeInOut",
                     repeat: Infinity,
-                    delay: animationDelay,
+                    repeatType: "loop",
+                    delay: waveDelay,
                   }}
                   className="aspect-square rounded-[6px]"
                   style={{ 
                     backgroundColor: color,
+                    willChange: 'opacity',
                   }}
                   aria-hidden="true"
                 />

@@ -10,6 +10,9 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = memo(function ProjectCard({ project, onClick }: ProjectCardProps) {
+  // Detect mobile for optimized interactions
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 1024;
+  
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -20,31 +23,49 @@ export const ProjectCard = memo(function ProjectCard({ project, onClick }: Proje
   return (
     <motion.article
       className="group cursor-pointer"
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: isMobile ? 20 : 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
-      transition={{ duration: DURATION.normal, ease: EASE_OUT_EXPO }}
+      transition={{ 
+        duration: isMobile ? 0.6 : DURATION.normal, 
+        ease: EASE_OUT_EXPO 
+      }}
+      whileHover={!isMobile ? { y: -4 } : undefined}
+      whileTap={{ scale: 0.98 }}
       onClick={onClick}
       onKeyDown={handleKeyDown}
       role="button"
       tabIndex={0}
+      style={{ 
+        WebkitTapHighlightColor: 'transparent',
+        touchAction: 'manipulation',
+      }}
     >
       {/* Preview Image */}
       <div 
-        className="aspect-[3/2] w-full overflow-hidden rounded-[6px] group-hover:opacity-80 transition-opacity duration-500"
-        style={{ marginBottom: 'var(--space-6)' }}
+        className="aspect-[3/2] w-full overflow-hidden rounded-[6px] transition-opacity"
+        style={{ 
+          marginBottom: 'var(--space-6)',
+          transitionDuration: isMobile ? '0.3s' : '0.5s',
+        }}
       >
-        <ImageWithFallback
-          src={project.previewImage}
-          alt={`${project.name} preview`}
-          className="h-full w-full object-cover"
-        />
+        <motion.div
+          whileHover={!isMobile ? { scale: 1.05 } : undefined}
+          transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+          className="h-full w-full"
+        >
+          <ImageWithFallback
+            src={project.previewImage}
+            alt={`${project.name} preview`}
+            className="h-full w-full object-cover"
+          />
+        </motion.div>
       </div>
 
       {/* Project Info */}
       <div>
         <div className="flex items-baseline justify-between" style={{ marginBottom: 'var(--space-2)', gap: 'var(--space-6)' }}>
-          <h3 className="text-2xl font-normal tracking-tight">
+          <h3 className="tracking-tight">
             {project.name}
           </h3>
           <span className="text-caption shrink-0">
