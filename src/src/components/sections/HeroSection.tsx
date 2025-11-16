@@ -177,19 +177,46 @@ export function HeroSection() {
             role="presentation"
             aria-hidden="true"
           >
-            {colorBlocks.map((color, index) => (
-              <motion.div
-                key={`color-block-${index}`}
-                variants={blockVariants}
-                className="aspect-square rounded-[6px] will-change-transform"
-                style={{ 
-                  backgroundColor: color,
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                }}
-                aria-hidden="true"
-              />
-            ))}
+            {colorBlocks.map((color, index) => {
+              const row = Math.floor(index / GRID_COLS);
+              const col = index % GRID_COLS;
+              
+              // Create subtle color variations for smooth transitions
+              const createColorVariations = (baseColor: string) => {
+                // Lighten and darken variations
+                return [
+                  baseColor,
+                  baseColor + 'f2', // slightly transparent
+                  baseColor + 'e6', // more transparent
+                  baseColor + 'f2',
+                  baseColor,
+                ];
+              };
+              
+              const colorVariations = createColorVariations(color);
+              const animationDelay = (row * 0.2) + (col * 0.1);
+              
+              return (
+                <motion.div
+                  key={`color-block-${index}`}
+                  variants={blockVariants}
+                  animate={{
+                    backgroundColor: colorVariations,
+                  }}
+                  transition={{
+                    duration: 6,
+                    ease: "easeInOut",
+                    repeat: Infinity,
+                    delay: animationDelay,
+                  }}
+                  className="aspect-square rounded-[6px]"
+                  style={{ 
+                    backgroundColor: color,
+                  }}
+                  aria-hidden="true"
+                />
+              );
+            })}
           </motion.div>
         </motion.div>
       </div>

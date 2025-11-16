@@ -1059,10 +1059,6 @@
     transition-timing-function: var(--ease-out);
   }
 
-  .will-change-transform {
-    will-change: transform;
-  }
-
   .outline-none {
     --tw-outline-style: none;
     outline-style: none;

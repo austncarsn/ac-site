@@ -11,27 +11,51 @@ interface Essay {
 const ESSAYS: Essay[] = [
   {
     title: 'The Art of Systematic Design',
-    date: 'March 2024',
+    date: 'November 2025',
     category: 'Design Systems',
-    excerpt: 'Exploring how systematic thinking transforms interface design from individual components into cohesive, scalable systems that serve both users and teams.',
+    excerpt: 'Exploring how systematic thinking transforms interface design from isolated components into cohesive, scalable systems that serve both users and teams. A deep dive into establishing principles, creating flexible foundations, and building design languages that evolve with product needs while maintaining consistency across platforms and contexts.',
   },
   {
     title: 'Production-Ready Components',
-    date: 'February 2024',
+    date: 'October 2025',
     category: 'Engineering',
-    excerpt: 'Building components that work seamlessly across contexts requires more than clean code—it demands thoughtful architecture and rigorous attention to edge cases.',
+    excerpt: 'Building components that work seamlessly across diverse contexts requires more than clean code—it demands thoughtful architecture, rigorous attention to edge cases, comprehensive accessibility considerations, and robust testing strategies. This essay examines the gap between prototype components and production-grade systems, exploring patterns for resilience, performance, and developer experience.',
   },
   {
     title: 'Typography at Scale',
-    date: 'January 2024',
+    date: 'September 2025',
     category: 'Typography',
-    excerpt: 'How typographic systems establish hierarchy, rhythm, and voice across digital products while maintaining flexibility for diverse content needs.',
+    excerpt: 'How typographic systems establish hierarchy, rhythm, and voice across digital products while maintaining flexibility for diverse content needs. From selecting typefaces and establishing scales to implementing responsive type systems and managing variable fonts, this exploration covers the technical and aesthetic decisions that shape modern digital typography at enterprise scale.',
   },
   {
     title: 'Bridging Design and Code',
-    date: 'December 2023',
+    date: 'August 2025',
     category: 'Process',
-    excerpt: 'The most effective design systems emerge from the space between design and engineering, where visual precision meets technical constraint.',
+    excerpt: 'The most effective design systems emerge from the collaborative space between design and engineering, where visual precision meets technical constraint. This essay examines workflows, tools, and communication patterns that enable designers and developers to work in tandem, creating systems that are both visually refined and technically sound, maintainable, and performant.',
+  },
+  {
+    title: 'Component API Design',
+    date: 'July 2025',
+    category: 'Architecture',
+    excerpt: 'Designing intuitive, flexible component APIs requires balancing developer experience with system constraints. This comprehensive guide explores prop naming conventions, composition patterns, polymorphic components, render props, compound components, and the principles that make interfaces feel natural while preventing misuse and maintaining type safety across large codebases.',
+  },
+  {
+    title: 'Design Tokens in Practice',
+    date: 'June 2025',
+    category: 'Design Systems',
+    excerpt: 'Design tokens form the foundation of scalable design systems, translating design decisions into platform-agnostic values. This deep dive covers token taxonomy, semantic vs. literal naming, multi-brand architectures, theme switching, token transformations, and real-world implementation strategies across web, iOS, and Android platforms using modern tooling.',
+  },
+  {
+    title: 'Accessibility as Foundation',
+    date: 'May 2025',
+    category: 'Accessibility',
+    excerpt: 'Building accessible interfaces isn\'t a feature—it\'s fundamental architecture. This essay explores integrating WCAG standards into component design from the ground up, covering ARIA patterns, keyboard navigation, screen reader optimization, focus management, color contrast systems, and creating inclusive experiences that work for everyone without compromise.',
+  },
+  {
+    title: 'The Evolution of Interface States',
+    date: 'April 2025',
+    category: 'Design Patterns',
+    excerpt: 'Every interface element exists in multiple states: default, hover, focus, active, disabled, loading, error, and success. This comprehensive study examines state management in design systems, exploring visual feedback patterns, micro-interactions, state machines, transition choreography, and establishing consistent behavioral patterns that guide users through complex interactions.',
   },
 ];
 

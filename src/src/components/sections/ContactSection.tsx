@@ -111,8 +111,8 @@ export function ContactSection() {
               <div>
                 <p className="text-meta" style={{ marginBottom: 'var(--space-3)' }}>Email</p>
                 <ContactLink 
-                  href="mailto:austin@example.com"
-                  label="austin@example.com"
+                  href="mailto:austncarsn@gmail.com"
+                  label="austncarsn@gmail.com"
                 />
               </div>
 
@@ -121,18 +121,13 @@ export function ContactSection() {
                 <p className="text-meta" style={{ marginBottom: 'var(--space-3)' }}>Social</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                   <ContactLink 
-                    href="https://github.com/austincarson"
+                    href="https://github.com/austncarsn"
                     label="GitHub"
                     external
                   />
                   <ContactLink 
-                    href="https://linkedin.com/in/austincarson"
+                    href="https://www.linkedin.com/in/austin-carson-4b059731a/"
                     label="LinkedIn"
-                    external
-                  />
-                  <ContactLink 
-                    href="https://twitter.com/austincarson"
-                    label="Twitter"
                     external
                   />
                 </div>
