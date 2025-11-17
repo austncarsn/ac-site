@@ -258,7 +258,7 @@ export function ResumeSection() {
         <div class="contact-info">
           <span>Seattle, Washington</span>
           <a href="mailto:austinscarson@gmail.com">austinscarson@gmail.com</a>
-          <a href="https://www.linkedin.com/in/austin-carson">linkedin.com/in/austin-carson</a>
+          <a href="https://www.linkedin.com/in/austncarsn">linkedin.com/in/austncarsn</a>
           <a href="tel:+12066204803">(206) 620-4803</a>
         </div>
       </header>
@@ -534,8 +534,8 @@ export function ResumeSection() {
               <a href="mailto:austinscarson@gmail.com" className="no-highlight text-meta hover:opacity-100 transition-opacity">
                 austinscarson@gmail.com
               </a>
-              <a href="https://www.linkedin.com/in/austin-carson" rel="nofollow" className="no-highlight text-meta hover:opacity-100 transition-opacity">
-                linkedin.com/in/austin-carson
+              <a href="https://www.linkedin.com/in/austncarsn" rel="nofollow" className="no-highlight text-meta hover:opacity-100 transition-opacity">
+                linkedin.com/in/austncarsn
               </a>
               <a href="tel:+12066204803" className="no-highlight text-meta hover:opacity-100 transition-opacity">
                 (206) 620-4803

@@ -7,17 +7,11 @@ import {
   MOBILE_DURATION,
   STAGGER,
 } from '../../lib/constants';
+import { VIBRANT_COLORS } from '../../lib/colors';
 import { ColorBlockGrid } from '../ui/ColorBlockGrid';
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
-
-  // Color palette for title letters
-  const titleColors = [
-    '#6B4EFF', '#FF3B5C', '#FF6B00', '#FFEB3B', '#00E676', 
-    '#FFC107', '#E040FB', '#FF5722', '#9C27B0', '#DC143C',
-    '#00BCD4', '#3F51B5', '#673AB7', '#F44336', '#4CAF50',
-  ];
 
   // State for tracking letter colors
   const title = 'Austin Carson';
@@ -27,7 +21,7 @@ export function HeroSection() {
 
   // Function to get random color
   const getRandomColor = (currentColor: string): string => {
-    const availableColors = titleColors.filter(c => c !== currentColor);
+    const availableColors = VIBRANT_COLORS.filter(c => c !== currentColor);
     return availableColors[Math.floor(Math.random() * availableColors.length)];
   };
 

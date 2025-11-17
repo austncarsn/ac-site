@@ -222,7 +222,7 @@ export function PrintResume() {
             <div className="contact-info">
               <span>Seattle, Washington</span>
               <a href="mailto:austinscarson@gmail.com">austinscarson@gmail.com</a>
-              <a href="https://www.linkedin.com/in/austin-carson">linkedin.com/in/austin-carson</a>
+              <a href="https://www.linkedin.com/in/austncarsn">linkedin.com/in/austncarsn</a>
               <a href="tel:+12066204803">(206) 620-4803</a>
             </div>
           </header>

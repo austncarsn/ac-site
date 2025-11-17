@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { EASE_OUT_EXPO, EASE_OUT_QUART, DURATION, MOBILE_DURATION } from '../../lib/constants';
+import { EASE_OUT_EXPO, DURATION, MOBILE_DURATION } from '../../lib/constants';
 
 const navItems = [
   { label: 'Work', href: '#work' },
@@ -9,7 +9,11 @@ const navItems = [
   { label: 'About', href: '#about' },
   { label: 'Resume', href: '#resume' },
   { label: 'Contact', href: '#contact' },
-];
+] as const;
+
+const SCROLL_THRESHOLD = 20;
+const ACTIVE_SECTION_OFFSET = 150;
+const TOP_THRESHOLD = 100;
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,11 +28,11 @@ export function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       // Update scroll state
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
 
       // Detect active section
       const sections = navItems.map(item => item.href.substring(1));
-      const scrollPosition = window.scrollY + 150;
+      const scrollPosition = window.scrollY + ACTIVE_SECTION_OFFSET;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i]);
@@ -39,7 +43,7 @@ export function Navigation() {
       }
       
       // If at top of page
-      if (window.scrollY < 100) {
+      if (window.scrollY < TOP_THRESHOLD) {
         setActiveSection('');
       }
     };
@@ -49,7 +53,7 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     
@@ -69,7 +73,7 @@ export function Navigation() {
         });
       }
     }
-  };
+  }, []);
 
   return (
     <>

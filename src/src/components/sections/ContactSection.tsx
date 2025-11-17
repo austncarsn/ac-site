@@ -3,6 +3,7 @@ import { toast } from 'sonner@2.0.3';
 import { AnimatedSection } from '../ui/AnimatedSection';
 import { SectionHeader } from '../ui/SectionHeader';
 import { FormField } from '../ui/FormField';
+import { isValidEmail } from '../../lib/utils';
 
 interface ContactLinkProps {
   href: string;
@@ -41,7 +42,20 @@ export function ContactSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Message sent');
+    
+    // Basic validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+    
+    // Email validation
+    if (!isValidEmail(formData.email)) {
+      toast.error('Please enter a valid email address');
+      return;
+    }
+    
+    toast.success('Message sent successfully!');
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -126,7 +140,7 @@ export function ContactSection() {
                     external
                   />
                   <ContactLink 
-                    href="https://www.linkedin.com/in/austin-carson-4b059731a/"
+                    href="https://www.linkedin.com/in/austncarsn"
                     label="LinkedIn"
                     external
                   />
