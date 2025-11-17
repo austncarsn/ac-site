@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
+import { useState } from 'react';
 import { 
   EASE_OUT_EXPO, 
   EASE_OUT_QUART, 
@@ -10,6 +11,32 @@ import { ColorBlockGrid } from '../ui/ColorBlockGrid';
 
 export function HeroSection() {
   const prefersReducedMotion = useReducedMotion();
+
+  // Color palette for title letters
+  const titleColors = [
+    '#6B4EFF', '#FF3B5C', '#FF6B00', '#FFEB3B', '#00E676', 
+    '#FFC107', '#E040FB', '#FF5722', '#9C27B0', '#DC143C',
+    '#00BCD4', '#3F51B5', '#673AB7', '#F44336', '#4CAF50',
+  ];
+
+  // State for tracking letter colors
+  const title = 'Austin Carson';
+  const [letterColors, setLetterColors] = useState<string[]>(
+    Array(title.length).fill('#000000')
+  );
+
+  // Function to get random color
+  const getRandomColor = (currentColor: string): string => {
+    const availableColors = titleColors.filter(c => c !== currentColor);
+    return availableColors[Math.floor(Math.random() * availableColors.length)];
+  };
+
+  // Handle letter click
+  const handleLetterClick = (index: number) => {
+    const newColors = [...letterColors];
+    newColors[index] = getRandomColor(letterColors[index]);
+    setLetterColors(newColors);
+  };
 
   const scrollToWork = () => {
     const workSection = document.getElementById('work');
@@ -113,7 +140,22 @@ export function HeroSection() {
                 transform: 'translateZ(0)',
               }}
             >
-              Austin Carson
+              {title.split('').map((letter, index) => (
+                <motion.span
+                  key={index}
+                  style={{ 
+                    color: letterColors[index],
+                    cursor: letter === ' ' ? 'default' : 'pointer',
+                    display: 'inline-block',
+                    whiteSpace: letter === ' ' ? 'pre' : 'normal',
+                  }}
+                  animate={{ color: letterColors[index] }}
+                  transition={{ duration: 0.3 }}
+                  onClick={letter === ' ' ? undefined : () => handleLetterClick(index)}
+                >
+                  {letter === ' ' ? '\u00A0' : letter}
+                </motion.span>
+              ))}
             </motion.h1>
             
             <motion.p
