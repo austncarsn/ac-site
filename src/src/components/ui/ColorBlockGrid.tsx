@@ -171,8 +171,6 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
             <motion.div
               key={`color-block-${index}`}
               variants={blockVariants}
-              whileHover={isLastRow ? { scale: 1.05 } : undefined}
-              whileTap={isLastRow ? { scale: 0.95 } : undefined}
               onClick={isLastRow ? () => handleColorClick(col) : undefined}
               animate={
                 prefersReducedMotion
@@ -237,8 +235,6 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
             <motion.div
               key={`mobile-color-block-${index}`}
               variants={blockVariants}
-              whileHover={isLastRow ? { scale: 1.05 } : undefined}
-              whileTap={isLastRow ? { scale: 0.95 } : undefined}
               onClick={isLastRow ? () => handleMobileColorClick(col) : undefined}
               animate={
                 prefersReducedMotion
