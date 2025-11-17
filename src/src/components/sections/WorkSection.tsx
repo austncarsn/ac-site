@@ -26,7 +26,7 @@ export function WorkSection(): JSX.Element {
     <section id="work" className="section-padding">
       <div className="container-main">
         <AnimatedSection>
-          <SectionHeader>Selected Work</SectionHeader>
+          <SectionHeader accentColor="#14B8A6">Selected Work</SectionHeader>
 
           <ProjectFilters
             categories={categories}

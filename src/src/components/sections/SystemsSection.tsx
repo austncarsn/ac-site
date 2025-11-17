@@ -24,7 +24,7 @@ export function SystemsSection() {
   return (
     <section id="systems" className="section-padding border-t border-border">
       <div className="container-main">
-        <SectionHeader>Systems</SectionHeader>
+        <SectionHeader accentColor="#10B981">Systems</SectionHeader>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: 'var(--space-8)' }}>
           {SYSTEMS.map((system, index) => (

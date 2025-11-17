@@ -210,7 +210,7 @@ export function EssaysSection() {
   return (
     <section id="essays" className="section-padding border-t border-border">
       <div className="container-main">
-        <SectionHeader>Essays</SectionHeader>
+        <SectionHeader accentColor="#F59E0B">Essays</SectionHeader>
 
         <div className="space-y-0">
           {ESSAYS.map((essay, index) => (

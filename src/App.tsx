@@ -13,13 +13,19 @@ export default function App() {
   return (
     <>
       <Navigation />
-      <main className="min-h-screen bg-background text-foreground">
+      <main className="min-h-screen text-foreground" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(20, 184, 166, 0.015) 50%, #FFFFFF 100%)' }}>
         <HeroSection />
-        <WorkSection />
+        <div style={{ backgroundColor: 'rgba(20, 184, 166, 0.02)' }}>
+          <WorkSection />
+        </div>
         <SystemsSection />
-        <EssaysSection />
+        <div style={{ backgroundColor: 'rgba(245, 158, 11, 0.018)' }}>
+          <EssaysSection />
+        </div>
         <AboutSection />
-        <ResumeSection />
+        <div style={{ backgroundColor: 'rgba(99, 102, 241, 0.02)' }}>
+          <ResumeSection />
+        </div>
         <ContactSection />
       </main>
       <Footer />
