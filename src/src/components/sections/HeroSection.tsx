@@ -160,10 +160,12 @@ export function HeroSection() {
             
             <motion.p
               variants={descriptionVariants}
-              className="max-w-[620px] text-[32px] leading-[44px]"
+              className="max-w-[620px]"
               style={{ 
                 marginBottom: 'var(--space-10)',
                 opacity: 0.6,
+                fontSize: isMobile ? '24px' : '32px',
+                lineHeight: isMobile ? '36px' : '44px',
                 fontWeight: 400,
                 letterSpacing: '-0.02em',
                 willChange: 'opacity, transform',

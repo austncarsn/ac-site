@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { EASE_OUT_EXPO, EASE_OUT_CIRC, DURATION, MOBILE_DURATION, STAGGER } from '../../lib/constants';
 
 // Color palettes
@@ -78,34 +78,12 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
   const colorBlocks = useMemo(() => generateColorBlocks(), []);
   const mobileColorBlocks = useMemo(() => generateMobileColorBlocks(), []);
   
-  // State for tracking current colors of vibrant blocks
-  const [vibrantColors, setVibrantColors] = useState<string[]>(() => 
-    Array.from({ length: GRID_COLS }, (_, i) => VIBRANT_COLORS[i])
-  );
-  const [mobileVibrantColors, setMobileVibrantColors] = useState<string[]>(() => 
-    Array.from({ length: MOBILE_GRID_COLS }, (_, i) => VIBRANT_COLORS[i])
-  );
-  
   const duration = isMobile ? MOBILE_DURATION : DURATION;
 
-  // Function to get a random color different from current
-  const getRandomColor = (currentColor: string): string => {
-    const availableColors = ALL_VIBRANT_COLORS.filter(c => c !== currentColor);
-    return availableColors[Math.floor(Math.random() * availableColors.length)];
-  };
-
-  // Handle color change for desktop
-  const handleColorClick = (index: number) => {
-    const newColors = [...vibrantColors];
-    newColors[index] = getRandomColor(vibrantColors[index]);
-    setVibrantColors(newColors);
-  };
-
-  // Handle color change for mobile
-  const handleMobileColorClick = (index: number) => {
-    const newColors = [...mobileVibrantColors];
-    newColors[index] = getRandomColor(mobileVibrantColors[index]);
-    setMobileVibrantColors(newColors);
+  // Handle background color change
+  const handleColorClick = (color: string) => {
+    document.body.style.backgroundColor = color;
+    document.body.style.transition = 'background-color 0.6s ease';
   };
 
   const gridVariants = {
@@ -164,25 +142,21 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
           
-          // Use dynamic color for vibrant blocks
-          const displayColor = isLastRow ? vibrantColors[col] : color;
-          
           return (
             <motion.div
               key={`color-block-${index}`}
               variants={blockVariants}
-              onClick={isLastRow ? () => handleColorClick(col) : undefined}
+              onClick={isLastRow ? () => handleColorClick(color) : undefined}
               animate={
                 prefersReducedMotion
-                  ? { background: displayColor }
+                  ? undefined
                   : {
                       opacity: [1, 0.85, 0.92, 0.88, 1],
-                      background: displayColor,
                     }
               }
               transition={
                 prefersReducedMotion
-                  ? { background: { duration: 0.4 } }
+                  ? undefined
                   : {
                       opacity: {
                         duration: 8,
@@ -191,15 +165,14 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                         repeatType: "loop",
                         delay: waveDelay,
                       },
-                      background: { duration: 0.4 },
                     }
               }
               className={`aspect-square ${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
-                background: displayColor,
+                background: color,
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '8px',
+                borderRadius: '6px',
                 border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"
@@ -213,7 +186,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
         variants={gridVariants}
         className="lg:hidden grid grid-cols-6 auto-rows-fr"
         style={{ 
-          gap: 'var(--space-6)',
+          gap: 'var(--space-4)',
           willChange: 'opacity, transform',
           transform: 'translateZ(0)',
         }}
@@ -228,25 +201,21 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
           
-          // Use dynamic color for vibrant blocks
-          const displayColor = isLastRow ? mobileVibrantColors[col] : color;
-          
           return (
             <motion.div
               key={`mobile-color-block-${index}`}
               variants={blockVariants}
-              onClick={isLastRow ? () => handleMobileColorClick(col) : undefined}
+              onClick={isLastRow ? () => handleColorClick(color) : undefined}
               animate={
                 prefersReducedMotion
-                  ? { background: displayColor }
+                  ? undefined
                   : {
                       opacity: [1, 0.85, 0.92, 0.88, 1],
-                      background: displayColor,
                     }
               }
               transition={
                 prefersReducedMotion
-                  ? { background: { duration: 0.4 } }
+                  ? undefined
                   : {
                       opacity: {
                         duration: 8,
@@ -255,15 +224,14 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                         repeatType: "loop",
                         delay: waveDelay,
                       },
-                      background: { duration: 0.4 },
                     }
               }
               className={`aspect-square ${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
-                background: displayColor,
+                background: color,
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '8px',
+                borderRadius: '6px',
                 border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"

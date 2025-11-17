@@ -1001,17 +1001,8 @@
     font-size: 17px;
   }
 
-  .text-\[32px\] {
-    font-size: 32px;
-  }
-
   .text-\[44px\] {
     font-size: 44px;
-  }
-
-  .leading-\[44px\] {
-    --tw-leading: 44px;
-    line-height: 44px;
   }
 
   .leading-\[52px\] {
