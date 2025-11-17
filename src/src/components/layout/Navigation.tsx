@@ -254,25 +254,26 @@ export function Navigation() {
                         key={item.label}
                         href={item.href}
                         onClick={(e) => handleNavClick(e, item.href)}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
                         transition={{ 
-                          delay: index * 0.035,
-                          duration: 0.4,
+                          delay: index * 0.05,
+                          duration: 0.35,
                           ease: [0.16, 1, 0.3, 1],
                         }}
+                        whileTap={{ scale: 0.98, opacity: 0.7 }}
                         className="flex items-center justify-between hover:opacity-100 transition-all group touch-manipulation border-b border-border/30"
                         style={{
                           fontSize: '24px',
                           fontWeight: 300,
                           letterSpacing: '-0.02em',
-                          opacity: isActive ? 1 : 0.5,
                           paddingTop: 'var(--space-6)',
                           paddingBottom: 'var(--space-6)',
                           transitionDuration: '0.25s',
                           transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
                           WebkitTapHighlightColor: 'transparent',
-                          willChange: 'opacity',
+                          willChange: 'opacity, transform',
                           backfaceVisibility: 'hidden',
                           WebkitBackfaceVisibility: 'hidden',
                         }}
@@ -281,19 +282,17 @@ export function Navigation() {
                         <div className="flex items-center" style={{ gap: 'var(--space-4)' }}>
                           {isActive && (
                             <motion.div
-                              initial={{ scale: 0, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
                               transition={{ 
-                                duration: 0.35,
+                                delay: index * 0.05 + 0.15,
+                                duration: 0.3,
                                 ease: [0.16, 1, 0.3, 1],
                               }}
                               className="rounded-full bg-brand-purple"
                               style={{ 
                                 width: '6px', 
                                 height: '6px',
-                                willChange: 'transform, opacity',
-                                backfaceVisibility: 'hidden',
-                                WebkitBackfaceVisibility: 'hidden',
                               }}
                             />
                           )}
@@ -306,6 +305,13 @@ export function Navigation() {
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             className="opacity-0 group-hover:opacity-30 transition-opacity"
+                            initial={{ x: -4, opacity: 0 }}
+                            animate={{ x: 0, opacity: 0 }}
+                            transition={{
+                              delay: index * 0.05 + 0.1,
+                              duration: 0.3,
+                              ease: [0.16, 1, 0.3, 1],
+                            }}
                             style={{ 
                               transitionDuration: '0.25s',
                               transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
