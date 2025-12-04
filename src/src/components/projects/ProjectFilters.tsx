@@ -22,17 +22,16 @@ export function ProjectFilters({
         <button
           key={cat}
           onClick={() => onCategoryChange(cat)}
-          className={`transition-all border-b pb-[2px] touch-manipulation ${
+          className={`transition-all duration-300 rounded-[6px] cursor-pointer touch-manipulation active:scale-[0.97] border ${
             selectedCategory === cat
               ? 'border-foreground opacity-100'
-              : 'border-transparent opacity-40 hover:opacity-100 active:opacity-100'
+              : 'border-transparent opacity-40'
           }`}
           style={{
-            fontSize: 'clamp(15px, 2vw, 17px)',
-            fontWeight: 400,
-            letterSpacing: 0,
-            transitionDuration: isMobile ? '0.2s' : '0.3s',
-            WebkitTapHighlightColor: 'transparent',
+            fontSize: '17px',
+            fontWeight: 300,
+            letterSpacing: '0.02em',
+            padding: 'var(--space-3) var(--space-5)',
           }}
         >
           {cat}

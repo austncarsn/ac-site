@@ -157,7 +157,7 @@ export const ProjectCard = memo(function ProjectCard({
             <div className="relative aspect-[1/1.3] bg-zinc-100 overflow-hidden">
               {/* Image Gradient / Preview */}
               <div
-                className="w-full h-full flex items-center justify-center transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full flex items-center justify-center transition-transform duration-700"
                 style={{
                   background:
                     project.previewColors.length > 1
@@ -167,7 +167,8 @@ export const ProjectCard = memo(function ProjectCard({
               >
                 {/* Category Label (Fades out on hover to reduce noise) */}
                 <motion.span
-                  className="font-mono text-[10px] tracking-[0.2em] uppercase text-zinc-500/80 bg-white/50 px-2 py-1 rounded backdrop-blur-sm"
+                  className="font-mono uppercase text-zinc-500/80 bg-white/50 px-2 py-1 rounded backdrop-blur-sm"
+                  style={{ fontSize: '10px', letterSpacing: '0.2em', fontWeight: 400 }}
                   animate={{ opacity: isActive ? 0 : 1 }}
                 >
                   {project.category}

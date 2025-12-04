@@ -80,7 +80,14 @@ function SystemModule({
   const Icon = system.icon;
 
   return (
-    <article className="group relative h-full">
+    <article className="group relative 
+        p-10 
+        bg-white border border-zinc-200 rounded-2xl 
+        cursor-pointer select-none
+        transition-all duration-300 ease-out
+        /* Hover State: Inverts to Dark Mode ('Active Module') */
+        "
+      >
       {/* CARD CASING */}
       <div
         className="h-full flex flex-col p-8 rounded-xl border border-zinc-200 bg-zinc-50/50 
@@ -90,7 +97,7 @@ function SystemModule({
       >
         {/* HEADER: ID & Status Light */}
         <div className="flex justify-between items-start mb-8">
-          <span className="font-mono text-[10px] tracking-widest text-zinc-400 group-hover:text-zinc-500">
+          <span className="font-mono tracking-widest text-zinc-400" style={{ fontSize: '10px', textTransform: 'uppercase' }}>
             SYS_{system.id}
           </span>
 

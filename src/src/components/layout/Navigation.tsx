@@ -103,7 +103,7 @@ export function Navigation() {
               href="#"
               onClick={(e) => handleNavClick(e, '#')}
               whileTap={{ scale: 0.95 }}
-              className="relative hover:opacity-60 transition-opacity flex items-center justify-center border border-foreground rounded-[6px] touch-manipulation"
+              className="relative transition-opacity flex items-center justify-center border border-foreground rounded-[6px] touch-manipulation"
               style={{
                 width: '40px',
                 height: '40px',

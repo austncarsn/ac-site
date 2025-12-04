@@ -470,7 +470,7 @@ export function ResumeSection() {
         >
           <button
             onClick={handleDownloadPDF}
-            className="inline-flex items-center gap-3 bg-[var(--color-brand-purple)] text-white hover:bg-[var(--color-brand-purple-dark)] transition-all rounded-[6px] shadow-lg hover:shadow-xl no-highlight cursor-pointer"
+            className="inline-flex items-center gap-3 bg-[var(--color-brand-purple)] text-white transition-all rounded-[6px] shadow-lg hover:shadow-xl no-highlight cursor-pointer"
             style={{
               padding: 'var(--space-4) var(--space-6)',
               fontSize: '17px',
@@ -495,7 +495,7 @@ export function ResumeSection() {
         >
           <button
             onClick={handleDownloadPDF}
-            className="inline-flex items-center gap-3 bg-[var(--color-brand-purple)] text-white hover:bg-[var(--color-brand-purple-dark)] transition-all rounded-[6px] no-highlight cursor-pointer"
+            className="inline-flex items-center gap-3 bg-[var(--color-brand-purple)] text-white transition-all rounded-[6px] no-highlight cursor-pointer"
             style={{
               padding: 'var(--space-4) var(--space-6)',
               fontSize: '17px',

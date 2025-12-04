@@ -136,7 +136,7 @@ export function ContactSection() {
                 disabled={isSubmitting}
                 aria-busy={isSubmitting}
                 aria-label="Send contact form"
-                className="group flex items-center gap-2 self-start transition-all duration-200 border-b-2 border-foreground hover:opacity-60 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="group flex items-center gap-2 self-start transition-all duration-200 border-b-2 border-foreground disabled:opacity-40 disabled:cursor-not-allowed"
                 style={{ 
                   paddingBottom: 'var(--space-2)',
                   fontSize: '17px',
@@ -186,8 +186,8 @@ export function ContactSection() {
                   Email
                 </p>
                 <a
-                  href="mailto:austncarsn@gmail.com"
-                  className="flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
+                  href="mailto:austinscarson@gmail.com"
+                  className="flex items-center gap-3 transition-all duration-200"
                   aria-label="Email Austin Carson"
                   style={{
                     fontSize: '16px',
@@ -200,7 +200,7 @@ export function ContactSection() {
                     className="transition-opacity duration-200 group-hover:opacity-100"
                   />
                   <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
-                    austncarsn@gmail.com
+                    austinscarson@gmail.com
                   </span>
                 </a>
               </div>

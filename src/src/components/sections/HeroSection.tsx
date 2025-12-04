@@ -246,7 +246,7 @@ export function HeroSection() {
               whileHover={!isMobile ? { opacity: 0.6 } : undefined}
               whileTap={{ scale: 0.98, opacity: 0.6 }}
               transition={{ duration: isMobile ? 0.15 : 0.2, ease: EASE_OUT_QUART }}
-              className="border-b border-foreground self-start cursor-pointer touch-manipulation hover:opacity-60 transition-opacity duration-200"
+              className="border-b border-foreground self-start cursor-pointer touch-manipulation transition-opacity duration-200"
               style={{ 
                 paddingBottom: 'var(--space-2)',
                 fontSize: '17px',

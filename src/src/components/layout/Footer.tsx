@@ -11,7 +11,7 @@ export function Footer() {
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="hover:opacity-60 transition-opacity duration-300"
+            className="transition-opacity duration-300"
             style={{ fontSize: '17px', opacity: 0.4 }}
             aria-label="Scroll to top"
           >
