@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { EASE_OUT_EXPO } from '../../lib/constants';
 import { X } from 'lucide-react';
@@ -15,41 +15,54 @@ interface Essay {
 
 const ESSAYS: Essay[] = [
   {
-    title: 'On Being Outshined By A Discount Constellation',
-    date: 'November 17, 2025',
-    dateShort: 'Nov 17',
-    category: 'Personal',
-    tags: ['PERSONAL', 'RANT'],
-    excerpt: 'Today I am annoyed. Not poetic annoyed, not elegant character building annoyed. I am the specific kind of irritated that happens when someone who treated you like a side quest suddenly acts like the main storyline.',
+    title: 'I Spent 6 Hours Perfecting a Button No One Will Ever Click',
+    date: 'December 3, 2024',
+    dateShort: 'Dec 03',
+    category: 'Design Philosophy',
+    tags: ['DESIGN', 'PERFECTIONISM'],
+    excerpt: 'A meditation on why I obsessively adjusted the border-radius of a "Terms & Conditions" button from 6px to 5.8px, then back to 6px, then settled on 5.9px at 2am.',
     content: [
-      'Today I am annoyed. Not poetic annoyed, not elegant character building annoyed. I am the specific kind of irritated that happens when someone who treated you like a side quest suddenly acts like the main storyline, funded by inheritance and delusion.',
-      'There was a time when I thought we were on the same team. Two people trying to build something real, scraping together futures out of late nights and messy dreams. Then his father\'s money arrived, and I watched him transform from "we are in this together" to "you are an optional feature I no longer need." I did not even get a software update. I just got uninstalled.',
-      'It forces a reflection on how we value our own output in a market that increasingly rewards noise over signal. The interface of our lives is becoming cluttered with pop-ups we didn\'t consent to.',
+      'Today I achieved enlightenment. Not through meditation or self-reflection, but by discovering that a button\'s border-radius looks subtly more harmonious at 5.9px instead of 6px. Will anyone notice? Absolutely not. Did I spend 6 hours on it? You bet your perfectly kerned typography I did.',
+      'The Terms & Conditions button. A noble element. A digital handshake that 99.8% of users will scroll past without reading. And yet, there I was at 2:47am, toggling between 5.8px, 5.9px, and 6px like a designer possessed by the ghost of Massimo Vignelli.',
+      'My partner asked what I was working on. "Important interface work," I said, zoomed in to 400% on a gray rectangle. They nodded slowly and backed away. Smart. This is the kind of obsession that built the pyramids, except the pyramids were probably finished faster and had better browser support.',
+      'The real question isn\'t whether this level of detail matters. It\'s whether I can live with myself knowing I shipped a 6px radius when 5.9px exists. The answer is no. The design system must be pure. The spacing must sing. The button that no one clicks must be *chef\'s kiss* perfect.',
     ],
   },
   {
-    title: 'Order, Gently Mugged By My Brain',
-    date: 'November 16, 2025',
-    dateShort: 'Nov 16',
-    category: 'Process',
-    tags: ['PROCESS', 'CREATIVE'],
-    excerpt: 'Today I woke up and chose chaos — again, but with taste. The plan was simple: open the laptop, calmly refine a few components, ship a clean update. Instead, I accidentally ran a full-scale creative heist on my own focus.',
+    title: 'My Git Commits Read Like A Descent Into Madness',
+    date: 'November 28, 2024',
+    dateShort: 'Nov 28',
+    category: 'Development',
+    tags: ['CODING', 'CHAOS'],
+    excerpt: 'An archaeological expedition through my commit history reveals a developer who started with hope and ended with "PLEASE WORK I BEG YOU" at 4am.',
     content: [
-      'Today I woke up and chose chaos — again, but with taste.',
-      'The plan was simple: open the laptop, calmly refine a few components, ship a clean update. Instead, I accidentally ran a full-scale creative heist on my own focus. One moment I was adjusting letter spacing on a hero title, the next I had six new project ideas, three Figma files, two design systems, and a half written prompt for a future AI agent who does not even exist yet.',
-      'My chaos isn\'t an accident. It\'s a process with bad posture.',
+      '10:23am - "Initial commit - clean architecture ✨"',
+      '11:45am - "Add responsive grid system"',
+      '2:14pm - "Refactor components for better reusability"',
+      '4:32pm - "Fix: minor styling adjustments"',
+      '6:18pm - "WHY IS CSS LIKE THIS"',
+      '8:45pm - "Revert last 4 commits, starting over"',
+      '11:23pm - "it works but idk why"',
+      '2:47am - "FINALLY FIXED THE BUG (don\'t touch anything ever)"',
+      '3:15am - "touched it. it broke. going to bed."',
+      '3:16am - "jk can\'t sleep until this is fixed"',
+      '4:04am - "PLEASE WORK I BEG YOU"',
+      '4:05am - "IT WORKED OMG"',
+      '4:06am - "pushed to prod, if anyone asks I was never here"',
     ],
   },
   {
-    title: 'The Art of Systematic Design',
-    date: 'November 2025',
-    dateShort: 'Nov 2025',
-    category: 'Design Systems',
-    tags: ['DESIGN', 'SYSTEMS'],
-    excerpt: 'Exploring how systematic thinking transforms interface design from isolated components into cohesive, scalable systems that serve both users and teams.',
+    title: 'Naming Variables: A Horror Story in CamelCase',
+    date: 'November 15, 2024',
+    dateShort: 'Nov 15',
+    category: 'Code Quality',
+    tags: ['NAMING', 'EXISTENTIAL'],
+    excerpt: 'Is it userData or userInfo? currentUser or activeUser? Why did I choose userDataManagerHelperUtilInstance and how do I live with this decision?',
     content: [
-      'Exploring how systematic thinking transforms interface design from isolated components into cohesive, scalable systems that serve both users and teams. A deep dive into establishing principles, creating flexible foundations, and building design languages that evolve with product needs while maintaining consistency across platforms and contexts.',
-      'Systematic design is about more than just creating a set of guidelines. It\'s about building a framework that allows for flexibility and adaptability.',
+      'I have been staring at a variable name for 20 minutes. Not writing code. Not solving problems. Just... staring at the word "userDataManagerHelperUtilInstance" wondering what demon possessed me to type that.',
+      'It started so innocently. I needed to store user data. "user" seemed too vague. "userData" felt verbose. "userInfo" implied it might be informational rather than definitive. So naturally, I escalated to "userDataManagerHelperUtilInstance" because clearly I was having a normal one.',
+      'The worst part? There\'s another variable three files over called "currentActiveUserInfoData". They do basically the same thing. I am both the author and victim of this madness. This is what happens when you give developers naming freedom and a caffeine addiction.',
+      'My code review comments now read like philosophy papers. "What IS userData, really?" "Does userInfo INFO the user, or does the user INFO the userInfo?" I have become the person I feared. The variable naming has consumed me. Send help. Or a style guide. Preferably both.',
     ],
   },
 ];
@@ -57,6 +70,18 @@ const ESSAYS: Essay[] = [
 export function EssaysSection() {
   const [selectedEssay, setSelectedEssay] = useState<Essay>(ESSAYS[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // ESC key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isModalOpen]);
 
   return (
     <section 
@@ -469,8 +494,24 @@ export function EssaysSection() {
                     ))}
                   </div>
 
-                  {/* Footer Spacer */}
-                  <div className="mt-16" />
+                  {/* Close hint */}
+                  <motion.div
+                    className="mt-16 text-center"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: '11px',
+                        color: '#52525b', // zinc-600
+                        letterSpacing: '0.15em',
+                      }}
+                    >
+                      PRESS ESC OR CLICK OUTSIDE TO CLOSE
+                    </span>
+                  </motion.div>
                 </div>
               </motion.div>
             </motion.div>
