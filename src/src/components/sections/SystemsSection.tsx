@@ -116,14 +116,23 @@ function SystemModule({
         {/* CONTENT */}
         <div className="mt-auto">
           <h4
-            className="font-['Zen_Kaku_Gothic_New'] text-xl font-medium text-zinc-900 mb-3 
-            group-hover:text-white transition-colors duration-300"
+            className="text-zinc-900 mb-3 group-hover:text-white transition-colors duration-300"
+            style={{
+              fontSize: '20px',
+              fontWeight: 400,
+              letterSpacing: '-0.01em',
+              lineHeight: '1.4',
+            }}
           >
             {system.title}
           </h4>
           <p
-            className="text-sm text-zinc-500 leading-relaxed 
-            group-hover:text-zinc-400 transition-colors duration-300"
+            className="text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300"
+            style={{
+              fontSize: '14px',
+              lineHeight: '1.6',
+              fontWeight: 400,
+            }}
           >
             {system.description}
           </p>

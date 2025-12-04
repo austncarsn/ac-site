@@ -1243,10 +1243,6 @@
     text-align: left;
   }
 
-  .font-\[\'Zen_Kaku_Gothic_New\'\] {
-    font-family: Zen Kaku Gothic New;
-  }
-
   .font-mono {
     font-family: var(--font-mono);
   }
