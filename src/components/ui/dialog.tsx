@@ -60,6 +60,23 @@ function DialogContent({
         data-slot="dialog-content"
         className={cn(
           "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
+          // Custom scrollbar styling - neumorphic morph effect
+          "[&::-webkit-scrollbar]:w-[12px]",
+          "[&::-webkit-scrollbar-track]:bg-transparent",
+          "[&::-webkit-scrollbar-track]:rounded-full",
+          "[&::-webkit-scrollbar-track]:m-2",
+          "[&::-webkit-scrollbar-thumb]:bg-zinc-300",
+          "[&::-webkit-scrollbar-thumb]:rounded-full",
+          "[&::-webkit-scrollbar-thumb]:border-2",
+          "[&::-webkit-scrollbar-thumb]:border-solid",
+          "[&::-webkit-scrollbar-thumb]:border-[var(--background)]",
+          "[&::-webkit-scrollbar-thumb]:shadow-[inset_1px_1px_2px_rgba(0,0,0,0.2),inset_-1px_-1px_2px_rgba(255,255,255,0.8)]",
+          "dark:[&::-webkit-scrollbar-thumb]:bg-zinc-700",
+          "dark:[&::-webkit-scrollbar-thumb]:shadow-[inset_1px_1px_2px_rgba(0,0,0,0.4),inset_-1px_-1px_2px_rgba(255,255,255,0.1)]",
+          "[&::-webkit-scrollbar-thumb]:hover:bg-zinc-400",
+          "dark:[&::-webkit-scrollbar-thumb]:hover:bg-zinc-600",
+          "[&::-webkit-scrollbar-thumb]:transition-colors",
+          "[&::-webkit-scrollbar-thumb]:duration-200",
           className,
         )}
         {...props}

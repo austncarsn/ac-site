@@ -94,7 +94,8 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
       viewport={{ once: true, margin: '-100px' }}
       className={`grid ${gridClasses} w-full`}
       style={{ 
-        gap: '24px',
+        // Golden Gap Rule: 40px outer radius × 1.5 = 60px gap (premium spacing)
+        gap: isMobile ? '48px' : '60px',
         marginTop: 'var(--space-12)',
       }}
     >

@@ -1,8 +1,8 @@
 /* Tailwind entry */
 @import "tailwindcss";
 
-/* Import Noto Sans JP for clean Japanese-inspired typography */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap');
+/* Import M PLUS 1 for Japanese-inspired geometric sans-serif typography */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@300;400;500;600&display=swap');
 
 /* =========================== Theme Configuration =========================== */
 
@@ -16,11 +16,11 @@
 /* =========================== Global CSS Variables =========================== */
 
 :root {
-  /* Base colors */
-  --background: #FFFFFF;
-  --foreground: #0A0A0A;
-  --border: rgba(10, 10, 10, 0.1);
-  --muted: rgba(10, 10, 10, 0.05);
+  /* Base colors - Pale cool gray background with dark zinc text */
+  --background: #F7F8FA;  /* Very pale, cool gray (almost white) */
+  --foreground: #3F3F46;  /* Dark zinc (not pure black) */
+  --border: rgba(63, 63, 70, 0.1);
+  --muted: rgba(63, 63, 70, 0.05);
   
   /* Brand color reference */
   --brand: var(--color-brand);
@@ -112,7 +112,7 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: 'Noto Sans JP', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'M PLUS 1', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     
@@ -296,6 +296,33 @@
     opacity: 0.7;
   }
   
+  /* Editorial typography - Japanese-inspired ultra-light all-caps */
+  .text-hero-name {
+    font-size: clamp(4rem, 8vw, 7rem); /* 64px -> 112px */
+    font-weight: 300; /* Ultra-light */
+    text-transform: uppercase;
+    letter-spacing: 0.15em; /* 15% tracking - wide, airy spacing */
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  
+  .text-hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.25rem); /* 16px -> 20px */
+    font-weight: 300; /* Light */
+    text-transform: uppercase;
+    letter-spacing: 0.2em; /* 20% tracking - ultra-wide spacing */
+    line-height: 1.4;
+    opacity: 0.6;
+  }
+  
+  .text-hero-description {
+    font-size: clamp(1.125rem, 2vw, 1.375rem); /* 18px -> 22px */
+    font-weight: 400; /* Regular */
+    line-height: 1.7; /* 170% - wide line height for readability */
+    max-width: 50ch; /* Narrower for editorial feel */
+    opacity: 0.7;
+  }
+  
   /* Link utilities */
   .link-subtle {
     opacity: 0.7;
@@ -386,5 +413,28 @@
   
   button.btn-primary:active {
     transform: scale(0.98); /* Subtle press inward */
+  }
+  
+  /* =========================== Hexagon Neumorphism Utilities =========================== */
+  
+  /* Hexagon clip-path shape */
+  .hex-shape {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  }
+  
+  /* Pressed inset neumorphic effect for hexagons */
+  .hex-neumorphic {
+    /* 
+       Creates beveled hole illusion:
+       - Top-left inner shadow (light source from top-left)
+       - Bottom-right highlight (reflected light)
+       - Uses gradient overlay since box-shadow doesn't work with clip-path
+    */
+    background: linear-gradient(135deg, rgba(0,0,0,0.08) 0%, transparent 50%, rgba(255,255,255,0.12) 100%);
+  }
+  
+  /* Stronger neumorphic effect for accent hexagons with color */
+  .hex-neumorphic-accent {
+    background: linear-gradient(135deg, rgba(0,0,0,0.15) 0%, transparent 50%, rgba(255,255,255,0.2) 100%);
   }
 }

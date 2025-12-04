@@ -166,7 +166,12 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '4px',
-                border: '1px solid rgba(0, 0, 0, 0.1)',
+                // Inset effect: layered inner shadows create embossed hole illusion
+                boxShadow: `
+                  inset 4px 4px 8px rgba(0, 0, 0, 0.25),
+                  inset -4px -4px 6px rgba(255, 255, 255, 0.3),
+                  0 1px 0 rgba(255, 255, 255, 0.5)
+                `,
               }}
               aria-hidden="true"
             />
@@ -227,7 +232,12 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '4px',
-                border: '1px solid rgba(0, 0, 0, 0.1)',
+                // Inset effect: layered inner shadows create embossed hole illusion
+                boxShadow: `
+                  inset 4px 4px 8px rgba(0, 0, 0, 0.25),
+                  inset -4px -4px 6px rgba(255, 255, 255, 0.3),
+                  0 1px 0 rgba(255, 255, 255, 0.5)
+                `,
               }}
               aria-hidden="true"
             />
