@@ -14,6 +14,26 @@ interface Essay {
 
 const ESSAYS: Essay[] = [
   {
+    title: 'On Being Outshined By A Discount Constellation',
+    date: 'November 17, 2025',
+    category: 'Personal',
+    excerpt: 'Today I am annoyed. Not poetic annoyed, not elegant character building annoyed. I am the specific kind of irritated that happens when someone who treated you like a side quest suddenly acts like the main storyline, funded by inheritance and delusion.',
+    content: [
+      'Today I am annoyed. Not poetic annoyed, not elegant character building annoyed. I am the specific kind of irritated that happens when someone who treated you like a side quest suddenly acts like the main storyline, funded by inheritance and delusion.',
+      'There was a time when I thought we were on the same team. Two people trying to build something real, scraping together futures out of late nights and messy dreams. Then his father\'s money arrived, and I watched him transform from "we are in this together" to "you are an optional feature I no longer need." I did not even get a software update. I just got uninstalled.',
+      'The part that really fries my circuits is that he traded me in for someone who looks like a Mr Bean understudy. Not the original, not a clever tribute. More like a community theater version that forgot half the lines but still insists on bowing. The two of them float around like a moral lesson in why money does not equal taste.',
+      'They have been negative about me for years. Little comments, quiet jabs, invisible verdicts that tried to shrink me into something easier to ignore. I used to absorb that, like maybe they were right and I was the dramatic one, the chaotic one, the one who needed to calm down and stop wanting so much.',
+      'Except my life keeps proving them wrong.',
+      'Because here is what actually happened. Every time they tried to dim me, I learned how to be my own power grid. Every time they talked about me like I was a warning, I quietly turned myself into a blueprint. I became that person people go to when they want things done right, when they want something thoughtful, when they want someone who can hold both feelings and strategy in the same hand.',
+      'They tried to make me feel small. Instead they accidentally trained me for the version of my life where I am not small enough to fit in their story at all.',
+      'Are they garbage people? On my petty days, yes, absolutely, and today is a petty day so I will allow it. They feel like emotional litter, the kind that blows across your path just when you thought the street was finally clear. But even trash can be sorted. Their opinions about me go straight into the "not recyclable, not useful" bin.',
+      'What matters is what I have turned that irritation into. I show up for people around me with a level of care they never managed to understand. I build beautiful things, I think deeply, I take my chaos and turn it into systems that actually help other people breathe easier. I am a strong component in a lot of lives, and I did that without inheritance money and without needing to step on anyone to stand taller.',
+      'They got a payout and a Mr Bean extra. I got resilience, better taste, a sharper sense of humor, and a future that does not depend on anyone remembering me in a will.',
+      'So yes, they have been pissing me off today. I let myself feel it. I let myself roll my eyes at their little performance. Then I remember the quiet truth under all this noise.',
+      'They can try to outshine me all they want. I am not even in the same lighting setup anymore.',
+    ],
+  },
+  {
     title: 'Order, Gently Mugged By My Brain',
     date: 'November 16, 2025',
     category: 'Process',
@@ -169,19 +189,19 @@ function EssayItem({ essay, index }: EssayItemProps) {
       className="border-t border-border"
       style={{ paddingTop: 'var(--space-8)', paddingBottom: 'var(--space-8)' }}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-6)' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-6" style={{ gap: 'var(--space-6)' }}>
         <div className="lg:col-span-3">
           <p className="text-caption">{essay.date}</p>
         </div>
 
         <div className="lg:col-span-9">
-          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between" style={{ gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
-            <h3 className="text-2xl font-normal tracking-tight">{essay.title}</h3>
+          <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-2 md:gap-4" style={{ gap: 'var(--space-2)', marginBottom: 'var(--space-2)' }}>
+            <h3 className="text-2xl font-normal tracking-tight break-words">{essay.title}</h3>
             <span className="text-caption shrink-0">{essay.category}</span>
           </div>
-          <p className="text-sm opacity-60">{essay.excerpt}</p>
+          <p className="text-sm opacity-60 break-words">{essay.excerpt}</p>
           <button
-            className="text-sm text-primary hover:underline"
+            className="text-sm text-primary hover:underline mt-3"
             onClick={() => setIsOpen(true)}
           >
             Read more

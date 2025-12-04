@@ -130,35 +130,31 @@ export function Navigation() {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="relative transition-opacity hover:opacity-100"
+                    className="relative transition-all hover:opacity-100"
                     style={{
                       fontSize: '17px',
                       fontWeight: 400,
                       letterSpacing: 0,
                       opacity: isActive ? 1 : 0.5,
+                      padding: '8px 16px',
+                      borderRadius: '8px',
+                      backgroundColor: isActive ? 'rgba(20, 184, 166, 0.08)' : 'transparent',
                       transitionDuration: '0.3s',
                       transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
-                      willChange: 'opacity',
+                      willChange: 'opacity, background-color',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.backgroundColor = 'rgba(20, 184, 166, 0.05)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
                     }}
                   >
                     {item.label}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeSection"
-                        className="absolute left-0 right-0 h-[1px] bg-foreground"
-                        style={{ 
-                          bottom: 'calc(var(--space-6) * -1)',
-                          willChange: 'transform',
-                        }}
-                        initial={false}
-                        transition={{
-                          type: "spring",
-                          stiffness: 340,
-                          damping: 28,
-                          mass: 0.8,
-                        }}
-                      />
-                    )}
                   </a>
                 );
               })}

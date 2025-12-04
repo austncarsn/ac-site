@@ -21,22 +21,22 @@ export function AboutSection() {
       <div className="container-main">
         <SectionHeader accentColor="#EC4899">About</SectionHeader>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12" style={{ gap: 'var(--space-12)' }}>
           {/* Main content */}
           <AnimatedSection className="lg:col-span-7">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-              <p className="text-body-medium">
+              <p className="text-body-medium break-words">
                 I build interface systems where precision meets creativity — turning messy design 
                 requirements into production-ready code that actually scales (and occasionally sparks joy).
               </p>
 
-              <p className="text-body-small opacity-60">
+              <p className="text-body-small opacity-60 break-words">
                 What keeps me awake at night: creating systems that empower teams to ship faster 
                 without sacrificing craft. I'm obsessed with building tools and components that make 
                 the design-to-development handoff feel less like a game of telephone and more like telepathy.
               </p>
 
-              <p className="text-body-small opacity-60">
+              <p className="text-body-small opacity-60 break-words">
                 Currently exploring: advanced animation choreography, accessibility patterns that don't feel 
                 like an afterthought, and the evolving landscape where AI meets design tooling. Always learning, 
                 occasionally breaking things, constantly iterating.

@@ -1,7 +1,7 @@
 
-  # AC WEBSITE
+  # AC
 
-  This is a code bundle for AC WEBSITE. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/AC-WEBSITE.
+  This is a code bundle for AC. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/AC.
 
   ## Running the code
 

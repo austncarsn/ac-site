@@ -17,7 +17,7 @@ export function ProjectFilters({
   }
 
   return (
-    <div className="flex flex-wrap gap-[21px]">
+    <div className="flex flex-wrap gap-3 sm:gap-[21px]">
       {categories.map((cat) => (
         <button
           key={cat}
@@ -28,7 +28,7 @@ export function ProjectFilters({
               : 'border-transparent opacity-40 hover:opacity-100 active:opacity-100'
           }`}
           style={{
-            fontSize: '17px',
+            fontSize: 'clamp(15px, 2vw, 17px)',
             fontWeight: 400,
             letterSpacing: 0,
             transitionDuration: isMobile ? '0.2s' : '0.3s',

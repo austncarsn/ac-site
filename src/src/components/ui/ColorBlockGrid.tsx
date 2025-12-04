@@ -118,7 +118,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
         variants={gridVariants}
         className="hidden lg:grid grid-cols-10 auto-rows-fr"
         style={{ 
-          gap: 'var(--space-6)',
+          gap: '8px',
           willChange: 'opacity, transform',
           transform: 'translateZ(0)',
         }}
@@ -158,12 +158,14 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                       },
                     }
               }
-              className={`aspect-square ${isLastRow ? 'cursor-pointer' : ''}`}
+              className={`${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
                 background: color,
+                width: '40px',
+                height: '40px',
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '6px',
+                borderRadius: '4px',
                 border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"
@@ -177,7 +179,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
         variants={gridVariants}
         className="lg:hidden grid grid-cols-6 auto-rows-fr"
         style={{ 
-          gap: 'var(--space-4)',
+          gap: '8px',
           willChange: 'opacity, transform',
           transform: 'translateZ(0)',
         }}
@@ -217,12 +219,14 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                       },
                     }
               }
-              className={`aspect-square ${isLastRow ? 'cursor-pointer' : ''}`}
+              className={`${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
                 background: color,
+                width: '40px',
+                height: '40px',
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '6px',
+                borderRadius: '4px',
                 border: '1px solid rgba(0, 0, 0, 0.1)',
               }}
               aria-hidden="true"
