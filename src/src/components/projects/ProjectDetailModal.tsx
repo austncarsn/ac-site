@@ -5,15 +5,167 @@ import {
   DialogClose,
   DialogTitle,
   DialogDescription,
-} from "../ui/dialog"; // Assuming DialogClose exists or we build a custom button
-import { X, ArrowUpRight, Github } from "lucide-react"; // Assuming you have an icon lib
+} from "../ui/dialog";
+import { X, ArrowUpRight, Github } from "lucide-react";
 import type { Project } from "../../data/projects";
 
-// TYPOGRAPHY UTILS
-const TYPE_HEADER =
-  "font-['Zen_Kaku_Gothic_New'] font-light uppercase tracking-widest";
-const TYPE_LABEL =
-  "font-mono text-[10px] text-zinc-400 uppercase tracking-[0.2em] mb-3";
+// ============================================================
+// TYPOGRAPHY CONSTANTS
+// ============================================================
+const LABEL_SMALL = "font-mono text-[11px] text-zinc-400 uppercase tracking-[0.25em] block";
+const TITLE_LARGE = "text-[clamp(2rem,4vw,3.5rem)] leading-[0.88] font-light tracking-tight";
+const SUBTITLE = "text-zinc-400 text-[16px] font-light tracking-wide";
+const BODY_TEXT = "text-zinc-500 text-[15.5px] font-light leading-[1.75]";
+const SECTION_LABEL = "font-mono text-[10px] text-zinc-400 uppercase tracking-[0.25em] mb-3 block";
+
+// ============================================================
+// SUB-COMPONENTS
+// ============================================================
+
+function ProjectHeader({ projectId, name, role, year }: {
+  projectId: string;
+  name: string;
+  role: string;
+  year: string;
+}) {
+  return (
+    <header className="mb-10">
+      <span className={`${LABEL_SMALL} mb-4 text-zinc-400`}>
+        PROJECT {projectId}
+      </span>
+      <h2 className={`${TITLE_LARGE} text-zinc-900 mb-5`}>
+        {name}
+      </h2>
+      <p className={`${SUBTITLE} mb-0`}>
+        {role} · {year}
+      </p>
+    </header>
+  );
+}
+
+function ProjectDescription({ paragraphs }: { paragraphs: string[] }) {
+  return (
+    <div className="mb-10 space-y-4">
+      {paragraphs.map((paragraph, i) => (
+        <p key={i} className={BODY_TEXT}>
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  );
+}
+
+function ImpactSection({ impact }: { impact?: string }) {
+  if (!impact) return null;
+  
+  return (
+    <div className="pt-8 border-t border-zinc-200 mb-10">
+      <h3 className={`${SECTION_LABEL} text-zinc-500 mb-4`}>
+        IMPACT / RESULTS
+      </h3>
+      <p className={BODY_TEXT}>
+        {impact}
+      </p>
+    </div>
+  );
+}
+
+function ActionLinks({ liveUrl, githubUrl }: { liveUrl?: string; githubUrl?: string }) {
+  if (!liveUrl && !githubUrl) return null;
+
+  const linkStyles = "group inline-flex items-center gap-2 text-[13px] font-medium uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors";
+  
+  return (
+    <div className="flex flex-wrap gap-6">
+      {liveUrl && (
+        <a
+          href={liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkStyles}
+        >
+          <span className="border-b border-zinc-300 group-hover:border-brand pb-0.5 transition-colors">
+            View Live Site
+          </span>
+          <ArrowUpRight size={13} className="text-zinc-400 group-hover:text-brand transition-colors" />
+        </a>
+      )}
+      {githubUrl && (
+        <a
+          href={githubUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkStyles}
+        >
+          <span className="border-b border-zinc-300 group-hover:border-brand pb-0.5 transition-colors">
+            Source Code
+          </span>
+          <Github size={13} className="text-zinc-400 group-hover:text-brand transition-colors" />
+        </a>
+      )}
+    </div>
+  );
+}
+
+function SpecItem({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <h3 className={SECTION_LABEL}>{label}</h3>
+      {children}
+    </div>
+  );
+}
+
+function StatusIndicator({ status }: { status: string }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <span className="relative flex h-2 w-2">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+      </span>
+      <span className="text-zinc-900 text-[14px] font-medium">
+        {status}
+      </span>
+    </div>
+  );
+}
+
+function TagList({ tags }: { tags: readonly string[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {tags.map((tag, i) => (
+        <span
+          key={i}
+          className="px-3 py-2 bg-white border border-zinc-200 rounded-md text-[12px] font-normal text-zinc-600 shadow-sm hover:shadow transition-shadow"
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function BarcodeFooter() {
+  return (
+    <div className="mt-auto pt-10 opacity-[0.15]">
+      <div
+        className="h-16 w-full"
+        style={{
+          backgroundImage: "repeating-linear-gradient(90deg, #000 0px, #000 1.5px, transparent 1.5px, transparent 4px)",
+          backgroundSize: "4px 100%",
+        }}
+        aria-hidden="true"
+      />
+      <span className="font-mono text-[9px] tracking-wider block mt-2 text-zinc-400">
+        SYS_ID_8842
+      </span>
+    </div>
+  );
+}
+
+// ============================================================
+// MAIN COMPONENT
+// ============================================================
 
 export function ProjectDetailModal({
   project,
@@ -23,21 +175,24 @@ export function ProjectDetailModal({
   project: Project | null;
   isOpen: boolean;
   onClose: () => void;
-}): JSX.Element {
-  if (!project) return <></>;
+}): JSX.Element | null {
+  if (!project || !isOpen) return null;
+
+  const projectId = project.id?.toString().padStart(3, "0") ?? "001";
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent
-        className="max-w-4xl p-0 overflow-hidden bg-[#FCFCFC] border-none rounded-2xl
-        /* THE 'FLOATING SLAB' PHYSICS */
-        shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]
-        /* The Top Rim Light (Thickness) */
-        ring-1 ring-black/5
-        before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-white before:z-20
+      <DialogContent 
+        className="
+          w-[95vw] max-w-[900px] 
+          h-[90vh] max-h-[800px]
+          p-0
+          bg-white border-none rounded-2xl 
+          shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35)] 
+          ring-1 ring-black/[0.05]
         "
       >
-        {/* Accessible title and description - visually hidden but available to screen readers */}
+        {/* Accessibility: Hidden title and description */}
         <DialogTitle className="sr-only">
           {project.name} - Project Details
         </DialogTitle>
@@ -45,156 +200,84 @@ export function ProjectDetailModal({
           {project.role} · {project.year} - {project.category} project
         </DialogDescription>
 
-        {/* CLOSE BUTTON (Floating Hardware Style) */}
-        <DialogClose className="absolute right-6 top-6 z-50 p-2 rounded-full bg-white/80 backdrop-blur border border-zinc-100 shadow-sm text-zinc-400 hover:text-zinc-900 transition-colors">
-          <X size={20} strokeWidth={1.5} />
+        {/* Close Button */}
+        <DialogClose className="absolute right-5 top-5 z-50 p-1.5 rounded-md bg-transparent text-zinc-400 hover:text-zinc-900 hover:bg-zinc-50 transition-all">
+          <X size={18} strokeWidth={1.5} />
+          <span className="sr-only">Close</span>
         </DialogClose>
 
-        {/* 2-COLUMN LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] max-h-[85vh]">
-          {/* --- LEFT: NARRATIVE (Scrollable) --- */}
-          <div className="p-10 md:p-12 overflow-y-auto custom-scrollbar">
-            {/* Header Group */}
-            <div className="mb-12">
-              <span
-                className={`${TYPE_LABEL} block mb-2 text-brand`}
-              >
-                Project 00{project.id || "1"}
-              </span>
-              <h2
-                className={`${TYPE_HEADER} text-4xl md:text-5xl text-zinc-900 leading-[0.9] mb-4`}
-              >
-                {project.name}
-              </h2>
-              <p className="text-zinc-400 font-light text-lg">
-                {project.role} · {project.year}
-              </p>
-            </div>
+        {/* DESKTOP: Horizontal Layout (70/30 split) | MOBILE: Vertical Stack */}
+        <div className="
+          flex flex-col h-full overflow-hidden rounded-2xl
+          lg:flex-row lg:grid lg:grid-cols-[7fr_auto_3fr]
+        ">
+          
+          {/* LEFT PANEL: Main Content (70% on desktop) */}
+          <div className="
+            p-6 sm:p-8 lg:p-12 
+            overflow-y-auto
+            flex-1 lg:flex-initial
+          ">
+            <div className="max-w-[600px] lg:max-w-none pb-8">
+              <ProjectHeader
+                projectId={projectId}
+                name={project.name}
+                role={project.role}
+                year={project.year}
+              />
 
-            {/* Main Description */}
-            <div className="prose prose-zinc prose-lg">
-              {project.description.map((desc, i) => (
-                <p
-                  key={i}
-                  className="text-zinc-600 font-light leading-loose text-[17px]"
-                >
-                  {desc}
-                </p>
-              ))}
-            </div>
+              <ProjectDescription paragraphs={project.description} />
 
-            {/* Impact Section */}
-            {project.impact && (
-              <div className="mt-12 pt-8 border-t border-zinc-100">
-                <h4 className={`${TYPE_LABEL} text-zinc-900`}>
-                  Impact / Results
-                </h4>
-                <p className="text-zinc-600 font-light leading-relaxed">
-                  {project.impact}
-                </p>
-              </div>
-            )}
+              <ImpactSection impact={project.impact} />
 
-            {/* Action Buttons */}
-            <div className="flex gap-6 mt-16">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
-                >
-                  <span className="border-b border-zinc-300 group-hover:border-brand pb-0.5 transition-colors">
-                    View Live Site
-                  </span>
-                  <ArrowUpRight
-                    size={14}
-                    className="text-zinc-400 group-hover:text-brand transition-colors"
-                  />
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center gap-2 text-sm font-medium uppercase tracking-widest text-zinc-900 hover:text-brand transition-colors"
-                >
-                  <span className="border-b border-zinc-300 group-hover:border-brand pb-0.5 transition-colors">
-                    Source Code
-                  </span>
-                  <Github
-                    size={14}
-                    className="text-zinc-400 group-hover:text-brand transition-colors"
-                  />
-                </a>
-              )}
+              <ActionLinks
+                liveUrl={project.liveUrl}
+                githubUrl={project.githubUrl}
+              />
             </div>
           </div>
 
-          {/* --- RIGHT: SPEC SHEET (Grey Background) --- */}
-          <div className="bg-zinc-50/80 border-l border-zinc-100 p-10 md:p-12 flex flex-col gap-10 overflow-y-auto">
-            {/* Tech Stack */}
-            <div>
-              <h4 className={TYPE_LABEL}>Technologies</h4>
-              <p className="text-zinc-700 font-light leading-relaxed text-sm">
+          {/* DIVIDER SPINE: Desktop Only */}
+          <div 
+            className="hidden lg:block w-[3px] bg-gradient-to-b from-zinc-800 via-zinc-900 to-zinc-800 self-stretch shadow-sm"
+            aria-hidden="true"
+          />
+
+          {/* RIGHT PANEL: Spec Sheet (30% on desktop) */}
+          <aside className="
+            bg-zinc-50/60 
+            p-6 sm:p-8 lg:p-10 
+            overflow-y-auto 
+            flex flex-col gap-8
+            border-t lg:border-t-0 lg:border-l border-zinc-200
+          ">
+            
+            <SpecItem label="TECHNOLOGIES">
+              <p className="text-zinc-700 text-[14px] font-light leading-relaxed whitespace-pre-line">
                 {project.techStack}
               </p>
-            </div>
+            </SpecItem>
 
-            {/* Category */}
-            <div>
-              <h4 className={TYPE_LABEL}>Category</h4>
-              <p className="text-zinc-700 font-medium">
+            <SpecItem label="CATEGORY">
+              <p className="text-zinc-900 text-[16px] font-medium">
                 {project.category}
               </p>
-            </div>
+            </SpecItem>
 
-            {/* Status */}
-            <div>
-              <h4 className={TYPE_LABEL}>Status</h4>
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-sm text-zinc-700">
-                  {project.status}
-                </span>
-              </div>
-            </div>
+            <SpecItem label="STATUS">
+              <StatusIndicator status={project.status} />
+            </SpecItem>
 
-            {/* Tags */}
             {project.tags && project.tags.length > 0 && (
-              <div>
-                <h4 className={TYPE_LABEL}>Tags</h4>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1.5 bg-white border border-zinc-200 rounded-md text-[11px] font-medium text-zinc-500 shadow-sm"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <SpecItem label="TAGS">
+                <TagList tags={project.tags} />
+              </SpecItem>
             )}
 
-            {/* Decorative Bar Code / ID (Optional aesthetic touch) */}
-            <div className="mt-auto pt-10 opacity-20">
-              <div
-                className="h-8 w-full bg-repeat-x"
-                style={{
-                  backgroundImage:
-                    "repeating-linear-gradient(90deg, black, black 1px, transparent 1px, transparent 3px)",
-                }}
-              ></div>
-              <span className="font-mono text-[10px] block mt-1">
-                SYS_ID_8842
-              </span>
+            <div className="pb-6">
+              <BarcodeFooter />
             </div>
-          </div>
+          </aside>
         </div>
       </DialogContent>
     </Dialog>
