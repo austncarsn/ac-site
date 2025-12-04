@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { EASE_OUT_EXPO } from '../../lib/constants';
+import { X } from 'lucide-react';
 
 interface Essay {
   title: string;
@@ -55,6 +56,7 @@ const ESSAYS: Essay[] = [
 
 export function EssaysSection() {
   const [selectedEssay, setSelectedEssay] = useState<Essay>(ESSAYS[0]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section 
@@ -293,6 +295,7 @@ export function EssaysSection() {
 
               {/* Read Full Entry Button */}
               <motion.button
+                onClick={() => setIsModalOpen(true)}
                 className="mt-12 flex items-center gap-2 uppercase tracking-widest transition-colors"
                 style={{
                   fontSize: '12px',
@@ -309,6 +312,171 @@ export function EssaysSection() {
           </motion.div>
         </div>
       </motion.div>
+
+      {/* FULL ESSAY MODAL */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+            />
+
+            {/* Modal Content */}
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
+            >
+              <motion.div
+                className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden"
+                style={{
+                  backgroundColor: '#18181b', // zinc-900
+                  borderRadius: '2rem',
+                  boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Modal Header */}
+                <div
+                  className="flex items-center justify-between px-8 h-16 border-b"
+                  style={{
+                    backgroundColor: '#09090b', // zinc-950
+                    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+                  }}
+                >
+                  <div
+                    className="uppercase tracking-widest"
+                    style={{
+                      fontFamily: 'monospace',
+                      fontSize: '10px',
+                      color: '#52525b', // zinc-600
+                      letterSpacing: '0.15em',
+                    }}
+                  >
+                    /system/logs/essays/{selectedEssay.dateShort.toLowerCase().replace(' ', '-')}
+                  </div>
+                  <motion.button
+                    onClick={() => setIsModalOpen(false)}
+                    className="p-2 rounded-lg transition-colors"
+                    style={{
+                      color: '#71717a', // zinc-500
+                    }}
+                    whileHover={{
+                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      color: '#ffffff',
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <X className="w-5 h-5" />
+                  </motion.button>
+                </div>
+
+                {/* Scrollable Content */}
+                <div
+                  className="overflow-y-auto p-8 md:p-12"
+                  style={{
+                    maxHeight: 'calc(90vh - 4rem)',
+                  }}
+                >
+                  {/* Tags */}
+                  <div className="flex gap-3 mb-8">
+                    {selectedEssay.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-0.5 rounded"
+                        style={{
+                          fontSize: '10px',
+                          fontFamily: 'monospace',
+                          border: '1px solid #3f3f46', // zinc-700
+                          color: '#a1a1aa', // zinc-400
+                          backgroundColor: 'rgba(39, 39, 42, 0.5)', // zinc-800/50
+                          letterSpacing: '0.05em',
+                        }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Title */}
+                  <h1
+                    className="mb-6"
+                    style={{
+                      fontFamily: 'var(--font-family)',
+                      fontSize: 'clamp(32px, 5vw, 48px)',
+                      color: '#ffffff',
+                      fontWeight: 300,
+                      lineHeight: '1.2',
+                      letterSpacing: '0.02em',
+                    }}
+                  >
+                    {selectedEssay.title}
+                  </h1>
+
+                  {/* Date & Category */}
+                  <div
+                    className="flex gap-4 mb-12 pb-6 border-b"
+                    style={{
+                      borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: '12px',
+                        color: '#14B8A6', // brand
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      {selectedEssay.date}
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: '12px',
+                        color: '#71717a', // zinc-500
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      {selectedEssay.category}
+                    </span>
+                  </div>
+
+                  {/* Full Content */}
+                  <div className="space-y-8 max-w-3xl">
+                    {selectedEssay.content.map((paragraph, i) => (
+                      <p
+                        key={i}
+                        style={{
+                          fontFamily: 'var(--font-family)',
+                          fontSize: '18px',
+                          fontWeight: 300,
+                          color: '#d4d4d8', // zinc-300
+                          lineHeight: '1.8',
+                          letterSpacing: '0.01em',
+                        }}
+                      >
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+
+                  {/* Footer Spacer */}
+                  <div className="mt-16" />
+                </div>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

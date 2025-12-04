@@ -137,8 +137,18 @@ export const ProjectCard = memo(function ProjectCard({
           }}
           transition={{ duration: 0.3 }}
         >
-          {/* Inner Shadow Overlay (Always ensures the hole looks deep) */}
-          <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_20px_rgba(0,0,0,0.1)] rounded-[inherit]" />
+          {/* Inset Border Effect - Creates depth illusion around colored frame */}
+          <div 
+            className="absolute inset-0 pointer-events-none z-20 rounded-[inherit]" 
+            style={{
+              boxShadow: `
+                inset 0 2px 4px rgba(0, 0, 0, 0.15),
+                inset 0 -1px 3px rgba(255, 255, 255, 0.5),
+                inset 2px 0 4px rgba(0, 0, 0, 0.1),
+                inset -2px 0 3px rgba(255, 255, 255, 0.3)
+              `
+            }}
+          />
 
           {/* --- LAYER 3: THE CONTENT CARD (THE HYDRAULIC PRESS) --- */}
           <motion.div
