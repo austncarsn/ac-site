@@ -25,23 +25,33 @@ export function SectionHeader({
 
   return (
     <div className="section-header-wrapper">
-      {/* 1. Accent Line */}
+      {/* 1. Accent Circles - "Embedded LED" Effect */}
       {showAccent && (
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "circOut" }}
-          variants={ACCENT_LINE_VARIANTS}
-          style={{
-            height: "3px",
-            width: "40px",
-            borderRadius: "2px",
-            backgroundColor: accentColor,
-            marginBottom: "1rem",
-            transformOrigin: "left center",
-          }}
-        />
+        <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', marginLeft: '6px' }}>
+          {[0, 1, 2].map((index) => (
+            <motion.div
+              key={index}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
+              variants={ACCENT_LINE_VARIANTS}
+              style={{
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%", // Perfect circle
+                backgroundColor: accentColor,
+                
+                // The Embedded LED Effect
+                boxShadow: `
+                  inset 2px 2px 3px rgba(0,0,0,0.2),          /* Inner Shadow (Depth) */
+                  inset -1px -1px 2px rgba(255,255,255,0.4),  /* Inner Highlight (Lip) */
+                  0px 0px 10px ${accentColor}                 /* Outer Glow (Neon/LED) */
+                `
+              }}
+            />
+          ))}
+        </div>
       )}
 
       {/* 2. Use InsetSection for pill-shaped deep inset look */}
