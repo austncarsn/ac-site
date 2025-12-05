@@ -213,7 +213,14 @@ function SectionHeading({
   return (
     <h2
       className={className}
-      style={{ marginBottom: "var(--space-8)" }}
+      style={{ 
+        marginBottom: "var(--space-12)",
+        fontSize: "clamp(2rem, 4vw, 2.75rem)", /* 32px -> 44px - Large editorial headers */
+        fontWeight: 600,
+        letterSpacing: "-0.025em",
+        lineHeight: 1.15,
+        color: "#18181B", /* High contrast zinc-900 */
+      }}
     >
       {children}
     </h2>
@@ -239,22 +246,25 @@ function JobEntry({
 }: JobEntryProps) {
   return (
     <div
+      className="bento-card gradient-hover-purple p-6 relative"
       style={{
         marginBottom: isLast
           ? "var(--space-16)"
-          : "var(--space-12)",
+          : "var(--space-6)",
+        padding: "var(--space-6)",
+        position: "relative",
       }}
     >
-      <h3 style={{ marginBottom: "var(--space-2)" }}>
+      <h3 style={{ marginBottom: "var(--space-2)", position: "relative", zIndex: 1 }}>
         {title}
       </h3>
       <p
         className="text-meta"
-        style={{ marginBottom: "var(--space-6)" }}
+        style={{ marginBottom: "var(--space-6)", position: "relative", zIndex: 1 }}
       >
         {company} · {location} · {period}
       </p>
-      <ul className="space-y-3 text-small">
+      <ul className="space-y-3 text-small" style={{ position: "relative", zIndex: 1 }}>
         {highlights.map((highlight, index) => (
           <li key={index} className="opacity-80">
             {highlight}
@@ -284,20 +294,29 @@ function ProjectEntry({
 }: ProjectEntryProps) {
   return (
     <div
-      style={{ marginBottom: isLast ? 0 : "var(--space-10)" }}
+      className="bento-card gradient-hover-pink p-6 relative"
+      style={{ 
+        marginBottom: isLast ? 0 : "var(--space-6)",
+        padding: "var(--space-6)",
+        position: "relative",
+      }}
     >
-      <h3 style={{ marginBottom: "var(--space-3)" }}>
+      <h3 style={{ marginBottom: "var(--space-3)", position: "relative", zIndex: 1 }}>
         {title}
       </h3>
       <p
         className="text-caption"
-        style={{ marginBottom: "var(--space-4)" }}
+        style={{ marginBottom: "var(--space-4)", position: "relative", zIndex: 1 }}
       >
         {type} · {year}
       </p>
       <ul
         className={`space-y-2 text-small${tags ? "" : ""}`}
-        style={{ marginBottom: tags ? "var(--space-4)" : 0 }}
+        style={{ 
+          marginBottom: tags ? "var(--space-4)" : 0,
+          position: "relative",
+          zIndex: 1,
+        }}
       >
         {description.map((item, index) => (
           <li key={index} className="opacity-80">
@@ -306,7 +325,7 @@ function ProjectEntry({
         ))}
       </ul>
       {tags && (
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" style={{ position: "relative", zIndex: 1 }}>
           {tags.map((tag) => (
             <Tag key={tag}>{tag}</Tag>
           ))}
@@ -594,7 +613,7 @@ export function ResumeSection() {
   return (
     <section
       id="resume"
-      className="section-padding bg-background"
+      className="section-padding bg-white"
       style={{
         minHeight: "100vh",
         position: "relative",

@@ -87,17 +87,17 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="section-padding border-t border-border">
+    <section id="contact" className="section-padding bg-white border-t border-border">
       <div className="container-main">
         {/* Large inset pill frame containing entire section */}
         <div
           style={{
-            padding: 'clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 3rem)',
+            padding: 'clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem)',
             borderRadius: '60px', // Large pill shape
             backgroundColor: '#F3F4F6',
             boxShadow: `
-              inset 6px 6px 12px rgba(163, 177, 198, 0.6),
-              inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+              inset 8px 8px 16px rgba(163, 177, 198, 0.7),
+              inset -8px -8px 16px rgba(255, 255, 255, 1.0)
             `,
           }}
         >

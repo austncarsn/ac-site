@@ -159,7 +159,6 @@ export function EssaysSection() {
             <h3 
               className="uppercase pl-4 mb-6"
               style={{
-                fontFamily: 'var(--font-family)',
                 color: '#71717a', // zinc-500
                 fontSize: '12px',
                 letterSpacing: '0.2em',
@@ -227,7 +226,6 @@ export function EssaysSection() {
                     <span 
                       className="block transition-colors leading-relaxed"
                       style={{
-                        fontFamily: 'var(--font-family)',
                         fontSize: '14px',
                         fontWeight: isActive ? 500 : 300,
                         color: isActive ? '#ffffff' : '#71717a', // white or zinc-500
@@ -288,7 +286,6 @@ export function EssaysSection() {
               <h2 
                 className="mb-8"
                 style={{
-                  fontFamily: 'var(--font-family)',
                   fontSize: 'clamp(28px, 5vw, 40px)',
                   color: '#ffffff',
                   fontWeight: 300,
@@ -305,7 +302,6 @@ export function EssaysSection() {
                   <p 
                     key={i}
                     style={{
-                      fontFamily: 'var(--font-family)',
                       fontSize: '16px',
                       fontWeight: 300,
                       color: '#a1a1aa', // zinc-400
@@ -435,7 +431,6 @@ export function EssaysSection() {
                   <h1
                     className="mb-6"
                     style={{
-                      fontFamily: 'var(--font-family)',
                       fontSize: 'clamp(32px, 5vw, 48px)',
                       color: '#ffffff',
                       fontWeight: 300,
@@ -481,7 +476,6 @@ export function EssaysSection() {
                       <p
                         key={i}
                         style={{
-                          fontFamily: 'var(--font-family)',
                           fontSize: '18px',
                           fontWeight: 300,
                           color: '#d4d4d8', // zinc-300

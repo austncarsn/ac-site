@@ -46,21 +46,22 @@ export function WorkSection() {
       aria-label="Selected work and portfolio"
     >
       <div className="container-main">
-        {/* Large inset pill frame containing entire section */}
-        <div
-          style={{
-            padding: 'clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 3rem)',
-            borderRadius: '60px', // Large pill shape
-            backgroundColor: '#F3F4F6',
-            boxShadow: `
-              inset 6px 6px 12px rgba(163, 177, 198, 0.6),
-              inset -6px -6px 12px rgba(255, 255, 255, 1.0)
-            `,
-          }}
-        >
-          <AnimatedSection>
+        <AnimatedSection>
+          {/* Inset pill frame for HEADER REGION ONLY (title + description + filters) */}
+          <div
+            style={{
+              padding: 'clamp(2rem, 4vw, 3rem)',
+              borderRadius: '30px', // Reduced curvature (was 60px)
+              backgroundColor: '#F3F4F6',
+              boxShadow: `
+                inset 6px 6px 12px rgba(163, 177, 198, 0.6),
+                inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+              `,
+              marginBottom: 'var(--space-12)',
+            }}
+          >
             {/* HEADER GROUP */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
               {/* Left: Title & Brief */}
               <div className="max-w-2xl">
                 <SectionHeader accentColor="#14B8A6">
@@ -76,10 +77,11 @@ export function WorkSection() {
                     ease: EASE_OUT_EXPO,
                     delay: 0.1,
                   }}
-                  className="mt-6 text-lg md:text-xl leading-relaxed text-zinc-500 font-light"
+                  className="mt-6 text-body-medium"
+                  style={{ opacity: 0.7 }}
                 >
                   A collection of recent projects exploring{" "}
-                  <span className="text-zinc-900 font-normal">
+                  <span style={{ opacity: 1, fontWeight: 500 }}>
                     system architecture
                   </span>
                   , interface patterns, and digital narratives.
@@ -95,15 +97,15 @@ export function WorkSection() {
                 />
               </div>
             </div>
-          </AnimatedSection>
+          </div>
+        </AnimatedSection>
 
-          {/* THE GRID */}
-          {/* We pass the filtered list. The Grid component handles the layout. */}
-          <ProjectGrid
-            projects={filteredProjects}
-            onProjectClick={setSelectedProject}
-          />
-        </div>
+        {/* THE GRID - Outside the inset pill */}
+        {/* We pass the filtered list. The Grid component handles the layout. */}
+        <ProjectGrid
+          projects={filteredProjects}
+          onProjectClick={setSelectedProject}
+        />
       </div>
 
       {/* MODAL */}
