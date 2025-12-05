@@ -77,6 +77,12 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
     return 'grid-cols-3';
   }, [isMobile, isTablet]);
 
+  // Create a unique key based on project IDs to trigger re-animation on filter change
+  const gridKey = useMemo(
+    () => projects.map((p) => p.id).join('-'),
+    [projects]
+  );
+
   // Empty state
   if (projects.length === 0) {
     return (
@@ -88,10 +94,10 @@ export function ProjectGrid({ projects, onProjectClick }: ProjectGridProps) {
 
   return (
     <motion.div
+      key={gridKey}
       variants={animationVariants.container}
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-100px' }}
+      animate="visible"
       className={`grid ${gridClasses} w-full`}
       style={{ 
         // Golden Gap Rule: 40px outer radius × 1.5 = 60px gap (premium spacing)
