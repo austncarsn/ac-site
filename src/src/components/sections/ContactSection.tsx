@@ -89,182 +89,195 @@ export function ContactSection() {
   return (
     <section id="contact" className="section-padding border-t border-border">
       <div className="container-main">
-        <SectionHeader accentColor="#6366F1">Contact</SectionHeader>
+        {/* Large inset pill frame containing entire section */}
+        <div
+          style={{
+            padding: 'clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 3rem)',
+            borderRadius: '60px', // Large pill shape
+            backgroundColor: '#F3F4F6',
+            boxShadow: `
+              inset 6px 6px 12px rgba(163, 177, 198, 0.6),
+              inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+            `,
+          }}
+        >
+          <SectionHeader accentColor="#6366F1">Contact</SectionHeader>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
-          {/* Contact Form - 7 columns on desktop */}
-          <AnimatedSection className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="flex flex-col" style={{ gap: 'var(--space-8)' }}>
-              <FormField
-                id="name"
-                name="name"
-                label="Name"
-                placeholder="Your name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                aria-label="Your name"
-              />
+          <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
+            {/* Contact Form - 7 columns on desktop */}
+            <AnimatedSection className="lg:col-span-7">
+              <form onSubmit={handleSubmit} className="flex flex-col" style={{ gap: 'var(--space-8)' }}>
+                <FormField
+                  id="name"
+                  name="name"
+                  label="Name"
+                  placeholder="Your name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  aria-label="Your name"
+                />
 
-              <FormField
-                id="email"
-                name="email"
-                label="Email"
-                type="email"
-                placeholder="your.email@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                aria-label="Your email address"
-              />
+                <FormField
+                  id="email"
+                  name="email"
+                  label="Email"
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  aria-label="Your email address"
+                />
 
-              <FormField
-                id="message"
-                name="message"
-                label="Message"
-                as="textarea"
-                rows={5}
-                placeholder="Tell me about your project"
-                value={formData.message}
-                onChange={handleChange}
-                required
-                aria-label="Your message"
-              />
+                <FormField
+                  id="message"
+                  name="message"
+                  label="Message"
+                  as="textarea"
+                  rows={5}
+                  placeholder="Tell me about your project"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  aria-label="Your message"
+                />
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                aria-busy={isSubmitting}
-                aria-label="Send contact form"
-                className="group flex items-center gap-2 self-start transition-all duration-200 border-b-2 border-foreground disabled:opacity-40 disabled:cursor-not-allowed"
-                style={{ 
-                  paddingBottom: 'var(--space-2)',
-                  fontSize: '17px',
-                  fontWeight: 500,
-                  letterSpacing: '-0.01em',
-                }}
-              >
-                {isSubmitting ? (
-                  <>
-                    <span className="inline-block animate-spin">
-                      <Send size={16} />
-                    </span>
-                    <span>Sending...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Send message</span>
-                    <Send 
-                      size={16} 
-                      className="transition-transform duration-200 group-hover:translate-x-1" 
-                    />
-                  </>
-                )}
-              </button>
-
-              {/* Screen reader feedback */}
-              <div aria-live="polite" aria-atomic="true" className="sr-only">
-                {formStatus === 'success' && 'Form submitted successfully'}
-                {formStatus === 'error' && 'Form submission failed. Please try again.'}
-              </div>
-            </form>
-          </AnimatedSection>
-
-          {/* Contact Info - 5 columns on desktop */}
-          <AnimatedSection delay={0.2} className="lg:col-span-5">
-            <div className="flex flex-col" style={{ gap: 'var(--space-10)' }}>
-              {/* Email */}
-              <div className="group">
-                <p 
-                  className="text-meta" 
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                  aria-label="Send contact form"
+                  className="group flex items-center gap-2 self-start transition-all duration-200 border-b-2 border-foreground disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ 
-                    marginBottom: 'var(--space-4)',
-                    opacity: 0.5,
-                    fontSize: '14px',
+                    paddingBottom: 'var(--space-2)',
+                    fontSize: '17px',
+                    fontWeight: 500,
+                    letterSpacing: '-0.01em',
                   }}
                 >
-                  Email
-                </p>
-                <a
-                  href="mailto:austinscarson@gmail.com"
-                  className="flex items-center gap-3 transition-all duration-200"
-                  aria-label="Email Austin Carson"
-                  style={{
-                    fontSize: '16px',
-                    padding: 'var(--space-2) 0',
-                  }}
-                >
-                  <Mail 
-                    size={18} 
-                    style={{ opacity: 0.6 }}
-                    className="transition-opacity duration-200 group-hover:opacity-100"
-                  />
-                  <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
-                    austinscarson@gmail.com
-                  </span>
-                </a>
-              </div>
+                  {isSubmitting ? (
+                    <>
+                      <span className="inline-block animate-spin">
+                        <Send size={16} />
+                      </span>
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send message</span>
+                      <Send 
+                        size={16} 
+                        className="transition-transform duration-200 group-hover:translate-x-1" 
+                      />
+                    </>
+                  )}
+                </button>
 
-              {/* Social Links */}
-              <div>
-                <p 
-                  className="text-meta" 
-                  style={{ 
-                    marginBottom: 'var(--space-4)',
-                    opacity: 0.5,
-                    fontSize: '14px',
-                  }}
-                >
-                  Social
-                </p>
-                <div className="flex flex-col" style={{ gap: 'var(--space-4)' }}>
-                  {/* GitHub */}
+                {/* Screen reader feedback */}
+                <div aria-live="polite" aria-atomic="true" className="sr-only">
+                  {formStatus === 'success' && 'Form submitted successfully'}
+                  {formStatus === 'error' && 'Form submission failed. Please try again.'}
+                </div>
+              </form>
+            </AnimatedSection>
+
+            {/* Contact Info - 5 columns on desktop */}
+            <AnimatedSection delay={0.2} className="lg:col-span-5">
+              <div className="flex flex-col" style={{ gap: 'var(--space-10)' }}>
+                {/* Email */}
+                <div className="group">
+                  <p 
+                    className="text-meta" 
+                    style={{ 
+                      marginBottom: 'var(--space-4)',
+                      opacity: 0.5,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Email
+                  </p>
                   <a
-                    href="https://github.com/austncarsn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
-                    aria-label="Visit Austin Carson's GitHub profile"
+                    href="mailto:austinscarson@gmail.com"
+                    className="flex items-center gap-3 transition-all duration-200"
+                    aria-label="Email Austin Carson"
                     style={{
                       fontSize: '16px',
                       padding: 'var(--space-2) 0',
                     }}
                   >
-                    <Github 
+                    <Mail 
                       size={18} 
                       style={{ opacity: 0.6 }}
                       className="transition-opacity duration-200 group-hover:opacity-100"
                     />
                     <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
-                      GitHub
-                    </span>
-                  </a>
-
-                  {/* LinkedIn */}
-                  <a
-                    href="https://www.linkedin.com/in/austncarsn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
-                    aria-label="Visit Austin Carson's LinkedIn profile"
-                    style={{
-                      fontSize: '16px',
-                      padding: 'var(--space-2) 0',
-                    }}
-                  >
-                    <Linkedin 
-                      size={18} 
-                      style={{ opacity: 0.6 }}
-                      className="transition-opacity duration-200 group-hover:opacity-100"
-                    />
-                    <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
-                      LinkedIn
+                      austinscarson@gmail.com
                     </span>
                   </a>
                 </div>
+
+                {/* Social Links */}
+                <div>
+                  <p 
+                    className="text-meta" 
+                    style={{ 
+                      marginBottom: 'var(--space-4)',
+                      opacity: 0.5,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Social
+                  </p>
+                  <div className="flex flex-col" style={{ gap: 'var(--space-4)' }}>
+                    {/* GitHub */}
+                    <a
+                      href="https://github.com/austncarsn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
+                      aria-label="Visit Austin Carson's GitHub profile"
+                      style={{
+                        fontSize: '16px',
+                        padding: 'var(--space-2) 0',
+                      }}
+                    >
+                      <Github 
+                        size={18} 
+                        style={{ opacity: 0.6 }}
+                        className="transition-opacity duration-200 group-hover:opacity-100"
+                      />
+                      <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
+                        GitHub
+                      </span>
+                    </a>
+
+                    {/* LinkedIn */}
+                    <a
+                      href="https://www.linkedin.com/in/austncarsn"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
+                      aria-label="Visit Austin Carson's LinkedIn profile"
+                      style={{
+                        fontSize: '16px',
+                        padding: 'var(--space-2) 0',
+                      }}
+                    >
+                      <Linkedin 
+                        size={18} 
+                        style={{ opacity: 0.6 }}
+                        className="transition-opacity duration-200 group-hover:opacity-100"
+                      />
+                      <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
+                        LinkedIn
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+          </div>
         </div>
       </div>
     </section>

@@ -16,8 +16,8 @@
 /* =========================== Global CSS Variables =========================== */
 
 :root {
-  /* Base colors - Pale cool gray background with dark zinc text */
-  --background: #F7F8FA;  /* Very pale, cool gray (almost white) */
+  /* Base colors - Light gray background for neumorphic inset effects */
+  --background: #F3F4F6;  /* Light gray (required for white inset highlights to pop) */
   --foreground: #3F3F46;  /* Dark zinc (not pure black) */
   --border: rgba(63, 63, 70, 0.1);
   --muted: rgba(63, 63, 70, 0.05);

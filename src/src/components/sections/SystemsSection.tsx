@@ -52,19 +52,32 @@ export function SystemsSection() {
       />
 
       <div className="container-main relative z-10">
-        <SectionHeader accentColor="#10B981">
-          Core Systems
-        </SectionHeader>
+        {/* Large inset pill frame containing entire section */}
+        <div
+          style={{
+            padding: 'clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 3rem)',
+            borderRadius: '60px', // Large pill shape
+            backgroundColor: '#F3F4F6',
+            boxShadow: `
+              inset 6px 6px 12px rgba(163, 177, 198, 0.6),
+              inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+            `,
+          }}
+        >
+          <SectionHeader accentColor="#10B981">
+            Core Systems
+          </SectionHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-          {SYSTEMS_DATA.map((system, index) => (
-            <AnimatedSection
-              key={system.id}
-              delay={index * 0.1}
-            >
-              <SystemModule system={system} />
-            </AnimatedSection>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            {SYSTEMS_DATA.map((system, index) => (
+              <AnimatedSection
+                key={system.id}
+                delay={index * 0.1}
+              >
+                <SystemModule system={system} />
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -46,51 +46,64 @@ export function WorkSection() {
       aria-label="Selected work and portfolio"
     >
       <div className="container-main">
-        <AnimatedSection>
-          {/* HEADER GROUP */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
-            {/* Left: Title & Brief */}
-            <div className="max-w-2xl">
-              <SectionHeader accentColor="#14B8A6">
-                Selected Work
-              </SectionHeader>
+        {/* Large inset pill frame containing entire section */}
+        <div
+          style={{
+            padding: 'clamp(2rem, 4vw, 4rem) clamp(2rem, 4vw, 3rem)',
+            borderRadius: '60px', // Large pill shape
+            backgroundColor: '#F3F4F6',
+            boxShadow: `
+              inset 6px 6px 12px rgba(163, 177, 198, 0.6),
+              inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+            `,
+          }}
+        >
+          <AnimatedSection>
+            {/* HEADER GROUP */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-20">
+              {/* Left: Title & Brief */}
+              <div className="max-w-2xl">
+                <SectionHeader accentColor="#14B8A6">
+                  Selected Work
+                </SectionHeader>
 
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  ease: EASE_OUT_EXPO,
-                  delay: 0.1,
-                }}
-                className="mt-6 text-lg md:text-xl leading-relaxed text-zinc-500 font-light"
-              >
-                A collection of recent projects exploring{" "}
-                <span className="text-zinc-900 font-normal">
-                  system architecture
-                </span>
-                , interface patterns, and digital narratives.
-              </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    ease: EASE_OUT_EXPO,
+                    delay: 0.1,
+                  }}
+                  className="mt-6 text-lg md:text-xl leading-relaxed text-zinc-500 font-light"
+                >
+                  A collection of recent projects exploring{" "}
+                  <span className="text-zinc-900 font-normal">
+                    system architecture
+                  </span>
+                  , interface patterns, and digital narratives.
+                </motion.p>
+              </div>
+
+              {/* Right: Filters (Aligned to bottom of header on desktop) */}
+              <div className="w-full md:w-auto">
+                <ProjectFilters
+                  categories={DERIVED_CATEGORIES}
+                  selectedCategory={selectedCategory}
+                  onCategoryChange={setSelectedCategory}
+                />
+              </div>
             </div>
+          </AnimatedSection>
 
-            {/* Right: Filters (Aligned to bottom of header on desktop) */}
-            <div className="w-full md:w-auto">
-              <ProjectFilters
-                categories={DERIVED_CATEGORIES}
-                selectedCategory={selectedCategory}
-                onCategoryChange={setSelectedCategory}
-              />
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* THE GRID */}
-        {/* We pass the filtered list. The Grid component handles the layout. */}
-        <ProjectGrid
-          projects={filteredProjects}
-          onProjectClick={setSelectedProject}
-        />
+          {/* THE GRID */}
+          {/* We pass the filtered list. The Grid component handles the layout. */}
+          <ProjectGrid
+            projects={filteredProjects}
+            onProjectClick={setSelectedProject}
+          />
+        </div>
       </div>
 
       {/* MODAL */}
