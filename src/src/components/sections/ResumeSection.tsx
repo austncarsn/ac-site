@@ -349,12 +349,33 @@ function DownloadButton({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-3 bg-brand text-white transition-all rounded-[6px] no-highlight cursor-pointer ${className}`}
+      className={`inline-flex items-center gap-3 text-white transition-all rounded-[6px] no-highlight cursor-pointer ${className}`}
       style={{
         padding: "var(--space-4) var(--space-6)",
         fontSize: "17px",
         fontWeight: 400,
         transitionDuration: "0.3s",
+        
+        // Animated pastel gradient background
+        background: `linear-gradient(135deg, 
+          #A4BFFF 0%, 
+          #92AFEE 25%, 
+          #809FDC 50%, 
+          #6E8FCA 75%, 
+          #5C7FB8 100%)`,
+        backgroundSize: '200% 200%',
+        animation: 'gradientShift 8s ease infinite',
+        
+        // Glassmorphism effect
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+        backgroundColor: 'rgba(164, 191, 255, 0.3)',
+        border: '1px solid rgba(255, 255, 255, 0.4)',
+        boxShadow: `
+          0 8px 32px rgba(92, 127, 184, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.4)
+        `,
+        
         ...style,
       }}
       aria-label="Download Austin Carson's resume as a single page PDF"

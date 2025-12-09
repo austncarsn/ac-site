@@ -64,7 +64,7 @@ export function WorkSection() {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
               {/* Left: Title & Brief */}
               <div className="max-w-2xl">
-                <SectionHeader accentColor="#14B8A6">
+                <SectionHeader accentColor="#A4BFFF">
                   Selected Work
                 </SectionHeader>
 

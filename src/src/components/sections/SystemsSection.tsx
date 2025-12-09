@@ -52,7 +52,7 @@ export function SystemsSection() {
       />
 
       <div className="container-main relative z-10">
-        <SectionHeader accentColor="#10B981">
+        <SectionHeader accentColor="#B6CFFF">
           Core Systems
         </SectionHeader>
 

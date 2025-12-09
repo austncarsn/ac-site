@@ -134,7 +134,8 @@ export function Navigation() {
                     style={{
                       fontSize: '17px',
                       fontWeight: 400,
-                      letterSpacing: 0,
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
                       opacity: isActive ? 1 : 0.5,
                       padding: '8px 16px',
                       borderRadius: '8px',
@@ -267,7 +268,8 @@ export function Navigation() {
                         style={{
                           fontSize: '24px',
                           fontWeight: 300,
-                          letterSpacing: '-0.02em',
+                          letterSpacing: '0.05em',
+                          textTransform: 'uppercase',
                           paddingTop: 'var(--space-6)',
                           paddingBottom: 'var(--space-6)',
                           transitionDuration: '0.25s',

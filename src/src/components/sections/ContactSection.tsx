@@ -101,7 +101,7 @@ export function ContactSection() {
             `,
           }}
         >
-          <SectionHeader accentColor="#6366F1">Contact</SectionHeader>
+          <SectionHeader accentColor="#809FDC">Contact</SectionHeader>
 
           <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
             {/* Contact Form - 7 columns on desktop */}

@@ -1,7 +1,6 @@
 import React, { CSSProperties } from "react";
 import { motion } from "motion/react";
 import { createFadeUpVariants } from "../../lib/constants";
-import { InsetSection } from "./InsetSection";
 
 interface SectionHeaderProps {
   children: React.ReactNode;
@@ -24,7 +23,7 @@ export function SectionHeader({
 }: SectionHeaderProps) {
 
   return (
-    <div className="section-header-wrapper">
+    <div className="section-header-wrapper" style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)' }}>
       {/* 1. Accent Circles - "Embedded LED" Effect */}
       {showAccent && (
         <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', marginLeft: '6px' }}>
@@ -54,10 +53,29 @@ export function SectionHeader({
         </div>
       )}
 
-      {/* 2. Use InsetSection for pill-shaped deep inset look */}
-      <InsetSection accentColor={accentColor} className={className}>
+      {/* 2. Header text without pill background */}
+      <motion.h2
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className={className}
+        style={{
+          margin: 0,
+          fontSize: 'clamp(2rem, 4vw, 2.5rem)',
+          fontWeight: 300, // Skinny font weight
+          lineHeight: 1.1,
+          letterSpacing: '0.02em', // Slightly wider tracking for light weight
+          
+          // Solid black color instead of gradient
+          color: '#000000',
+          
+          // Optional: A tiny drop shadow on the text to lift it slightly
+          filter: 'drop-shadow(0px 2px 2px rgba(0,0,0,0.1))',
+        }}
+      >
         {children}
-      </InsetSection>
+      </motion.h2>
     </div>
   );
 }

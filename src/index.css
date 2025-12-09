@@ -934,10 +934,6 @@
     justify-content: center;
   }
 
-  .justify-start {
-    justify-content: flex-start;
-  }
-
   .gap-2 {
     gap: calc(var(--spacing) * 2);
   }
@@ -2389,6 +2385,20 @@
 
     * {
       -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  @keyframes gradientShift {
+    0% {
+      background-position: 0%;
+    }
+
+    50% {
+      background-position: 100%;
+    }
+
+    100% {
+      background-position: 0%;
     }
   }
 }

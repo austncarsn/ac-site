@@ -2,29 +2,24 @@
  * Shared color constants for consistent color usage across the application
  */
 
-// Vibrant color palette used for interactive elements
+// Blue gradient palette for interactive elements - from dark pastel blue to lightest shade
 export const VIBRANT_COLORS = [
-  '#6B4EFF', // Purple
-  '#FF3B5C', // Red/Pink
-  '#FF6B00', // Orange
-  '#FFEB3B', // Yellow
-  '#00E676', // Green
-  '#FFC107', // Amber
-  '#E040FB', // Magenta
-  '#FF5722', // Deep Orange
-  '#9C27B0', // Deep Purple
-  '#DC143C', // Crimson
-  '#00BCD4', // Cyan
-  '#3F51B5', // Indigo
-  '#673AB7', // Deep Purple Alt
-  '#F44336', // Red
-  '#4CAF50', // Green Alt
+  '#4A6FA5', // Dark Pastel Blue
+  '#5C7FB8', // Medium Dark Blue
+  '#6E8FCA', // Mid Blue
+  '#809FDC', // Medium Blue
+  '#92AFEE', // Medium Light Blue
+  '#A4BFFF', // Light Blue
+  '#B6CFFF', // Lighter Blue
+  '#C8DFFF', // Very Light Blue
+  '#DAEFFF', // Pale Blue
+  '#ECFAFF', // Lightest Blue
 ] as const;
 
-// Monochrome palette for neutral color blocks
+// Off-white monochrome palette for neutral color blocks
 export const MONOCHROME_PALETTE = [
-  '#0A0A0A', '#1A1A1A', '#2D2D2D', '#404040', '#595959',
-  '#737373', '#8C8C8C', '#A6A6A6', '#BFBFBF', '#D9D9D9',
+  '#F8F8F8', '#F6F6F6', '#F4F4F4', '#F2F2F2', '#F0F0F0',
+  '#EEEEEE', '#ECECEC', '#EAEAEA', '#E8E8E8', '#E6E6E6',
 ] as const;
 
 /**

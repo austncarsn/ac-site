@@ -16,14 +16,27 @@ function generateColorBlocks(): readonly string[] {
   const blocks: string[] = [];
   const monochromeCount = MONOCHROME_ROWS * GRID_COLS;
   
-  // First 3 rows - monochrome
+  // First 3 rows - off-white monochrome
   for (let i = 0; i < monochromeCount; i++) {
     blocks.push(MONOCHROME_PALETTE[i % MONOCHROME_PALETTE.length]);
   }
   
-  // Last row - vibrant colors
+  // Last row - gradient from dark pastel blue to light off-white
+  const gradientColors = [
+    '#4A6FA5', // Dark Pastel Blue
+    '#5C7FB8', // Medium Dark Blue
+    '#6E8FCA', // Mid Blue
+    '#92AFEE', // Medium Light Blue
+    '#B6CFFF', // Lighter Blue
+    '#C8DFFF', // Very Light Blue
+    '#DAEFFF', // Pale Blue
+    '#ECFAFF', // Lightest Blue
+    '#F4F4F4', // Light Off-white
+    '#F8F8F8', // Off-white
+  ];
+  
   for (let i = 0; i < GRID_COLS; i++) {
-    blocks.push(VIBRANT_COLORS[i]);
+    blocks.push(gradientColors[i]);
   }
   
   return blocks;
@@ -36,14 +49,23 @@ function generateColorBlocks(): readonly string[] {
 function generateMobileColorBlocks(): readonly string[] {
   const blocks: string[] = [];
   
-  // First row - monochrome (6 blocks)
+  // First row - off-white monochrome (6 blocks)
   for (let i = 0; i < MOBILE_GRID_COLS; i++) {
     blocks.push(MONOCHROME_PALETTE[i % MONOCHROME_PALETTE.length]);
   }
   
-  // Second row - vibrant colors (6 blocks)
+  // Second row - gradient from dark pastel blue to light off-white (6 blocks)
+  const gradientColors = [
+    '#4A6FA5', // Dark Pastel Blue
+    '#6E8FCA', // Mid Blue
+    '#92AFEE', // Medium Light Blue
+    '#C8DFFF', // Very Light Blue
+    '#ECFAFF', // Lightest Blue
+    '#F8F8F8', // Off-white
+  ];
+  
   for (let i = 0; i < MOBILE_GRID_COLS; i++) {
-    blocks.push(VIBRANT_COLORS[i]);
+    blocks.push(gradientColors[i]);
   }
   
   return blocks;
@@ -165,7 +187,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 height: '40px',
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '4px',
+                borderRadius: '50%', // Circle shape
                 // Inset effect: layered inner shadows create embossed hole illusion
                 boxShadow: `
                   inset 4px 4px 8px rgba(0, 0, 0, 0.25),
@@ -231,7 +253,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 height: '40px',
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
-                borderRadius: '4px',
+                borderRadius: '50%', // Circle shape
                 // Inset effect: layered inner shadows create embossed hole illusion
                 boxShadow: `
                   inset 4px 4px 8px rgba(0, 0, 0, 0.25),
