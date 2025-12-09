@@ -63,7 +63,6 @@
   :root, :host {
     --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --color-emerald-400: oklch(.765 .177 163.223);
     --color-zinc-50: oklch(.985 0 0);
     --color-zinc-100: oklch(.967 .001 286.375);
     --color-zinc-200: oklch(.92 .004 286.32);
@@ -1178,10 +1177,6 @@
     background-color: var(--color-zinc-100);
   }
 
-  .bg-zinc-300 {
-    background-color: var(--color-zinc-300);
-  }
-
   .p-0 {
     padding: calc(var(--spacing) * 0);
   }
@@ -1621,12 +1616,6 @@
   }
 
   @media (hover: hover) {
-    .group-hover\:bg-emerald-400:is(:where(.group):hover *) {
-      background-color: var(--color-emerald-400);
-    }
-  }
-
-  @media (hover: hover) {
     .group-hover\:bg-zinc-800:is(:where(.group):hover *) {
       background-color: var(--color-zinc-800);
     }
@@ -1635,12 +1624,6 @@
   @media (hover: hover) {
     .group-hover\:bg-zinc-900:is(:where(.group):hover *) {
       background-color: var(--color-zinc-900);
-    }
-  }
-
-  @media (hover: hover) {
-    .group-hover\:text-emerald-400:is(:where(.group):hover *) {
-      color: var(--color-emerald-400);
     }
   }
 
@@ -1665,13 +1648,6 @@
   @media (hover: hover) {
     .group-hover\:opacity-100:is(:where(.group):hover *) {
       opacity: 1;
-    }
-  }
-
-  @media (hover: hover) {
-    .group-hover\:shadow-\[0_0_8px_rgba\(52\,211\,153\,0\.6\)\]:is(:where(.group):hover *) {
-      --tw-shadow: 0 0 8px var(--tw-shadow-color, #34d39999);
-      box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
 

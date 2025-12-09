@@ -18,7 +18,7 @@ const ACCENT_LINE_VARIANTS = {
 export function SectionHeader({
   children,
   className = "",
-  accentColor = "#14B8A6",
+  accentColor = "#B6CFFF", // Changed default to pastel blue
   showAccent = true,
 }: SectionHeaderProps) {
 

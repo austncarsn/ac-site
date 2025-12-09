@@ -101,7 +101,7 @@ export function ContactSection() {
             `,
           }}
         >
-          <SectionHeader accentColor="#809FDC">Contact</SectionHeader>
+          <SectionHeader accentColor="#B6CFFF">Contact</SectionHeader>
 
           <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
             {/* Contact Form - 7 columns on desktop */}
@@ -208,7 +208,7 @@ export function ContactSection() {
                   >
                     <Mail 
                       size={18} 
-                      style={{ opacity: 0.6 }}
+                      style={{ color: '#B6CFFF', opacity: 0.9 }}
                       className="transition-opacity duration-200 group-hover:opacity-100"
                     />
                     <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
@@ -244,7 +244,7 @@ export function ContactSection() {
                     >
                       <Github 
                         size={18} 
-                        style={{ opacity: 0.6 }}
+                        style={{ color: '#B6CFFF', opacity: 0.9 }}
                         className="transition-opacity duration-200 group-hover:opacity-100"
                       />
                       <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
@@ -266,7 +266,7 @@ export function ContactSection() {
                     >
                       <Linkedin 
                         size={18} 
-                        style={{ opacity: 0.6 }}
+                        style={{ color: '#B6CFFF', opacity: 0.9 }}
                         className="transition-opacity duration-200 group-hover:opacity-100"
                       />
                       <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">

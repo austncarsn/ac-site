@@ -203,7 +203,7 @@ export function EssaysSection() {
                         style={{
                           fontFamily: 'monospace',
                           fontSize: '10px',
-                          color: isActive ? '#14B8A6' : '#52525b', // brand or zinc-600
+                          color: isActive ? '#B6CFFF' : '#52525b', // pastel blue or zinc-600
                           letterSpacing: '0.1em',
                         }}
                       >
@@ -217,8 +217,8 @@ export function EssaysSection() {
                           style={{
                             width: '6px',
                             height: '6px',
-                            backgroundColor: '#14B8A6', // brand
-                            boxShadow: '0 0 8px rgba(20, 184, 166, 0.6)',
+                            backgroundColor: '#B6CFFF', // pastel blue
+                            boxShadow: '0 0 8px rgba(182, 207, 255, 0.6)',
                           }}
                         />
                       )}
@@ -452,7 +452,7 @@ export function EssaysSection() {
                       style={{
                         fontFamily: 'monospace',
                         fontSize: '12px',
-                        color: '#14B8A6', // brand
+                        color: '#B6CFFF', // pastel blue
                         letterSpacing: '0.1em',
                       }}
                     >

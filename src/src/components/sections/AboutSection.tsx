@@ -19,7 +19,7 @@ export function AboutSection() {
   return (
     <section id="about" className="section-padding bg-white border-t border-border">
       <div className="container-main">
-        <SectionHeader accentColor="#C8DFFF">About</SectionHeader>
+        <SectionHeader accentColor="#B6CFFF">About</SectionHeader>
 
         <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)', marginTop: 'var(--space-16)' }}>
           {/* Main content - 7 columns */}

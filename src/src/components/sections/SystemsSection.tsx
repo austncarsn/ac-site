@@ -105,13 +105,16 @@ function SystemModule({
 
           {/* Status LED */}
           <div
-            className="w-2 h-2 rounded-full bg-zinc-300 transition-colors duration-300 
-            group-hover:bg-emerald-400 group-hover:shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+            className="w-2 h-2 rounded-full transition-all duration-300"
+            style={{
+              backgroundColor: '#B6CFFF',
+              boxShadow: '0 0 8px rgba(182, 207, 255, 0.6)',
+            }}
           />
         </div>
 
         {/* ICON */}
-        <div className="mb-6 text-zinc-400 group-hover:text-emerald-400 transition-colors duration-300">
+        <div className="mb-6 transition-colors duration-300" style={{ color: '#B6CFFF' }}>
           <Icon size={28} strokeWidth={1.5} />
         </div>
 

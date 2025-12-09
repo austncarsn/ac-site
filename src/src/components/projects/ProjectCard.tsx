@@ -170,7 +170,23 @@ export const ProjectCard = memo(function ProjectCard({
                 className="w-full h-full flex items-center justify-center transition-transform duration-700"
                 style={{
                   background:
-                    project.previewColors.length > 1
+                    project.name === "Color Rodeo"
+                      ? `url('https://images.unsplash.com/photo-1533133303533-682ef118cdce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMHJhaW5ib3clMjBncmFkaWVudCUyMHJlZnJhY3Rpb258ZW58MXx8fHwxNzY1MzAzNDQ5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Cell Biology Virtual Textbook"
+                      ? `url('https://images.unsplash.com/photo-1764440446152-13286373bcd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyZWVuJTIwZ2VvbWV0cmljJTIwdHJhbnNsdWNlbnR8ZW58MXx8fHwxNzY1MzAzNTc2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Korwin Design System"
+                      ? `url('https://images.unsplash.com/photo-1688413709025-5f085266935a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxkYXJrJTIwYmx1ZSUyMHZpb2xldCUyMGdyYWRpZW50JTIwYWJzdHJhY3QlMjBncmlkfGVufDF8fHx8MTc2NTMwMzY0Nnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Pattern Gallery"
+                      ? `url('https://images.unsplash.com/photo-1759583545970-0106ff47353f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxpcmlkZXNjZW50JTIwZ2VvbWV0cmljJTIwcGF0dGVybiUyMGhvbG9ncmFwaGljJTIwdGV4dHVyZXxlbnwxfHx8fDE3NjUzMDQxNTN8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Scroll Animation Library"
+                      ? `url('https://images.unsplash.com/photo-1761319659783-cceb1973d6f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsaWdodCUyMHNwZWVkJTIwbW90aW9uJTIwYmx1ciUyMG5lb24lMjBzdHJlYWtzfGVufDF8fHx8MTc2NTMwNDE1M3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Floral Design SVG"
+                      ? `url('https://images.unsplash.com/photo-1613233629562-cee828d79999?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5rJTIwcm9zZSUyMGlyaWRlc2NlbnQlMjBob2xvZ3JhcGhpYyUyMGZsb3JhbHxlbnwxfHx8fDE3NjUzMDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Cameo Web"
+                      ? `url('https://images.unsplash.com/photo-1711198575377-68435bae04df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYW1lbyUyMGpld2VscnklMjBwb3J0cmFpdCUyMGlyaWRlc2NlbnQlMjB2aW50YWdlfGVufDF8fHx8MTc2NTMwNDI4OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.name === "Graphic Design Gallery"
+                      ? `url('https://images.unsplash.com/photo-1580122252289-8eccefa9ce2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHdoaXRlJTIwY3lhbiUyMGdyYWRpZW50JTIwbWluaW1hbHxlbnwxfHx8fDE3NjUzMDQwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      : project.previewColors.length > 1
                       ? `linear-gradient(135deg, ${project.previewColors.join(", ")})`
                       : `rgba(${rgbColor}, 0.1)`,
                 }}
