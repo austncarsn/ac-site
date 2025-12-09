@@ -183,7 +183,7 @@ export const ProjectCard = memo(function ProjectCard({
                       : project.name === "Floral Design SVG"
                       ? `url('https://images.unsplash.com/photo-1613233629562-cee828d79999?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5rJTIwcm9zZSUyMGlyaWRlc2NlbnQlMjBob2xvZ3JhcGhpYyUyMGZsb3JhbHxlbnwxfHx8fDE3NjUzMDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
                       : project.name === "Cameo Web"
-                      ? `url('https://images.unsplash.com/photo-1711198575377-68435bae04df?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjYW1lbyUyMGpld2VscnklMjBwb3J0cmFpdCUyMGlyaWRlc2NlbnQlMjB2aW50YWdlfGVufDF8fHx8MTc2NTMwNDI4OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
+                      ? `url('https://images.unsplash.com/photo-1765104932623-841dd3ab3832?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwaG9sb2dyYXBoaWMlMjBwYXN0ZWx8ZW58MXx8fHwxNzY1MzA0NDU2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
                       : project.name === "Graphic Design Gallery"
                       ? `url('https://images.unsplash.com/photo-1580122252289-8eccefa9ce2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHdoaXRlJTIwY3lhbiUyMGdyYWRpZW50JTIwbWluaW1hbHxlbnwxfHx8fDE3NjUzMDQwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
                       : project.previewColors.length > 1

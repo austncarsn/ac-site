@@ -32,6 +32,11 @@ export function ProjectFilters({
             fontWeight: 300,
             letterSpacing: '0.02em',
             padding: 'var(--space-3) var(--space-5)',
+            backgroundColor: '#E8F0FF', // Light pastel blue background
+            boxShadow: `
+              inset 2px 2px 4px rgba(163, 177, 198, 0.4),
+              inset -2px -2px 4px rgba(255, 255, 255, 0.8)
+            `,
           }}
         >
           {cat}
