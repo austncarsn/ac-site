@@ -13,7 +13,7 @@ const RESUME_DATA = {
   name: "Austin Carson",
   title: "Product Designer & Front-End Developer",
   location: "Seattle, Washington",
-  email: "austinscarson@gmail.com",
+  email: "austncarsn@gmail.com",
   linkedin: "linkedin.com/in/austncarsn",
   linkedinUrl: "https://www.linkedin.com/in/austncarsn",
   phone: "(206) 620-4803",
@@ -359,31 +359,33 @@ function DownloadButton({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-3 text-white transition-all rounded-[16px] no-highlight cursor-pointer ${className}`}
+      className={`inline-flex items-center gap-3 transition-all rounded-[16px] no-highlight cursor-pointer ${className}`}
       style={{
         padding: "var(--space-4) var(--space-6)",
         fontSize: "17px",
         fontWeight: 400,
         transitionDuration: "0.3s",
+        color: "#1A1A19", // Near black text
         
-        // Animated pastel gradient background
+        // Semi-transparent glass gradient - balanced opacity
         background: `linear-gradient(135deg, 
-          #A4BFFF 0%, 
-          #92AFEE 25%, 
-          #809FDC 50%, 
-          #6E8FCA 75%, 
-          #5C7FB8 100%)`,
+          rgba(164, 191, 255, 0.28) 0%, 
+          rgba(146, 175, 238, 0.25) 25%, 
+          rgba(128, 159, 220, 0.22) 50%, 
+          rgba(110, 143, 202, 0.25) 75%, 
+          rgba(92, 127, 184, 0.28) 100%)`,
         backgroundSize: '200% 200%',
         animation: 'gradientShift 8s ease infinite',
         
-        // Glassmorphism effect
-        backdropFilter: 'blur(10px)',
-        WebkitBackdropFilter: 'blur(10px)',
-        backgroundColor: 'rgba(164, 191, 255, 0.3)',
-        border: '1px solid rgba(255, 255, 255, 0.4)',
+        // Enhanced glassmorphism - frosted glass effect
+        backdropFilter: 'blur(16px) saturate(180%)',
+        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+        backgroundColor: 'rgba(255, 255, 255, 0.15)', // Moderate white tint for glass
+        border: '1px solid rgba(255, 255, 255, 0.3)',
         boxShadow: `
           0 8px 32px rgba(92, 127, 184, 0.2),
-          inset 0 1px 0 rgba(255, 255, 255, 0.4)
+          inset 0 1px 1px rgba(255, 255, 255, 0.35),
+          inset 0 -1px 1px rgba(0, 0, 0, 0.06)
         `,
         
         ...style,

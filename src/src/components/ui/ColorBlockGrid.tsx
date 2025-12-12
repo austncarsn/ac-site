@@ -9,6 +9,47 @@ const MONOCHROME_ROWS = 3;
 const MOBILE_GRID_COLS = 6;
 
 /**
+ * Generates controlled, subtle variations for each circle
+ * Creates a calibrated, high-end feel - not random, but alive
+ * @param index - Position in grid
+ * @param totalCount - Total number of circles
+ * @returns Variation object with size, offset, and shadow adjustments
+ */
+function getCircleVariation(index: number, totalCount: number) {
+  // Use deterministic variation based on position
+  // Creates a pattern that feels intentional, not mechanical
+  const normalizedIndex = index / totalCount;
+  
+  // Size variation (±4-6% = 38px to 42.4px from base 40px)
+  // Use sine wave for smooth, organic distribution
+  const sizeVariation = Math.sin(index * 0.618) * 0.05; // Golden ratio for pleasing distribution
+  const sizeFactor = 1 + sizeVariation;
+  
+  // Vertical offset (0-2px) - only on select circles
+  // Use modulo pattern to create rhythm
+  const hasOffset = (index % 7 === 0 || index % 11 === 0); // Prime numbers for irregular pattern
+  const verticalOffset = hasOffset ? Math.sin(index * 0.5) * 2 : 0;
+  
+  // Shadow blur variation (slight differences in softness)
+  // Subtle variation in shadow diffusion
+  const shadowBlurVariation = 2 + (Math.cos(index * 0.5) * 1.5); // 0.5px to 3.5px range
+  const shadowSpreadVariation = 4 + (Math.sin(index * 0.8) * 2); // 2px to 6px range
+  
+  // Inner shadow intensity variation
+  const innerShadowOpacity = 0.06 + (Math.sin(index * 1.2) * 0.02); // 0.04 to 0.08
+  const innerHighlightOpacity = 0.35 + (Math.cos(index * 0.9) * 0.1); // 0.25 to 0.45
+  
+  return {
+    sizeFactor,
+    verticalOffset,
+    shadowBlur: shadowBlurVariation,
+    shadowSpread: shadowSpreadVariation,
+    innerShadowOpacity,
+    innerHighlightOpacity,
+  };
+}
+
+/**
  * Generates color blocks for desktop grid
  * @returns Array of color strings (3 rows monochrome + 1 row vibrant)
  */
@@ -164,6 +205,8 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
           
+          const variation = getCircleVariation(index, colorBlocks.length);
+          
           return (
             <motion.div
               key={`color-block-${index}`}
@@ -192,15 +235,15 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               className={`${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
                 background: color,
-                width: '40px',
-                height: '40px',
+                width: `${40 * variation.sizeFactor}px`,
+                height: `${40 * variation.sizeFactor}px`,
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
-                transform: 'translateZ(0)',
+                transform: `translateZ(0) translateY(${variation.verticalOffset}px)`,
                 borderRadius: '50%', // Circle shape
-                // Subtle matte inset - soft, tactile, not glossy
+                // Subtle matte inset with gentle variation - soft, tactile, not glossy
                 boxShadow: `
-                  inset 2px 2px 6px rgba(0, 0, 0, 0.08),
-                  inset -1px -1px 4px rgba(255, 255, 255, 0.4)
+                  inset ${variation.shadowBlur}px ${variation.shadowBlur}px ${variation.shadowSpread}px rgba(0, 0, 0, ${variation.innerShadowOpacity}),
+                  inset -1px -1px 4px rgba(255, 255, 255, ${variation.innerHighlightOpacity})
                 `,
               }}
               aria-hidden="true"
@@ -228,6 +271,8 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
           
           // Optimized wave animation
           const waveDelay = (row * 0.25) + (col * 0.06);
+          
+          const variation = getCircleVariation(index, mobileColorBlocks.length);
           
           return (
             <motion.div
@@ -257,15 +302,15 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
               className={`${isLastRow ? 'cursor-pointer' : ''}`}
               style={{ 
                 background: color,
-                width: '40px',
-                height: '40px',
+                width: `${40 * variation.sizeFactor}px`,
+                height: `${40 * variation.sizeFactor}px`,
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
-                transform: 'translateZ(0)',
+                transform: `translateZ(0) translateY(${variation.verticalOffset}px)`,
                 borderRadius: '50%', // Circle shape
-                // Subtle matte inset - soft, tactile, not glossy
+                // Subtle matte inset with gentle variation - soft, tactile, not glossy
                 boxShadow: `
-                  inset 2px 2px 6px rgba(0, 0, 0, 0.08),
-                  inset -1px -1px 4px rgba(255, 255, 255, 0.4)
+                  inset ${variation.shadowBlur}px ${variation.shadowBlur}px ${variation.shadowSpread}px rgba(0, 0, 0, ${variation.innerShadowOpacity}),
+                  inset -1px -1px 4px rgba(255, 255, 255, ${variation.innerHighlightOpacity})
                 `,
               }}
               aria-hidden="true"
