@@ -23,16 +23,16 @@ function generateColorBlocks(): readonly string[] {
   
   // Last row - gradient from dark pastel blue to light off-white
   const gradientColors = [
-    '#4A6FA5', // Dark Pastel Blue
-    '#5C7FB8', // Medium Dark Blue
-    '#6E8FCA', // Mid Blue
-    '#92AFEE', // Medium Light Blue
-    '#B6CFFF', // Lighter Blue
-    '#C8DFFF', // Very Light Blue
-    '#DAEFFF', // Pale Blue
-    '#ECFAFF', // Lightest Blue
-    '#F4F4F4', // Light Off-white
     '#F8F8F8', // Off-white
+    '#F4F4F4', // Light Off-white
+    '#ECFAFF', // Lightest Blue
+    '#DAEFFF', // Pale Blue
+    '#C8DFFF', // Very Light Blue
+    '#B6CFFF', // Lighter Blue
+    '#92AFEE', // Medium Light Blue
+    '#6E8FCA', // Mid Blue
+    '#5C7FB8', // Medium Dark Blue
+    '#4A6FA5', // Dark Pastel Blue
   ];
   
   for (let i = 0; i < GRID_COLS; i++) {
@@ -49,19 +49,28 @@ function generateColorBlocks(): readonly string[] {
 function generateMobileColorBlocks(): readonly string[] {
   const blocks: string[] = [];
   
-  // First row - off-white monochrome (6 blocks)
+  // First row - warm near-white to soft neutral tones (6 blocks)
+  const topRowColors = [
+    '#FDFCFB', // Warm almost white
+    '#F9F8F7', // Very soft warm gray
+    '#F5F4F2', // Soft warm light gray
+    '#F1F0ED', // Warm light gray
+    '#EDEBE8', // Gentle warm gray
+    '#E9E7E3', // Soft neutral gray
+  ];
+  
   for (let i = 0; i < MOBILE_GRID_COLS; i++) {
-    blocks.push(MONOCHROME_PALETTE[i % MONOCHROME_PALETTE.length]);
+    blocks.push(topRowColors[i]);
   }
   
-  // Second row - gradient from dark pastel blue to light off-white (6 blocks)
+  // Second row - quiet gradient: lightest off-white/pale blue → deeper pastel blues (6 blocks)
   const gradientColors = [
-    '#4A6FA5', // Dark Pastel Blue
-    '#6E8FCA', // Mid Blue
-    '#92AFEE', // Medium Light Blue
-    '#C8DFFF', // Very Light Blue
-    '#ECFAFF', // Lightest Blue
-    '#F8F8F8', // Off-white
+    '#F2F6FA', // Lightest off-white with hint of blue
+    '#E5EDF5', // Very pale blue
+    '#D8E4F0', // Pale blue
+    '#C3D5E8', // Soft blue
+    '#ADC6DF', // Gentle mid blue
+    '#97B7D6', // Deeper pastel blue
   ];
   
   for (let i = 0; i < MOBILE_GRID_COLS; i++) {
@@ -188,11 +197,10 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '50%', // Circle shape
-                // Inset effect: layered inner shadows create embossed hole illusion
+                // Subtle matte inset - soft, tactile, not glossy
                 boxShadow: `
-                  inset 4px 4px 8px rgba(0, 0, 0, 0.25),
-                  inset -4px -4px 6px rgba(255, 255, 255, 0.3),
-                  0 1px 0 rgba(255, 255, 255, 0.5)
+                  inset 2px 2px 6px rgba(0, 0, 0, 0.08),
+                  inset -1px -1px 4px rgba(255, 255, 255, 0.4)
                 `,
               }}
               aria-hidden="true"
@@ -254,11 +262,10 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                 willChange: prefersReducedMotion ? 'auto' : 'opacity',
                 transform: 'translateZ(0)',
                 borderRadius: '50%', // Circle shape
-                // Inset effect: layered inner shadows create embossed hole illusion
+                // Subtle matte inset - soft, tactile, not glossy
                 boxShadow: `
-                  inset 4px 4px 8px rgba(0, 0, 0, 0.25),
-                  inset -4px -4px 6px rgba(255, 255, 255, 0.3),
-                  0 1px 0 rgba(255, 255, 255, 0.5)
+                  inset 2px 2px 6px rgba(0, 0, 0, 0.08),
+                  inset -1px -1px 4px rgba(255, 255, 255, 0.4)
                 `,
               }}
               aria-hidden="true"

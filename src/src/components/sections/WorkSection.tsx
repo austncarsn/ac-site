@@ -39,35 +39,55 @@ export function WorkSection() {
   return (
     <section
       id="work"
-      // bg-zinc-100 is CRITICAL here.
-      // It provides the "Aluminum Surface" color that allows the
-      // ProjectCard's white shadows to be visible, creating the "Inset" 3D effect.
-      className="section-padding bg-zinc-100 relative overflow-hidden"
+      className="relative overflow-hidden"
+      style={{
+        paddingTop: 'clamp(3rem, 8vw, 5rem)',
+        paddingBottom: 'clamp(3rem, 8vw, 5rem)',
+        backgroundColor: '#F5F5F4', // Warm neutral background
+      }}
       aria-label="Selected work and portfolio"
     >
       <div className="container-main">
         <AnimatedSection>
-          {/* Inset pill frame for HEADER REGION ONLY (title + description + filters) */}
+          {/* Card-like surface - curated archive aesthetic */}
           <div
             style={{
-              padding: 'clamp(2rem, 4vw, 3rem)',
-              borderRadius: '30px', // Reduced curvature (was 60px)
-              backgroundColor: '#F3F4F6',
+              padding: 'clamp(1.75rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.5rem)',
+              borderRadius: '24px', // Soft corner radius
+              backgroundColor: '#FAFAF9', // Slightly warmer than pure white
+              // Subtle vertical shadow - long and diffused
               boxShadow: `
-                inset 6px 6px 12px rgba(163, 177, 198, 0.6),
-                inset -6px -6px 12px rgba(255, 255, 255, 1.0)
+                0 12px 32px -8px rgba(0, 0, 0, 0.06),
+                0 4px 16px -4px rgba(0, 0, 0, 0.04)
               `,
-              marginBottom: 'var(--space-12)',
+              marginBottom: 'clamp(2.5rem, 6vw, 4rem)',
             }}
           >
             {/* HEADER GROUP */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-              {/* Left: Title & Brief */}
+            <div className="flex flex-col gap-8 md:gap-10">
+              {/* Title & Description */}
               <div className="max-w-2xl">
-                <SectionHeader accentColor="#B6CFFF">
-                  Selected Work
-                </SectionHeader>
+                {/* Heading - light weight, increased letter spacing */}
+                <motion.h2
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.7,
+                    ease: EASE_OUT_EXPO,
+                  }}
+                  style={{
+                    fontSize: 'clamp(24px, 4vw, 32px)',
+                    fontWeight: 300, // Light weight
+                    letterSpacing: '0.08em', // Slightly increased
+                    color: '#1A1A19',
+                    marginBottom: '16px',
+                  }}
+                >
+                  SYSTEMS IN PRACTICE
+                </motion.h2>
 
+                {/* Description - short, declarative, skimmable */}
                 <motion.p
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -77,31 +97,44 @@ export function WorkSection() {
                     ease: EASE_OUT_EXPO,
                     delay: 0.1,
                   }}
-                  className="mt-6 text-body-medium"
-                  style={{ opacity: 0.7 }}
+                  style={{
+                    fontSize: 'clamp(16px, 2.5vw, 18px)',
+                    lineHeight: '1.7', // Generous line height for mobile comfort
+                    color: '#4A4A48',
+                    fontWeight: 400,
+                  }}
                 >
-                  A collection of recent projects exploring{" "}
-                  <span style={{ opacity: 1, fontWeight: 500 }}>
+                  A focused set of projects exploring{' '}
+                  <span style={{ fontWeight: 500, color: '#2D2D2C' }}>
                     system architecture
                   </span>
                   , interface patterns, and digital narratives.
                 </motion.p>
               </div>
 
-              {/* Right: Filters (Aligned to bottom of header on desktop) */}
-              <div className="w-full md:w-auto">
+              {/* Filters - designed as lenses */}
+              <div className="w-full">
                 <ProjectFilters
                   categories={DERIVED_CATEGORIES}
                   selectedCategory={selectedCategory}
                   onCategoryChange={setSelectedCategory}
                 />
               </div>
+
+              {/* Subtle divider - suggests continuation */}
+              <div 
+                style={{
+                  height: '1px',
+                  background: 'linear-gradient(to right, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.03) 50%, rgba(0,0,0,0) 100%)',
+                  marginTop: '8px',
+                }}
+                aria-hidden="true"
+              />
             </div>
           </div>
         </AnimatedSection>
 
-        {/* THE GRID - Outside the inset pill */}
-        {/* We pass the filtered list. The Grid component handles the layout. */}
+        {/* THE GRID - Below the card */}
         <ProjectGrid
           projects={filteredProjects}
           onProjectClick={setSelectedProject}

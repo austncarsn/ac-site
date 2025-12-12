@@ -99,9 +99,6 @@ export function HeroSection() {
   const title = 'AUSTIN CARSON';
 
   // State management
-  const [letterColors, setLetterColors] = useState<string[]>(
-    Array(title.length).fill('#000000')
-  );
   const [isMobile, setIsMobile] = useState<boolean>(
     typeof window !== 'undefined' && window.innerWidth < 1024
   );
@@ -123,21 +120,6 @@ export function HeroSection() {
     [isMobile, prefersReducedMotion, duration]
   );
 
-  // Memoize color getter function
-  const getRandomColor = useCallback((currentColor: string): string => {
-    const availableColors = VIBRANT_COLORS.filter(c => c !== currentColor);
-    return availableColors[Math.floor(Math.random() * availableColors.length)];
-  }, []);
-
-  // Handle letter click with optimized state update
-  const handleLetterClick = useCallback((index: number) => {
-    setLetterColors(prevColors => {
-      const newColors = [...prevColors];
-      newColors[index] = getRandomColor(prevColors[index]);
-      return newColors;
-    });
-  }, [getRandomColor]);
-
   // Handle scroll to work section
   const scrollToWork = useCallback(() => {
     const workSection = document.getElementById('work');
@@ -151,7 +133,8 @@ export function HeroSection() {
       className="relative" 
       style={{ 
         paddingTop: 'var(--header-height)',
-        paddingBottom: 'var(--space-20)',
+        paddingBottom: isMobile ? 'var(--space-16)' : 'var(--space-20)',
+        backgroundColor: '#FAFAF9', // Warm off-white background
       }}
       aria-label="Hero section"
     >
@@ -163,106 +146,85 @@ export function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-2 w-full"
           style={{ 
             gap: 'clamp(var(--space-12), 5vw, var(--space-16))',
-            paddingTop: 'clamp(var(--space-12), 5vw, var(--space-20))',
-            paddingBottom: 'clamp(var(--space-12), 5vw, var(--space-20))',
+            paddingTop: isMobile ? '0' : 'clamp(var(--space-12), 5vw, var(--space-20))',
+            paddingBottom: isMobile ? '0' : 'clamp(var(--space-12), 5vw, var(--space-20))',
           }}
         >
           {/* Hero Content */}
-          <div className="flex flex-col justify-center">
+          <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left" style={{
+            paddingLeft: isMobile ? 'var(--space-6)' : '0',
+            paddingRight: isMobile ? 'var(--space-6)' : '0',
+          }}>
             <motion.h1 
               variants={animationVariants.content}
               className="break-words"
               style={{ 
-                marginBottom: '24px',
+                marginBottom: isMobile ? '32px' : '24px',
                 willChange: 'opacity, transform',
                 transform: 'translateZ(0)',
+                letterSpacing: isMobile ? '0.18em' : '0.15em', // Wide letter-spacing for editorial feel
+                color: '#1A1A19', // Softened dark, not pure black
+                fontWeight: 300, // Ultra-light weight
               }}
             >
-              {title.split('').map((letter, index) => (
-                <motion.span
-                  key={`letter-${index}`}
-                  className={letter === ' ' ? '' : 'cursor-pointer transition-colors duration-300'}
-                  style={{ 
-                    color: letterColors[index],
-                    display: 'inline-block',
-                    whiteSpace: letter === ' ' ? 'pre' : 'normal',
-                  }}
-                  animate={{ color: letterColors[index] }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  onClick={letter !== ' ' ? () => handleLetterClick(index) : undefined}
-                  role={letter !== ' ' ? 'button' : undefined}
-                  tabIndex={letter !== ' ' ? 0 : undefined}
-                  onKeyDown={letter !== ' ' ? (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      e.preventDefault();
-                      handleLetterClick(index);
-                    }
-                  } : undefined}
-                  aria-label={letter !== ' ' ? `Letter ${letter} - click to change color` : undefined}
-                >
-                  {letter === ' ' ? '\u00A0' : letter}
-                </motion.span>
-              ))}
+              {title}
             </motion.h1>
             
-            {/* Subheading - larger than body */}
+            {/* Value statement - concise and clear */}
             <motion.p
               variants={animationVariants.subheading}
               className="max-w-[620px]"
               style={{ 
-                marginBottom: '16px',
-                fontSize: isMobile ? '20px' : '24px',
-                lineHeight: isMobile ? '30px' : '36px',
+                marginBottom: isMobile ? '48px' : '32px',
+                fontSize: isMobile ? '18px' : '22px',
+                lineHeight: isMobile ? '28px' : '34px',
                 fontWeight: 400,
-                letterSpacing: '-0.01em',
+                letterSpacing: '-0.005em',
                 willChange: 'opacity, transform',
                 transform: 'translateZ(0)',
+                color: '#2D2D2C', // Warm dark tone
+                maxWidth: isMobile ? '320px' : '620px', // Tighter on mobile
               }}
             >
-              Interface systems architect building production-grade design systems for teams that care about detail.
+              Building production-ready design systems with technical precision and editorial clarity.
             </motion.p>
 
-            {/* Supporting line - smaller text */}
-            <motion.p
-              variants={animationVariants.supporting}
-              className="max-w-[620px]"
-              style={{ 
-                marginBottom: '32px',
-                opacity: 0.6,
-                fontSize: isMobile ? '16px' : '18px',
-                lineHeight: isMobile ? '24px' : '28px',
-                fontWeight: 400,
-                letterSpacing: '-0.01em',
-                willChange: 'opacity, transform',
-                transform: 'translateZ(0)',
-              }}
-            >
-              Product designer & front-end developer combining technical precision with creative mischief.
-            </motion.p>
+            {/* Circle grid - visual anchor */}
+            <div className="lg:hidden w-full flex justify-center" style={{ marginBottom: isMobile ? '48px' : '32px' }}>
+              <ColorBlockGrid isMobile={isMobile} />
+            </div>
 
-            <motion.button
-              variants={animationVariants.button}
-              onClick={scrollToWork}
-              whileHover={!isMobile ? { opacity: 0.6 } : undefined}
-              whileTap={{ scale: 0.98, opacity: 0.6 }}
-              transition={{ duration: isMobile ? 0.15 : 0.2, ease: EASE_OUT_QUART }}
-              className="border-b border-foreground self-start cursor-pointer touch-manipulation transition-opacity duration-200"
-              style={{ 
-                paddingBottom: 'var(--space-2)',
-                fontSize: '17px',
-                fontWeight: 400,
-                letterSpacing: '-0.01em',
-                WebkitTapHighlightColor: 'transparent',
-                willChange: 'opacity, transform',
-              }}
-              aria-label="Scroll to view selected work section"
-            >
-              View selected work
-            </motion.button>
+            {/* Subtle CTA - desktop only or very minimal on mobile */}
+            {!isMobile && (
+              <motion.button
+                variants={animationVariants.button}
+                onClick={scrollToWork}
+                whileHover={{ opacity: 0.5 }}
+                whileTap={{ scale: 0.98, opacity: 0.5 }}
+                transition={{ duration: 0.2, ease: EASE_OUT_QUART }}
+                className="self-center lg:self-start cursor-pointer touch-manipulation transition-opacity duration-200"
+                style={{ 
+                  fontSize: '15px',
+                  fontWeight: 400,
+                  letterSpacing: '0.02em',
+                  WebkitTapHighlightColor: 'transparent',
+                  willChange: 'opacity, transform',
+                  color: '#6B7280', // Muted gray
+                  opacity: 0.6,
+                  borderBottom: '1px solid currentColor',
+                  paddingBottom: '2px',
+                }}
+                aria-label="Scroll to view selected work section"
+              >
+                View work
+              </motion.button>
+            )}
           </div>
 
-          {/* Color Block Grid */}
-          <ColorBlockGrid isMobile={isMobile} />
+          {/* Color Block Grid - Desktop only (mobile shows inline above) */}
+          <div className="hidden lg:flex lg:items-center lg:justify-center">
+            <ColorBlockGrid isMobile={isMobile} />
+          </div>
         </motion.div>
       </div>
     </section>
