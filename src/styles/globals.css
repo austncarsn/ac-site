@@ -106,6 +106,8 @@
     scroll-behavior: smooth;
     /* Prevent horizontal scroll on mobile */
     overflow-x: hidden;
+    /* Account for fixed header when scrolling to anchors */
+    scroll-padding-top: 84px; /* 68px header + 16px breathing room */
   }
   
   @media (prefers-reduced-motion: reduce) {

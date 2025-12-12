@@ -29,18 +29,18 @@ const INPUT_CLASS = [
   'duration-200',
   'ease-out',
   'font-smooth',
-  'rounded-lg', // Rounded corners for the well
+  'rounded-xl', // Slightly larger radius for precision
   'border-0', // Remove default border
-  'px-4', // Horizontal padding
+  'px-5', // Increased horizontal padding
   'focus:outline-none', // Remove default focus ring
 ].join(' ');
 
-// Inset style object for inputs (neumorphic/soft UI)
+// Inset style object for inputs (carved recess effect)
 const INSET_STYLE = {
-  backgroundColor: '#F3F4F6', // Light gray matching page background
+  backgroundColor: '#EFEFEF', // Slightly darker than container for depth
   boxShadow: `
-    inset 2px 2px 5px rgba(0, 0, 0, 0.1),
-    inset -2px -2px 5px rgba(255, 255, 255, 0.7)
+    inset 2px 2px 6px rgba(0, 0, 0, 0.08),
+    inset -1px -1px 3px rgba(255, 255, 255, 0.5)
   `,
   fontSize: '15px',
   fontWeight: 400,
@@ -48,12 +48,12 @@ const INSET_STYLE = {
   lineHeight: '1.6',
 } as const;
 
-// Focus state - "pops out" when active
+// Focus state - subtle lift with accent glow
 const FOCUS_STYLE = {
   backgroundColor: '#FFFFFF',
   boxShadow: `
-    0px 2px 4px rgba(0, 0, 0, 0.1),
-    0px 0px 0px 2px #B6CFFF
+    inset 0px 0px 0px 1px #B6CFFF,
+    0px 2px 8px rgba(182, 207, 255, 0.15)
   `,
   fontSize: '15px',
   fontWeight: 400,
@@ -97,11 +97,12 @@ export function FormField(props: FormFieldProps) {
         htmlFor={id} 
         className="text-meta block" 
         style={{ 
-          marginBottom: 'var(--space-3)',
-          fontSize: '12px',
+          marginBottom: '0.625rem', // Increased from var(--space-3) for more breathing room
+          fontSize: '11px',
           fontWeight: 400,
-          opacity: 0.5,
-          letterSpacing: '0.02em',
+          opacity: 0.42, // Slightly lower for refinement
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase' as const,
         }}
       >
         {label}

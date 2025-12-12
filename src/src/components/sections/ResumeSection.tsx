@@ -349,7 +349,7 @@ function DownloadButton({
   return (
     <button
       onClick={onClick}
-      className={`inline-flex items-center gap-3 text-white transition-all rounded-[6px] no-highlight cursor-pointer ${className}`}
+      className={`inline-flex items-center gap-3 text-white transition-all rounded-[16px] no-highlight cursor-pointer ${className}`}
       style={{
         padding: "var(--space-4) var(--space-6)",
         fontSize: "17px",
@@ -697,26 +697,54 @@ export function ResumeSection() {
           }}
         >
           {/* Header */}
-          <header style={{ marginBottom: "var(--space-12)" }}>
-            <h1 style={{ marginBottom: "var(--space-2)" }}>
+          <header style={{ marginBottom: 'clamp(2.5rem, 5vw, 3.5rem)' }}>
+            {/* Name - Primary anchor */}
+            <h1 
+              style={{ 
+                marginBottom: '0.375rem', // Tighter spacing to role
+                fontSize: 'clamp(2rem, 5vw, 2.75rem)',
+                fontWeight: 400,
+                letterSpacing: '-0.02em',
+                lineHeight: 1.1,
+                color: '#1A1A19',
+              }}
+            >
               {RESUME_DATA.name}
             </h1>
+            
+            {/* Role - Secondary descriptor */}
             <h2
               style={{
-                marginBottom: "var(--space-6)",
-                opacity: 0.8,
+                marginBottom: 'clamp(1rem, 3vw, 1.25rem)', // Reduced from var(--space-6)
+                fontSize: 'clamp(16px, 2.5vw, 18px)',
+                fontWeight: 400,
+                letterSpacing: '0.01em',
+                color: '#52525B', // Lower contrast
+                lineHeight: 1.4,
               }}
             >
               {RESUME_DATA.title}
             </h2>
-            <address className="flex flex-wrap items-center gap-4 md:gap-6 not-italic">
-              <span className="flex items-center gap-2 text-meta">
-                <MapPin size={14} aria-hidden="true" />
+            
+            {/* Contact Info - Metadata treatment */}
+            <address 
+              className="flex flex-wrap items-center not-italic"
+              style={{
+                gap: 'clamp(0.75rem, 2vw, 1.25rem)',
+                fontSize: '13px',
+                color: '#71717A',
+                letterSpacing: '0.01em',
+                lineHeight: 1.5,
+              }}
+            >
+              <span className="flex items-center gap-1.5">
+                <MapPin size={13} aria-hidden="true" style={{ opacity: 0.6 }} />
                 {RESUME_DATA.location}
               </span>
               <a
                 href={`mailto:${RESUME_DATA.email}`}
-                className="no-highlight text-meta hover:opacity-100 transition-opacity"
+                className="no-highlight transition-colors hover:text-[#1A1A19]"
+                style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
               >
                 {RESUME_DATA.email}
               </a>
@@ -724,27 +752,35 @@ export function ResumeSection() {
                 href={RESUME_DATA.linkedinUrl}
                 rel="noopener noreferrer nofollow"
                 target="_blank"
-                className="no-highlight text-meta hover:opacity-100 transition-opacity"
+                className="no-highlight transition-colors hover:text-[#1A1A19]"
+                style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
               >
                 {RESUME_DATA.linkedin}
               </a>
               <a
                 href={`tel:${RESUME_DATA.phoneRaw}`}
-                className="no-highlight text-meta hover:opacity-100 transition-opacity"
+                className="no-highlight transition-colors hover:text-[#1A1A19]"
+                style={{ minHeight: '44px', display: 'flex', alignItems: 'center' }}
               >
                 {RESUME_DATA.phone}
               </a>
             </address>
           </header>
 
-          <hr
-            className="border-t border-border"
-            style={{ marginBottom: "var(--space-12)" }}
+          {/* Visual transition - Subtle divider */}
+          <div
+            style={{
+              width: '48px',
+              height: '1px',
+              backgroundColor: '#B6CFFF',
+              opacity: 0.4,
+              marginBottom: 'clamp(2rem, 4vw, 2.5rem)',
+            }}
           />
 
-          {/* Summary */}
+          {/* Summary - Professional statement */}
           <motion.section
-            style={{ marginBottom: "var(--space-16)" }}
+            style={{ marginBottom: 'clamp(3rem, 6vw, 4rem)' }}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -757,8 +793,14 @@ export function ResumeSection() {
             aria-label="Professional Summary"
           >
             <p
-              className="text-body-medium"
-              style={{ opacity: 0.85 }}
+              style={{ 
+                fontSize: 'clamp(15px, 2.2vw, 17px)',
+                lineHeight: '1.8', // Generous line height
+                color: '#52525B',
+                maxWidth: '700px',
+                fontWeight: 400,
+                letterSpacing: '0.005em',
+              }}
             >
               {RESUME_DATA.summary}
             </p>

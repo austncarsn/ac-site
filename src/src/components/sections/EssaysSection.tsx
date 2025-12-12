@@ -177,59 +177,43 @@ export function EssaysSection() {
                   <motion.button
                     key={index}
                     onClick={() => setSelectedEssay(essay)}
-                    className="group relative text-left p-4 rounded-xl transition-all"
+                    className="group relative text-left px-4 py-3 transition-all"
                     style={{
-                      backgroundColor: isActive 
-                        ? 'rgba(39, 39, 42, 0.5)' // zinc-800/50
-                        : 'transparent',
-                      border: `1px solid ${isActive 
-                        ? 'rgba(255, 255, 255, 0.05)' 
-                        : 'transparent'}`,
-                      boxShadow: isActive 
-                        ? 'inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-                        : 'none',
+                      backgroundColor: 'transparent', // Flatten - no card background
+                      border: 'none', // Remove borders entirely
+                      borderLeft: isActive 
+                        ? '2px solid rgba(182, 207, 255, 0.3)' // Subtle accent line
+                        : '2px solid transparent',
+                      paddingLeft: isActive ? '14px' : '16px', // Adjust for border
                     }}
                     whileHover={{
-                      backgroundColor: isActive 
-                        ? 'rgba(39, 39, 42, 0.5)'
-                        : 'rgba(24, 24, 27, 0.5)', // zinc-900/50
-                      borderColor: 'rgba(255, 255, 255, 0.05)',
+                      backgroundColor: 'rgba(24, 24, 27, 0.3)', // Very subtle hover
                     }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="flex justify-between items-baseline mb-1">
-                      <span 
-                        className="uppercase transition-colors"
-                        style={{
-                          fontFamily: 'monospace',
-                          fontSize: '10px',
-                          color: isActive ? '#B6CFFF' : '#52525b', // pastel blue or zinc-600
-                          letterSpacing: '0.1em',
-                        }}
-                      >
-                        {essay.dateShort}
-                      </span>
-                      {isActive && (
-                        <motion.div
-                          className="rounded-full"
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          style={{
-                            width: '6px',
-                            height: '6px',
-                            backgroundColor: '#B6CFFF', // pastel blue
-                            boxShadow: '0 0 8px rgba(182, 207, 255, 0.6)',
-                          }}
-                        />
-                      )}
-                    </div>
+                    {/* Date - Low contrast metadata */}
                     <span 
-                      className="block transition-colors leading-relaxed"
+                      className="block mb-1 uppercase transition-colors"
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: '9px', // Smaller
+                        color: isActive ? '#71717a' : '#3f3f46', // zinc-500 or zinc-700 - very subtle
+                        letterSpacing: '0.08em',
+                        fontWeight: 300,
+                      }}
+                    >
+                      {essay.dateShort}
+                    </span>
+                    
+                    {/* Title - Primary identifier */}
+                    <span 
+                      className="block transition-colors"
                       style={{
                         fontSize: '14px',
-                        fontWeight: isActive ? 500 : 300,
-                        color: isActive ? '#ffffff' : '#71717a', // white or zinc-500
-                        lineHeight: '1.6',
+                        fontWeight: isActive ? 400 : 300, // Typography-based emphasis
+                        color: isActive ? '#e4e4e7' : '#52525b', // zinc-200 or zinc-600
+                        lineHeight: '1.5',
+                        letterSpacing: '0.01em',
                       }}
                     >
                       {essay.title}
@@ -243,7 +227,7 @@ export function EssaysSection() {
           {/* RIGHT COLUMN - The Reading Pane (Content) */}
           <motion.div 
             key={selectedEssay.title}
-            className="p-10 md:p-14 relative"
+            className="p-6 md:p-12 lg:p-14 relative"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
@@ -262,19 +246,20 @@ export function EssaysSection() {
 
             {/* Content */}
             <div className="relative z-10 max-w-2xl">
-              {/* Tags */}
-              <div className="flex gap-3 mb-6">
+              {/* Tags - Visually secondary */}
+              <div className="flex gap-2 mb-3">
                 {selectedEssay.tags.map((tag, i) => (
                   <span
                     key={i}
                     className="px-2 py-0.5 rounded"
                     style={{
-                      fontSize: '10px',
+                      fontSize: '9px', // Smaller
                       fontFamily: 'monospace',
-                      border: '1px solid #3f3f46', // zinc-700
-                      color: '#a1a1aa', // zinc-400
-                      backgroundColor: 'rgba(39, 39, 42, 0.5)', // zinc-800/50
+                      border: '1px solid rgba(63, 63, 70, 0.4)', // Softer border
+                      color: '#71717a', // More subtle - zinc-500
+                      backgroundColor: 'rgba(39, 39, 42, 0.3)', // Less prominent
                       letterSpacing: '0.05em',
+                      opacity: 0.7, // Additional subtlety
                     }}
                   >
                     {tag}
@@ -282,30 +267,30 @@ export function EssaysSection() {
                 ))}
               </div>
 
-              {/* Title */}
+              {/* Title - Clear anchor */}
               <h2 
-                className="mb-8"
+                className="mb-12"
                 style={{
                   fontSize: 'clamp(28px, 5vw, 40px)',
                   color: '#ffffff',
                   fontWeight: 300,
-                  lineHeight: '1.2',
-                  letterSpacing: '0.02em',
+                  lineHeight: '1.3', // Slightly more relaxed
+                  letterSpacing: '0.01em',
                 }}
               >
                 {selectedEssay.title}
               </h2>
 
-              {/* Content */}
-              <div className="space-y-6">
+              {/* Content - Generous spacing for long-form reading */}
+              <div className="space-y-8">
                 {selectedEssay.content.map((paragraph, i) => (
                   <p 
                     key={i}
                     style={{
                       fontSize: '16px',
                       fontWeight: 300,
-                      color: '#a1a1aa', // zinc-400
-                      lineHeight: '1.8',
+                      color: '#d4d4d8', // Increased contrast - zinc-300 instead of zinc-400
+                      lineHeight: '2.0', // Generous line height for reading
                       letterSpacing: '0.01em',
                     }}
                   >

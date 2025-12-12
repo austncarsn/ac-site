@@ -163,8 +163,8 @@ export const ProjectCard = memo(function ProjectCard({
             }}
             transition={{ duration: 0.4, ease: EASE_PHYSICS }}
           >
-            {/* A. IMAGE AREA */}
-            <div className="relative aspect-[1/1.3] bg-zinc-100 overflow-hidden">
+            {/* A. IMAGE AREA - Reduced height for better balance */}
+            <div className="relative aspect-[1/1.15] bg-zinc-100 overflow-hidden">
               {/* Image Gradient / Preview */}
               <div
                 className="w-full h-full flex items-center justify-center transition-transform duration-700"
@@ -191,11 +191,17 @@ export const ProjectCard = memo(function ProjectCard({
                       : `rgba(${rgbColor}, 0.1)`,
                 }}
               >
-                {/* Category Label (Fades out on hover to reduce noise) */}
+                {/* Category Label - Caption style, whispers classification */}
                 <motion.span
-                  className="font-mono uppercase text-zinc-500/80 bg-white/50 px-2 py-1 rounded backdrop-blur-sm"
-                  style={{ fontSize: '10px', letterSpacing: '0.2em', fontWeight: 400 }}
-                  animate={{ opacity: isActive ? 0 : 1 }}
+                  className="font-mono uppercase bg-white/40 px-2.5 py-1 rounded backdrop-blur-sm"
+                  style={{ 
+                    fontSize: '9px', 
+                    letterSpacing: '0.08em', 
+                    fontWeight: 400,
+                    color: '#71717a', // Softer zinc-500
+                    opacity: 0.75, // Reduced opacity for whisper effect
+                  }}
+                  animate={{ opacity: isActive ? 0 : 0.75 }}
                 >
                   {project.category}
                 </motion.span>
@@ -216,33 +222,52 @@ export const ProjectCard = memo(function ProjectCard({
             <div className="p-6 md:p-7 relative z-10 bg-white flex-grow flex flex-col justify-between">
               <div>
                 <div className="flex items-baseline justify-between mb-2">
-                  <motion.h3
-                    className="text-xl font-medium tracking-tight text-zinc-900"
-                    animate={{
-                      color: isActive
-                        ? `rgb(${rgbColor})`
-                        : "#18181b",
-                    }}
-                  >
-                    {project.name}
-                  </motion.h3>
+                  <div className="relative">
+                    <motion.h3
+                      className="tracking-tight"
+                      style={{
+                        fontSize: '20px',
+                        fontWeight: 500, // Increased from medium (450) for more confidence
+                        color: '#18181b',
+                      }}
+                      animate={{
+                        color: isActive
+                          ? `rgb(${rgbColor})`
+                          : "#18181b",
+                      }}
+                    >
+                      {project.name}
+                    </motion.h3>
+                    {/* Subtle underline affordance on hover/focus */}
+                    <motion.div
+                      className="absolute -bottom-0.5 left-0 right-0 h-px"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: isActive ? 1 : 0 }}
+                      transition={{ duration: 0.3, ease: EASE_PHYSICS }}
+                      style={{ 
+                        backgroundColor: `rgb(${rgbColor})`,
+                        transformOrigin: 'left',
+                      }}
+                    />
+                  </div>
                   <span className="font-mono text-[10px] text-zinc-400">
                     {project.year}
                   </span>
                 </div>
 
-                <p className="text-sm text-zinc-500 line-clamp-2 leading-relaxed">
+                <p className="text-sm text-zinc-500 leading-relaxed">
                   {project.description ||
                     `An exploration in ${project.category.toLowerCase()} systems.`}
                 </p>
               </div>
 
-              {/* Tags */}
+              {/* Tags - Reduced to 2 max with lower opacity */}
               <div className="flex flex-wrap gap-2 mt-4">
-                {project.tags?.slice(0, 3).map((tag) => (
+                {project.tags?.slice(0, 2).map((tag) => (
                   <span
                     key={tag}
                     className="text-[10px] font-medium px-2 py-1 rounded-md bg-zinc-50 border border-zinc-100 text-zinc-500"
+                    style={{ opacity: 0.8 }}
                   >
                     {tag}
                   </span>

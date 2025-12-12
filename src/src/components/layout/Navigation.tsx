@@ -59,17 +59,12 @@ export function Navigation() {
     
     if (href === '#') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveSection('');
     } else {
       const element = document.querySelector(href);
       if (element) {
-        const offset = 68;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
         });
       }
     }
@@ -180,8 +175,9 @@ export function Navigation() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.25"
                 strokeLinecap="round"
+                style={{ opacity: 0.7 }}
               >
                 {mobileMenuOpen ? (
                   <>
@@ -212,117 +208,81 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ 
-                duration: 0.25,
+                duration: 0.2,
                 ease: [0.25, 0.1, 0.25, 1],
               }}
               onClick={() => setMobileMenuOpen(false)}
               style={{
                 willChange: 'opacity',
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden',
-                transform: 'translateZ(0)',
-                WebkitTransform: 'translateZ(0)',
               }}
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel - Table of Contents */}
             <motion.div
-              className="fixed left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border z-40 md:hidden"
+              className="fixed left-0 right-0 bg-background/95 backdrop-blur-xl z-40 md:hidden"
               style={{ 
                 top: 'var(--header-height)',
-                willChange: 'opacity, transform',
-                backfaceVisibility: 'hidden',
-                WebkitBackfaceVisibility: 'hidden',
-                transform: 'translateZ(0)',
-                WebkitTransform: 'translateZ(0)',
+                borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+                willChange: 'opacity',
               }}
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ 
-                duration: 0.3,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.2,
+                ease: [0.25, 0.1, 0.25, 1],
               }}
             >
-              <div className="container-main" style={{ paddingTop: 'var(--space-12)', paddingBottom: 'var(--space-12)' }}>
-                <nav className="flex flex-col" style={{ gap: 'var(--space-1)' }}>
+              <div className="container-main" style={{ paddingTop: 'clamp(2rem, 5vw, 3rem)', paddingBottom: 'clamp(2rem, 5vw, 3rem)' }}>
+                <nav className="flex flex-col" style={{ gap: 0 }}>
                   {navItems.map((item, index) => {
                     const sectionId = item.href.substring(1);
                     const isActive = activeSection === sectionId;
                     
                     return (
-                      <motion.a
+                      <button
                         key={item.label}
-                        href={item.href}
-                        onClick={(e) => handleNavClick(e, item.href)}
-                        initial={{ opacity: 0, y: -8 }}
-                        animate={{ opacity: isActive ? 1 : 0.5, y: 0 }}
-                        exit={{ opacity: 0, y: -4 }}
-                        transition={{ 
-                          delay: index * 0.05,
-                          duration: 0.35,
-                          ease: [0.16, 1, 0.3, 1],
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          
+                          setTimeout(() => {
+                            const element = document.querySelector(item.href);
+                            if (element) {
+                              element.scrollIntoView({ 
+                                behavior: 'smooth',
+                                block: 'start'
+                              });
+                            }
+                          }, 250);
                         }}
-                        whileTap={{ scale: 0.98, opacity: 0.7 }}
-                        className="flex items-center justify-between hover:opacity-100 transition-all group touch-manipulation border-b border-border/30"
+                        className="touch-manipulation transition-all active:opacity-60 text-left"
                         style={{
-                          fontSize: '24px',
-                          fontWeight: 300,
-                          letterSpacing: '0.05em',
+                          fontSize: isActive ? '22px' : '20px',
+                          fontWeight: isActive ? 400 : 300,
+                          letterSpacing: isActive ? '0.08em' : '0.06em',
                           textTransform: 'uppercase',
-                          paddingTop: 'var(--space-6)',
-                          paddingBottom: 'var(--space-6)',
-                          transitionDuration: '0.25s',
-                          transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                          color: isActive ? '#1A1A19' : '#71717A',
+                          paddingTop: 'clamp(1rem, 3vw, 1.25rem)',
+                          paddingBottom: 'clamp(1rem, 3vw, 1.25rem)',
+                          paddingLeft: isActive ? '0.5rem' : '0',
+                          borderBottom: index < navItems.length - 1 ? '1px solid rgba(0, 0, 0, 0.04)' : 'none',
+                          transitionProperty: 'all',
+                          transitionDuration: '0.2s',
+                          transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
                           WebkitTapHighlightColor: 'transparent',
-                          willChange: 'opacity, transform',
-                          backfaceVisibility: 'hidden',
-                          WebkitBackfaceVisibility: 'hidden',
+                          minHeight: '56px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          cursor: 'pointer',
+                          userSelect: 'none',
+                          WebkitUserSelect: 'none',
+                          border: 'none',
+                          background: 'none',
+                          width: '100%',
                         }}
                       >
-                        <span>{item.label}</span>
-                        <div className="flex items-center" style={{ gap: 'var(--space-4)' }}>
-                          {isActive && (
-                            <motion.div
-                              initial={{ scale: 0 }}
-                              animate={{ scale: 1 }}
-                              transition={{ 
-                                delay: index * 0.05 + 0.15,
-                                duration: 0.3,
-                                ease: [0.16, 1, 0.3, 1],
-                              }}
-                              className="rounded-full bg-brand-purple"
-                              style={{ 
-                                width: '6px', 
-                                height: '6px',
-                              }}
-                            />
-                          )}
-                          <motion.svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 16 16"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            className="opacity-0 group-hover:opacity-30 transition-opacity"
-                            initial={{ x: -4, opacity: 0 }}
-                            animate={{ x: 0, opacity: 0 }}
-                            transition={{
-                              delay: index * 0.05 + 0.1,
-                              duration: 0.3,
-                              ease: [0.16, 1, 0.3, 1],
-                            }}
-                            style={{ 
-                              transitionDuration: '0.25s',
-                              transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                            }}
-                          >
-                            <path d="M6 12L10 8L6 4" />
-                          </motion.svg>
-                        </div>
-                      </motion.a>
+                        {item.label}
+                      </button>
                     );
                   })}
                 </nav>

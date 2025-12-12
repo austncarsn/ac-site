@@ -92,13 +92,23 @@ export function ContactSection() {
         {/* Large inset pill frame containing entire section */}
         <div
           style={{
-            padding: 'clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem)',
-            borderRadius: '60px', // Large pill shape
-            backgroundColor: '#F3F4F6',
+            // Vertical padding bias - more at top for visual lift
+            paddingTop: 'clamp(3rem, 6vw, 4.5rem)',
+            paddingBottom: 'clamp(2.25rem, 4.5vw, 3.5rem)',
+            paddingLeft: 'clamp(2rem, 4vw, 3.5rem)',
+            paddingRight: 'clamp(2rem, 4vw, 3.5rem)',
+            borderRadius: '60px', // Large outer radius
+            // More neutral background - reduced saturation
+            backgroundColor: '#F8F8F8',
+            // Asymmetrical shadow - stronger at top edge, light source from above
             boxShadow: `
-              inset 8px 8px 16px rgba(163, 177, 198, 0.7),
-              inset -8px -8px 16px rgba(255, 255, 255, 1.0)
+              0px -2px 12px rgba(163, 177, 198, 0.25),
+              0px 4px 8px rgba(163, 177, 198, 0.08),
+              inset 0px 1px 0px rgba(255, 255, 255, 0.6),
+              inset 0px 0px 0px 1px rgba(163, 177, 198, 0.08)
             `,
+            // Create subtle edge definition
+            position: 'relative' as const,
           }}
         >
           <SectionHeader accentColor="#B6CFFF">Contact</SectionHeader>
