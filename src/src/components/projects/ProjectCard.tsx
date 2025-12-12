@@ -227,7 +227,7 @@ export const ProjectCard = memo(function ProjectCard({
                       className="tracking-tight"
                       style={{
                         fontSize: '20px',
-                        fontWeight: 500, // Increased from medium (450) for more confidence
+                        fontWeight: 300, // Light weight to match headers
                         color: '#18181b',
                       }}
                       animate={{

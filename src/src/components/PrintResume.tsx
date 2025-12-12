@@ -45,7 +45,7 @@ export function PrintResume() {
             font-size: 13px;
             line-height: 18px;
             margin-bottom: 3px;
-            font-weight: 600;
+            font-weight: 300;
           }
           
           h4 {
@@ -141,7 +141,7 @@ export function PrintResume() {
             font-size: 13px;
             line-height: 18px;
             margin-bottom: 3px;
-            font-weight: 600;
+            font-weight: 300;
           }
           
           .job-meta {
@@ -171,7 +171,7 @@ export function PrintResume() {
             font-size: 13px;
             line-height: 18px;
             margin-bottom: 4px;
-            font-weight: 600;
+            font-weight: 300;
           }
           
           .project-meta {

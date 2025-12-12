@@ -255,7 +255,12 @@ function JobEntry({
         position: "relative",
       }}
     >
-      <h3 style={{ marginBottom: "var(--space-2)", position: "relative", zIndex: 1 }}>
+      <h3 style={{ 
+        marginBottom: "var(--space-2)", 
+        position: "relative", 
+        zIndex: 1,
+        fontWeight: 300, // Match section header weight
+      }}>
         {title}
       </h3>
       <p
@@ -301,7 +306,12 @@ function ProjectEntry({
         position: "relative",
       }}
     >
-      <h3 style={{ marginBottom: "var(--space-3)", position: "relative", zIndex: 1 }}>
+      <h3 style={{ 
+        marginBottom: "var(--space-3)", 
+        position: "relative", 
+        zIndex: 1,
+        fontWeight: 300, // Match section header weight
+      }}>
         {title}
       </h3>
       <p
@@ -886,7 +896,7 @@ export function ResumeSection() {
                   className="text-[44px] leading-[52px]"
                   style={{
                     marginBottom: "var(--space-8)",
-                    fontWeight: 400,
+                    fontWeight: 300, // Match section header weight
                     letterSpacing: "-0.02em",
                   }}
                   id="education-heading"
@@ -895,7 +905,10 @@ export function ResumeSection() {
                 </h2>
                 <div>
                   <h3
-                    style={{ marginBottom: "var(--space-2)" }}
+                    style={{ 
+                      marginBottom: "var(--space-2)",
+                      fontWeight: 300, // Match section header weight
+                    }}
                   >
                     {RESUME_DATA.education.degree}
                   </h3>

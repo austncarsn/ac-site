@@ -57,7 +57,7 @@ export function Footer() {
               fontSize: 'clamp(14px, 2vw, 15px)',
               color: '#3f3f46', // zinc-700 - much stronger contrast
               letterSpacing: '0.01em',
-              fontWeight: 500, // Stronger
+              fontWeight: 300, // Light weight to match headers
               lineHeight: 1.5,
             }}
           >
