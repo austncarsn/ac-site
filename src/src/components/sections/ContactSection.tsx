@@ -103,15 +103,30 @@ export function ContactSection() {
         >
           <SectionHeader accentColor="#B6CFFF">Contact</SectionHeader>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)' }}>
+          {/* Framing sentence - invitation */}
+          <p
+            style={{
+              fontSize: 'clamp(15px, 2.2vw, 16px)',
+              lineHeight: '1.7',
+              color: '#71717A',
+              marginTop: 'clamp(0.75rem, 2vw, 1rem)',
+              marginBottom: 'clamp(2rem, 4vw, 3rem)',
+              maxWidth: '500px',
+              fontWeight: 400,
+            }}
+          >
+            If you're working on something interesting, I'd like to hear about it.
+          </p>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'clamp(2rem, 5vw, 3rem)' }}>
             {/* Contact Form - 7 columns on desktop */}
             <AnimatedSection className="lg:col-span-7">
-              <form onSubmit={handleSubmit} className="flex flex-col" style={{ gap: 'var(--space-8)' }}>
+              <form onSubmit={handleSubmit} className="flex flex-col" style={{ gap: 'clamp(1.25rem, 3vw, 1.75rem)' }}>
                 <FormField
                   id="name"
                   name="name"
                   label="Name"
-                  placeholder="Your name"
+                  placeholder="How should I address you?"
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -123,7 +138,7 @@ export function ContactSection() {
                   name="email"
                   label="Email"
                   type="email"
-                  placeholder="your.email@example.com"
+                  placeholder="Where can I reply?"
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -135,8 +150,8 @@ export function ContactSection() {
                   name="message"
                   label="Message"
                   as="textarea"
-                  rows={5}
-                  placeholder="Tell me about your project"
+                  rows={7}
+                  placeholder="What are you working on?"
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -148,18 +163,26 @@ export function ContactSection() {
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
                   aria-label="Send contact form"
-                  className="group flex items-center gap-2 self-start transition-all duration-200 border-b-2 border-foreground disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="group flex items-center gap-2 self-start transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                   style={{ 
-                    paddingBottom: 'var(--space-2)',
-                    fontSize: '17px',
-                    fontWeight: 500,
-                    letterSpacing: '-0.01em',
+                    paddingBottom: '4px',
+                    fontSize: '15px',
+                    fontWeight: 400,
+                    letterSpacing: '0.01em',
+                    borderBottom: '1px solid #52525B',
+                    color: '#1A1A19',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#1A1A19';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderBottomColor = '#52525B';
                   }}
                 >
                   {isSubmitting ? (
                     <>
                       <span className="inline-block animate-spin">
-                        <Send size={16} />
+                        <Send size={14} />
                       </span>
                       <span>Sending...</span>
                     </>
@@ -167,8 +190,8 @@ export function ContactSection() {
                     <>
                       <span>Send message</span>
                       <Send 
-                        size={16} 
-                        className="transition-transform duration-200 group-hover:translate-x-1" 
+                        size={14} 
+                        className="transition-transform duration-200 group-hover:translate-x-0.5" 
                       />
                     </>
                   )}
@@ -184,34 +207,41 @@ export function ContactSection() {
 
             {/* Contact Info - 5 columns on desktop */}
             <AnimatedSection delay={0.2} className="lg:col-span-5">
-              <div className="flex flex-col" style={{ gap: 'var(--space-10)' }}>
+              <div 
+                className="flex flex-col" 
+                style={{ 
+                  gap: 'clamp(1.5rem, 4vw, 2rem)',
+                  paddingTop: 'clamp(0rem, 2vw, 0.5rem)', // Slight alignment on desktop
+                }}
+              >
                 {/* Email */}
                 <div className="group">
                   <p 
-                    className="text-meta" 
                     style={{ 
-                      marginBottom: 'var(--space-4)',
-                      opacity: 0.5,
-                      fontSize: '14px',
+                      marginBottom: '0.625rem',
+                      fontSize: '11px',
+                      fontWeight: 400,
+                      letterSpacing: '0.06em',
+                      color: '#A1A1AA',
                     }}
                   >
-                    Email
+                    DIRECT
                   </p>
                   <a
                     href="mailto:austinscarson@gmail.com"
-                    className="flex items-center gap-3 transition-all duration-200"
+                    className="flex items-center gap-2.5 transition-all duration-200"
                     aria-label="Email Austin Carson"
                     style={{
-                      fontSize: '16px',
-                      padding: 'var(--space-2) 0',
+                      fontSize: '14px',
+                      color: '#52525B',
                     }}
                   >
                     <Mail 
-                      size={18} 
-                      style={{ color: '#B6CFFF', opacity: 0.9 }}
+                      size={16} 
+                      style={{ color: '#B6CFFF', opacity: 0.7 }}
                       className="transition-opacity duration-200 group-hover:opacity-100"
                     />
-                    <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
+                    <span className="transition-colors duration-200 group-hover:text-[#1A1A19]">
                       austinscarson@gmail.com
                     </span>
                   </a>
@@ -220,34 +250,35 @@ export function ContactSection() {
                 {/* Social Links */}
                 <div>
                   <p 
-                    className="text-meta" 
                     style={{ 
-                      marginBottom: 'var(--space-4)',
-                      opacity: 0.5,
-                      fontSize: '14px',
+                      marginBottom: '0.625rem',
+                      fontSize: '11px',
+                      fontWeight: 400,
+                      letterSpacing: '0.06em',
+                      color: '#A1A1AA',
                     }}
                   >
-                    Social
+                    ELSEWHERE
                   </p>
-                  <div className="flex flex-col" style={{ gap: 'var(--space-4)' }}>
+                  <div className="flex flex-col" style={{ gap: '0.625rem' }}>
                     {/* GitHub */}
                     <a
                       href="https://github.com/austncarsn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
+                      className="group flex items-center gap-2.5 transition-all duration-200"
                       aria-label="Visit Austin Carson's GitHub profile"
                       style={{
-                        fontSize: '16px',
-                        padding: 'var(--space-2) 0',
+                        fontSize: '14px',
+                        color: '#52525B',
                       }}
                     >
                       <Github 
-                        size={18} 
-                        style={{ color: '#B6CFFF', opacity: 0.9 }}
+                        size={16} 
+                        style={{ color: '#B6CFFF', opacity: 0.7 }}
                         className="transition-opacity duration-200 group-hover:opacity-100"
                       />
-                      <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
+                      <span className="transition-colors duration-200 group-hover:text-[#1A1A19]">
                         GitHub
                       </span>
                     </a>
@@ -257,19 +288,19 @@ export function ContactSection() {
                       href="https://www.linkedin.com/in/austncarsn"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-3 transition-all duration-200 hover:translate-x-1"
+                      className="group flex items-center gap-2.5 transition-all duration-200"
                       aria-label="Visit Austin Carson's LinkedIn profile"
                       style={{
-                        fontSize: '16px',
-                        padding: 'var(--space-2) 0',
+                        fontSize: '14px',
+                        color: '#52525B',
                       }}
                     >
                       <Linkedin 
-                        size={18} 
-                        style={{ color: '#B6CFFF', opacity: 0.9 }}
+                        size={16} 
+                        style={{ color: '#B6CFFF', opacity: 0.7 }}
                         className="transition-opacity duration-200 group-hover:opacity-100"
                       />
-                      <span className="border-b border-transparent group-hover:border-foreground transition-all duration-200">
+                      <span className="transition-colors duration-200 group-hover:text-[#1A1A19]">
                         LinkedIn
                       </span>
                     </a>

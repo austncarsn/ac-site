@@ -899,15 +899,15 @@ export function ResumeSection() {
                       onClick={() => setActiveFilter(type)}
                       className="px-4 py-2 rounded-[6px] border transition-all text-small no-highlight cursor-pointer"
                       style={{
-                        borderColor: isActive ? '#14B8A6' : 'var(--color-border)',
-                        backgroundColor: isActive ? 'rgba(20, 184, 166, 0.1)' : 'transparent',
-                        color: isActive ? '#14B8A6' : 'var(--color-text-secondary)',
+                        borderColor: isActive ? '#B6CFFF' : 'var(--color-border)',
+                        backgroundColor: isActive ? 'rgba(182, 207, 255, 0.1)' : 'transparent',
+                        color: isActive ? '#B6CFFF' : 'var(--color-text-secondary)',
                         fontWeight: isActive ? 500 : 300,
                         letterSpacing: '0.02em',
                       }}
                       whileHover={{
-                        borderColor: '#14B8A6',
-                        backgroundColor: 'rgba(20, 184, 166, 0.05)',
+                        borderColor: '#B6CFFF',
+                        backgroundColor: 'rgba(182, 207, 255, 0.05)',
                       }}
                       whileTap={{ scale: 0.98 }}
                     >

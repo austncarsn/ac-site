@@ -1,60 +1,175 @@
 import { AnimatedSection } from '../ui/AnimatedSection';
 import { SectionHeader } from '../ui/SectionHeader';
 
-interface InfoBlockProps {
-  label: string;
-  content: string;
-}
-
-function InfoBlock({ label, content }: InfoBlockProps) {
-  return (
-    <div>
-      <p className="text-meta" style={{ marginBottom: 'var(--space-3)' }}>{label}</p>
-      <p className="text-body-small">{content}</p>
-    </div>
-  );
-}
-
 export function AboutSection() {
   return (
     <section id="about" className="section-padding bg-white border-t border-border">
       <div className="container-main">
         <SectionHeader accentColor="#B6CFFF">About</SectionHeader>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12" style={{ gap: 'var(--space-12)', marginTop: 'var(--space-16)' }}>
-          {/* Main content - 7 columns */}
+        <div 
+          className="grid grid-cols-1 lg:grid-cols-12" 
+          style={{ 
+            gap: 'clamp(2rem, 5vw, 3rem)', 
+            marginTop: 'clamp(2rem, 5vw, 3rem)' 
+          }}
+        >
+          {/* Main content - Mobile optimized narrative */}
           <AnimatedSection className="lg:col-span-7">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-              <p className="text-body-medium break-words">
+            <div 
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: 'clamp(1.5rem, 4vw, 2rem)',
+                maxWidth: '600px', // Comfortable line length
+              }}
+            >
+              {/* Featured statement - thesis */}
+              <p 
+                className="break-words"
+                style={{
+                  fontSize: 'clamp(17px, 2.5vw, 19px)',
+                  lineHeight: '1.6',
+                  fontWeight: 400,
+                  letterSpacing: '-0.01em',
+                  color: '#1A1A19',
+                }}
+              >
                 I build interface systems where precision meets creativity — turning messy design 
-                requirements into production-ready code that actually scales (and occasionally sparks joy).
+                requirements into production-ready code that scales.
               </p>
 
-              <p className="text-body-small opacity-60 break-words">
-                What keeps me awake at night: creating systems that empower teams to ship faster 
-                without sacrificing craft. I'm obsessed with building tools and components that make 
-                the design-to-development handoff feel less like a game of telephone and more like telepathy.
-              </p>
+              {/* Systems thinking paragraph */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <p 
+                  className="break-words"
+                  style={{
+                    fontSize: 'clamp(15px, 2.2vw, 16px)',
+                    lineHeight: '1.7',
+                    fontWeight: 400,
+                    color: '#52525B',
+                  }}
+                >
+                  My focus is creating systems that empower teams to ship faster without sacrificing 
+                  craft. I build tools and components that make the design-to-development handoff 
+                  feel less like a game of telephone and more like telepathy.
+                </p>
+              </div>
 
-              <p className="text-body-small opacity-60 break-words">
-                Currently exploring: advanced animation choreography, accessibility patterns that don't feel 
-                like an afterthought, and the evolving landscape where AI meets design tooling. Always learning, 
-                occasionally breaking things, constantly iterating.
-              </p>
+              {/* Currently exploring - segmented list */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <p 
+                  style={{
+                    fontSize: 'clamp(12px, 1.8vw, 13px)',
+                    letterSpacing: '0.06em',
+                    color: '#A1A1AA',
+                    fontWeight: 400,
+                  }}
+                >
+                  CURRENTLY EXPLORING
+                </p>
+                <div 
+                  style={{ 
+                    display: 'flex', 
+                    flexDirection: 'column', 
+                    gap: '0.5rem',
+                    paddingLeft: '1rem',
+                  }}
+                >
+                  <p 
+                    style={{
+                      fontSize: 'clamp(14px, 2vw, 15px)',
+                      lineHeight: '1.6',
+                      color: '#71717A',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Advanced animation choreography
+                  </p>
+                  <p 
+                    style={{
+                      fontSize: 'clamp(14px, 2vw, 15px)',
+                      lineHeight: '1.6',
+                      color: '#71717A',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Accessibility patterns that don't feel like an afterthought
+                  </p>
+                  <p 
+                    style={{
+                      fontSize: 'clamp(14px, 2vw, 15px)',
+                      lineHeight: '1.6',
+                      color: '#71717A',
+                      fontWeight: 400,
+                    }}
+                  >
+                    The evolving landscape where AI meets design tooling
+                  </p>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
 
-          {/* Sidebar info - 5 columns */}
+          {/* Sidebar info - Index style summary */}
           <AnimatedSection delay={0.2} className="lg:col-span-5">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
-              <InfoBlock
-                label="What I Do"
-                content="Design Systems · Component Architecture · Interface Engineering"
-              />
-              <InfoBlock
-                label="Learning"
-                content="AI Tools · Advanced Animation · Accessibility · Developer Experience"
-              />
+            <div 
+              style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: 'clamp(1.75rem, 4vw, 2.5rem)',
+                paddingTop: 'clamp(0rem, 2vw, 0.5rem)', // Slight alignment on desktop
+              }}
+            >
+              {/* What I Do - Index entry */}
+              <div>
+                <p 
+                  style={{
+                    fontSize: 'clamp(12px, 1.8vw, 13px)',
+                    letterSpacing: '0.06em',
+                    color: '#A1A1AA',
+                    marginBottom: '0.75rem',
+                    fontWeight: 400,
+                  }}
+                >
+                  WHAT I DO
+                </p>
+                <p 
+                  style={{
+                    fontSize: 'clamp(14px, 2vw, 15px)',
+                    lineHeight: '1.7',
+                    color: '#52525B',
+                    fontWeight: 400,
+                  }}
+                >
+                  Design Systems · Component Architecture · Interface Engineering
+                </p>
+              </div>
+
+              {/* Learning - Index entry */}
+              <div>
+                <p 
+                  style={{
+                    fontSize: 'clamp(12px, 1.8vw, 13px)',
+                    letterSpacing: '0.06em',
+                    color: '#A1A1AA',
+                    marginBottom: '0.75rem',
+                    fontWeight: 400,
+                  }}
+                >
+                  LEARNING
+                </p>
+                <p 
+                  style={{
+                    fontSize: 'clamp(14px, 2vw, 15px)',
+                    lineHeight: '1.7',
+                    color: '#52525B',
+                    fontWeight: 400,
+                  }}
+                >
+                  AI Tools · Advanced Animation · Accessibility · Developer Experience
+                </p>
+              </div>
             </div>
           </AnimatedSection>
         </div>

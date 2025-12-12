@@ -1,16 +1,8 @@
-/* Tailwind entry */
-@import "tailwindcss";
-
-/* Import IBM Plex Sans for refined, professional typography */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
-
-/* =========================== Theme Configuration =========================== */
-
 /* Brand color palette (teal-based) */
 @theme {
-  --color-brand: #14B8A6;
-  --color-brand-dark: #0F9488;
-  --color-brand-light: #2DD4BF;
+  --color-brand: #B6CFFF;
+  --color-brand-dark: #97B7D6;
+  --color-brand-light: #D8E4F0;
 }
 
 /* =========================== Global CSS Variables =========================== */
@@ -78,10 +70,10 @@
   --project-color-pink: 236 72 153;     /* #EC4899 */
   --project-color-rose: 244 63 94;      /* #F43F5E */
   --project-color-amber: 245 158 11;    /* #F59E0B */
-  --project-color-emerald: 16 185 129;  /* #10B981 */
+  --project-color-emerald: 182 207 255;  /* #B6CFFF - Pale blue */
   --project-color-cyan: 6 182 212;      /* #06B6D4 */
   --project-color-slate: 100 116 139;   /* #64748B */
-  --project-color-brand: 20 184 166;    /* #14B8A6 */
+  --project-color-brand: 182 207 255;    /* #B6CFFF - Pale blue */
   
   /* Hover interaction intensities */
   --hover-opacity-light: 0.06;

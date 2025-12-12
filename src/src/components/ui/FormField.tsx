@@ -42,6 +42,10 @@ const INSET_STYLE = {
     inset 2px 2px 5px rgba(0, 0, 0, 0.1),
     inset -2px -2px 5px rgba(255, 255, 255, 0.7)
   `,
+  fontSize: '15px',
+  fontWeight: 400,
+  color: '#1A1A19', // Emphasis on user-entered text
+  lineHeight: '1.6',
 } as const;
 
 // Focus state - "pops out" when active
@@ -49,8 +53,12 @@ const FOCUS_STYLE = {
   backgroundColor: '#FFFFFF',
   boxShadow: `
     0px 2px 4px rgba(0, 0, 0, 0.1),
-    0px 0px 0px 2px #6366F1
+    0px 0px 0px 2px #B6CFFF
   `,
+  fontSize: '15px',
+  fontWeight: 400,
+  color: '#1A1A19',
+  lineHeight: '1.6',
 } as const;
 
 export function FormField(props: FormFieldProps) {
@@ -90,9 +98,10 @@ export function FormField(props: FormFieldProps) {
         className="text-meta block" 
         style={{ 
           marginBottom: 'var(--space-3)',
-          fontSize: '14px',
-          fontWeight: 500,
-          opacity: 0.7,
+          fontSize: '12px',
+          fontWeight: 400,
+          opacity: 0.5,
+          letterSpacing: '0.02em',
         }}
       >
         {label}

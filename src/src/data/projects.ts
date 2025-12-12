@@ -75,7 +75,7 @@ export const PROJECTS: readonly Project[] = [
       'A playful color-system playground for exploring palettes and contrast in a structured way. Built to help designers and developers experiment with color relationships.',
       'Features design token integration, contrast checking, and systematic color palette generation with real-time feedback.',
     ],
-    previewColors: ['#FF3B5C', '#00F5FF', '#FFEB3B', '#00E676', '#FF6B00', '#E040FB'],
+    previewColors: ['#FF3B5C', '#00F5FF', '#FFEB3B', '#B6CFFF', '#FF6B00', '#E040FB'],
     hoverColor: '236, 72, 153', // Pink RGB
     tags: ['Color Systems', 'Design Tokens', 'Contrast', 'Interactive'],
     impact: 'Structured exploration of color palettes and accessibility',
@@ -236,8 +236,8 @@ export const PROJECTS: readonly Project[] = [
       'Curated gallery of graphic design work as a visual archive. Features print-inspired layouts and image systems for showcasing design work.',
       'Built with attention to typography and grid systems, creating an elegant showcase that honors the craft of graphic design.',
     ],
-    previewColors: ['#0A0A0A', '#FFFFFF', '#6B4EFF', '#D9D9D9'],
-    hoverColor: '6, 182, 212', // Cyan RGB
+    previewColors: ['#B6CFFF', '#97B7D6', '#D8E4F0', '#ADC6DF'],
+    hoverColor: '182, 207, 255', // Pale blue RGB
     tags: ['Gallery', 'Print-Inspired Layouts', 'Image Systems', 'Typography'],
     impact: 'Visual archive with editorial presentation',
     liveUrl: 'https://graphicdesigngallery.vercel.app',
