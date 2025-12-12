@@ -216,10 +216,10 @@ function SectionHeading({
       style={{ 
         marginBottom: "var(--space-12)",
         fontSize: "clamp(2rem, 4vw, 2.75rem)", /* 32px -> 44px - Large editorial headers */
-        fontWeight: 600,
-        letterSpacing: "-0.025em",
+        fontWeight: 300, // Light weight to match headers
+        letterSpacing: "-0.02em",
         lineHeight: 1.15,
-        color: "#18181B", /* High contrast zinc-900 */
+        color: "#18181B",
       }}
     >
       {children}
@@ -839,7 +839,10 @@ export function ResumeSection() {
               {RESUME_DATA.competencies.map((competency) => (
                 <div key={competency.title}>
                   <h4
-                    style={{ marginBottom: "var(--space-4)" }}
+                    style={{ 
+                      marginBottom: "var(--space-4)",
+                      fontWeight: 300, // Light weight to match headers
+                    }}
                   >
                     {competency.title}
                   </h4>
