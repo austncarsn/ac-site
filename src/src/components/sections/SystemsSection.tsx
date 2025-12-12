@@ -1,7 +1,6 @@
 import { useMemo } from "react";
-import { AnimatedSection } from "../ui/AnimatedSection";
-import { SectionHeader } from "../ui/SectionHeader";
-import { Box, Palette, FileText, Wrench } from "lucide-react"; // Assuming lucide-react is installed
+import { motion } from "motion/react";
+import { EASE_OUT_EXPO } from "../../lib/constants";
 
 // Define data outside component to prevent re-creation on render
 const SYSTEMS_DATA = [
@@ -10,28 +9,24 @@ const SYSTEMS_DATA = [
     title: "Component Libraries",
     description:
       "Production-ready React components built with TypeScript and accessibility.",
-    icon: Box,
   },
   {
     id: "02",
     title: "Design Tokens",
     description:
       "Systematic approach to colors, typography, and spacing across platforms.",
-    icon: Palette,
   },
   {
     id: "03",
     title: "Documentation",
     description:
       "Living documentation bridging the gap between design and engineering.",
-    icon: FileText,
   },
   {
     id: "04",
     title: "Build Tools",
     description:
       "Custom automation accelerating design system adoption and deployment.",
-    icon: Wrench,
   },
 ] as const;
 
@@ -39,118 +34,193 @@ export function SystemsSection() {
   return (
     <section
       id="systems"
-      className="section-padding border-t border-zinc-100 bg-white relative overflow-hidden"
+      className="relative overflow-hidden"
+      style={{
+        paddingTop: 'clamp(3rem, 8vw, 5rem)',
+        paddingBottom: 'clamp(3rem, 8vw, 5rem)',
+        backgroundColor: '#FAFAF9', // Warm off-white
+      }}
     >
-      {/* Decorative Background Grid (Subtle Engineering Paper look) */}
+      {/* Subtle baseline grid - technical documentation feel */}
       <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+            "linear-gradient(#000 1px, transparent 1px)",
+          backgroundSize: "1px 24px", // Vertical rhythm guide
         }}
+        aria-hidden="true"
       />
 
       <div className="container-main relative z-10">
-        <SectionHeader accentColor="#B6CFFF">
-          Core Systems
-        </SectionHeader>
+        {/* Section Header with Index Marker */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: EASE_OUT_EXPO }}
+          style={{ marginBottom: 'clamp(2rem, 5vw, 3rem)' }}
+        >
+          {/* Index Marker */}
+          <div
+            style={{
+              fontSize: '11px',
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+              letterSpacing: '0.08em',
+              color: '#9CA3AF',
+              marginBottom: '12px',
+              fontWeight: 500,
+            }}
+          >
+            ARCH / 01
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style={{ marginTop: 'var(--space-16)' }}>
-          {SYSTEMS_DATA.map((system, index) => (
-            <AnimatedSection
-              key={system.id}
-              delay={index * 0.1}
-            >
-              <SystemModule system={system} />
-            </AnimatedSection>
-          ))}
+          {/* Title */}
+          <h2
+            style={{
+              fontSize: 'clamp(28px, 5vw, 40px)',
+              fontWeight: 300,
+              letterSpacing: '0.06em',
+              color: '#1A1A19',
+            }}
+          >
+            CORE SYSTEMS
+          </h2>
+        </motion.div>
+
+        {/* Spec Index Container */}
+        <div
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '16px', // Rounded corners at container level only
+            padding: 'clamp(1.5rem, 4vw, 2.5rem)',
+            // Subtle container shadow
+            boxShadow: '0 2px 12px -4px rgba(0, 0, 0, 0.06)',
+          }}
+        >
+          {/* Vertical Indexed List */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0', // No gap, rows are separated by borders
+            }}
+          >
+            {SYSTEMS_DATA.map((system, index) => (
+              <SystemRow
+                key={system.id}
+                system={system}
+                index={index}
+                isLast={index === SYSTEMS_DATA.length - 1}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// Sub-component for performance and cleaner JSX
-function SystemModule({
+// System Row Component - Documentation Entry
+function SystemRow({
   system,
+  index,
+  isLast,
 }: {
   system: (typeof SYSTEMS_DATA)[number];
+  index: number;
+  isLast: boolean;
 }) {
-  const Icon = system.icon;
-
   return (
-    <article className="group relative 
-        p-10 
-        bg-white border border-zinc-200
-        cursor-pointer select-none
-        transition-all duration-300 ease-out
-        /* Hover State: Inverts to Dark Mode ('Active Module') */
-        "
-        style={{ borderRadius: 'var(--radius)' }}
-      >
-      {/* CARD CASING */}
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        duration: 0.6,
+        ease: EASE_OUT_EXPO,
+        delay: index * 0.08,
+      }}
+      className="group cursor-pointer touch-manipulation"
+      style={{
+        padding: 'clamp(1.25rem, 3vw, 1.75rem) 0',
+        borderBottom: isLast ? 'none' : '1px solid rgba(0, 0, 0, 0.06)',
+        display: 'grid',
+        gridTemplateColumns: 'auto 1fr auto',
+        gap: 'clamp(1rem, 3vw, 1.5rem)',
+        alignItems: 'start',
+        transition: 'background-color 0.2s ease',
+        borderRadius: '8px',
+        marginLeft: '-12px',
+        marginRight: '-12px',
+        paddingLeft: '12px',
+        paddingRight: '12px',
+      }}
+      // Active/hover state
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = '#F9FAFB';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'transparent';
+      }}
+      role="article"
+      tabIndex={0}
+    >
+      {/* Left: System ID */}
       <div
-        className="h-full flex flex-col p-8 border border-zinc-200 bg-zinc-50/50 
-        transition-all duration-300 ease-out
-        /* Hover State: Inverts to Dark Mode ('Active Module') */
-        group-hover:bg-zinc-900 group-hover:border-zinc-900 group-hover:-translate-y-1 group-hover:shadow-xl"
-        style={{ borderRadius: 'calc(var(--radius) - 10px)' }}
+        style={{
+          fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+          fontSize: 'clamp(11px, 1.5vw, 12px)',
+          letterSpacing: '0.05em',
+          color: '#9CA3AF',
+          fontWeight: 500,
+          paddingTop: '2px', // Optical alignment
+          minWidth: 'clamp(60px, 10vw, 70px)',
+        }}
       >
-        {/* HEADER: ID & Status Light */}
-        <div className="flex justify-between items-start mb-8">
-          <span className="font-mono tracking-widest text-zinc-400" style={{ fontSize: '10px', textTransform: 'uppercase' }}>
-            SYS_{system.id}
-          </span>
-
-          {/* Status LED */}
-          <div
-            className="w-2 h-2 rounded-full transition-all duration-300"
-            style={{
-              backgroundColor: '#B6CFFF',
-              boxShadow: '0 0 8px rgba(182, 207, 255, 0.6)',
-            }}
-          />
-        </div>
-
-        {/* ICON */}
-        <div className="mb-6 transition-colors duration-300" style={{ color: '#B6CFFF' }}>
-          <Icon size={28} strokeWidth={1.5} />
-        </div>
-
-        {/* CONTENT */}
-        <div className="mt-auto">
-          <h4
-            className="text-zinc-900 mb-3 group-hover:text-white transition-colors duration-300"
-            style={{
-              fontSize: '20px',
-              fontWeight: 400,
-              letterSpacing: '-0.01em',
-              lineHeight: '1.4',
-            }}
-          >
-            {system.title}
-          </h4>
-          <p
-            className="text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300"
-            style={{
-              fontSize: '14px',
-              lineHeight: '1.6',
-              fontWeight: 400,
-            }}
-          >
-            {system.description}
-          </p>
-        </div>
-
-        {/* DECORATIVE CORNER (Technical Detail) */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden rounded-xl">
-          <div
-            className="absolute top-0 right-0 w-8 h-8 -mr-4 -mt-4 bg-zinc-100 rotate-45 border border-zinc-200 
-             group-hover:bg-zinc-800 group-hover:border-zinc-700 transition-colors duration-300"
-          />
-        </div>
+        SYS_{system.id}
       </div>
-    </article>
+
+      {/* Center: System Name + Description */}
+      <div style={{ minWidth: 0 }}> {/* minWidth: 0 for text truncation */}
+        <h3
+          style={{
+            fontSize: 'clamp(17px, 2.5vw, 19px)',
+            fontWeight: 400,
+            letterSpacing: '-0.01em',
+            color: '#1A1A19',
+            marginBottom: '6px',
+            lineHeight: '1.3',
+          }}
+        >
+          {system.title}
+        </h3>
+        <p
+          style={{
+            fontSize: 'clamp(14px, 2vw, 15px)',
+            lineHeight: '1.6',
+            color: '#6B7280',
+            fontWeight: 400,
+            maxWidth: '600px', // Consistent line length
+          }}
+        >
+          {system.description}
+        </p>
+      </div>
+
+      {/* Right: Minimal Indicator */}
+      <div
+        style={{
+          width: '6px',
+          height: '6px',
+          borderRadius: '50%',
+          backgroundColor: '#D1D5DB',
+          marginTop: '8px', // Align with title baseline
+          transition: 'all 0.2s ease',
+        }}
+        className="group-hover:bg-[#B6CFFF] group-hover:shadow-[0_0_8px_rgba(182,207,255,0.5)]"
+        aria-hidden="true"
+      />
+    </motion.div>
   );
 }
