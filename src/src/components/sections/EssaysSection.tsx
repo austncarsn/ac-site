@@ -15,6 +15,23 @@ interface Essay {
 
 const ESSAYS: Essay[] = [
   {
+    title: 'A Cold Kept Me Up All Night and I Had Thoughts',
+    date: 'December 13, 2024',
+    dateShort: 'Dec 13',
+    category: 'Life',
+    tags: ['HEALTH', 'INSOMNIA'],
+    excerpt: 'What do you do at 3am when your nose has declared war on breathing? Apparently, you contemplate the entire human respiratory system and why tissues are never where you need them.',
+    content: [
+      '2:14am. I have achieved a new understanding of the phrase "can\'t breathe through my nose." It\'s not that I CAN\'T—it\'s that my body has decided breathing is now a luxury feature that requires a premium subscription I apparently didn\'t renew.',
+      'You know what\'s wild? We take approximately 20,000 breaths per day and never think about it until a cold shows up like an uninvited houseguest and says "remember breathing? That thing you do unconsciously? Let\'s make it a whole SITUATION."',
+      'The ceiling at 3am is fascinating, by the way. I\'ve counted the texture patterns. Twice. I\'ve also discovered that when you\'re congested enough, your own heartbeat sounds like a distant techno beat. My body is literally throwing a rave and I wasn\'t invited.',
+      '4:17am update: I got up for the 6th time to get water. The kitchen floor is cold. This is a betrayal. Also, why do I have 47 different types of tea but none of them are labeled \"will actually make you feel better at 4am\"? False advertising, chamomile. You promised relaxation, not an existential crisis about mortality.',
+      'By 5:30am I had convinced myself I was patient zero of some new respiratory thing. WebMD said I had everything from a mild cold to \"you should probably update your will.\" Thanks, internet. Very helpful. Very reassuring.',
+      'The birds started chirping around 6am, which felt deeply personal. Like they were mocking me. "Oh look, the human is still awake. How cute. We\'re going to be EXTRA loud today." Nature is brutal when you haven\'t slept.',
+      'Final thought at 6:42am: Tissues. Why are tissues never where you left them? I bought a box specifically for the nightstand. It\'s now in the kitchen. I didn\'t move it. My cold has developed telekinetic powers. This is my villain origin story.',
+    ],
+  },
+  {
     title: 'I Spent 6 Hours Perfecting a Button No One Will Ever Click',
     date: 'December 3, 2024',
     dateShort: 'Dec 03',

@@ -164,7 +164,8 @@ export function HeroSection() {
                 transform: 'translateZ(0)',
                 letterSpacing: isMobile ? '0.18em' : '0.15em', // Wide letter-spacing for editorial feel
                 color: '#1A1A19', // Softened dark, not pure black
-                fontWeight: 300, // Ultra-light weight
+                fontWeight: 300, // Ultra-light weight matching all other headers
+                textTransform: 'uppercase', // Ensure uppercase
               }}
             >
               {title}
