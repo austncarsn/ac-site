@@ -1,7 +1,7 @@
 
-  # AC
+  # AUSTIN CARSON
 
-  This is a code bundle for AC. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/AC.
+  This is a code bundle for AUSTIN CARSON. The original project is available at https://www.figma.com/design/zvvGmlDrvtJybvRaYejjID/AUSTIN-CARSON.
 
   ## Running the code
 
