@@ -5,6 +5,26 @@
   --color-brand-light: #D8E4F0;
 }
 
+/* =========================== Accessibility & Performance =========================== */
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Optimize font rendering for smooth loading */
+@font-face {
+  font-family: 'system-ui';
+  font-display: swap; /* Prevent invisible text during font load */
+}
+
 /* =========================== Global CSS Variables =========================== */
 
 :root {

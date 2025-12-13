@@ -1,8 +1,5 @@
-"use client";
-
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog@1.1.6";
-import { XIcon } from "lucide-react@0.487.0";
 
 import { cn } from "./utils";
 
@@ -66,16 +63,26 @@ function DialogContent({
       >
         {children}
         <DialogPrimitive.Close 
-          className="absolute top-6 right-6 flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-50/80 backdrop-blur-sm border border-zinc-200/60 text-zinc-500 transition-all duration-300 hover:bg-brand/10 hover:border-brand/30 hover:text-brand focus:outline-none focus:ring-2 focus:ring-brand/20 focus:ring-offset-2 group"
+          className="absolute top-4 right-4 sm:top-6 sm:right-6 flex items-center justify-center w-10 h-10 rounded-lg bg-white border border-zinc-300 text-zinc-700 transition-all duration-300 hover:bg-brand hover:border-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-brand/30 focus:ring-offset-2 group z-50"
           style={{ 
-            boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8)'
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08)'
           }}
         >
-          <XIcon 
-            className="transition-transform duration-300 group-hover:rotate-90" 
-            size={16} 
-            strokeWidth={1.5}
-          />
+          <svg 
+            width="18" 
+            height="18" 
+            viewBox="0 0 18 18" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+            className="transition-transform duration-300 group-hover:rotate-90"
+          >
+            <path 
+              d="M2 2L16 16M16 2L2 16" 
+              stroke="currentColor" 
+              strokeWidth="2.5" 
+              strokeLinecap="round"
+            />
+          </svg>
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>

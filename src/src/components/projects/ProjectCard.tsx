@@ -7,6 +7,7 @@ import {
 } from "react";
 import { motion } from "motion/react";
 import type { Project } from "../../data/projects";
+import { ProgressiveImage } from "../loading/ProgressiveImage";
 
 // --- CONSTANTS & PHYSICS ---
 

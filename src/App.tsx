@@ -8,10 +8,11 @@ import { AboutSection } from './src/components/sections/AboutSection';
 import { ResumeSection } from './src/components/sections/ResumeSection';
 import { ContactSection } from './src/components/sections/ContactSection';
 import { Toaster } from './src/components/ui/sonner';
+import { AppLoader } from './src/components/loading/AppLoader';
 
 export default function App() {
   return (
-    <>
+    <AppLoader>
       <Navigation />
       <main className="min-h-screen text-foreground" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(20, 184, 166, 0.015) 50%, #FFFFFF 100%)' }}>
         <HeroSection />
@@ -30,6 +31,6 @@ export default function App() {
       </main>
       <Footer />
       <Toaster />
-    </>
+    </AppLoader>
   );
 }
