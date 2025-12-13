@@ -369,23 +369,15 @@ export function EssaysSection() {
       <AnimatePresence>
         {isModalOpen && (
           <>
-            {/* Backdrop */}
+            {/* Backdrop with Layout - Click anywhere to close */}
             <motion.div
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50"
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsModalOpen(false)}
-            />
-
-            {/* Modal Content */}
-            <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
             >
+              {/* Modal Content */}
               <motion.div
                 className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden"
                 style={{
@@ -395,6 +387,10 @@ export function EssaysSection() {
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
                 onClick={(e) => e.stopPropagation()}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: EASE_OUT_EXPO }}
               >
                 {/* Sticky Close Button for Mobile - Floating in top right */}
                 {isMobile && (
