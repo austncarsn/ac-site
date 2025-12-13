@@ -220,29 +220,6 @@ export const PROJECTS: readonly Project[] = [
     liveUrl: 'https://cameo-web.vercel.app',
     githubUrl: 'https://github.com/austncarsn/cameo-web',
   },
-  {
-    id: '8',
-    name: 'Graphic Design Gallery',
-    slug: 'graphic-design-gallery',
-    category: ProjectCategory.GALLERY,
-    summary: 'Curated gallery of my graphic design work as a visual archive.',
-    primaryFocus: 'Print inspired layouts, image systems',
-    techStack: 'React, TypeScript, CSS, Vercel',
-    status: ProjectStatus.LIVE,
-    featured: false,
-    year: '2025',
-    role: 'Frontend Developer',
-    description: [
-      'Curated gallery of graphic design work as a visual archive. Features print-inspired layouts and image systems for showcasing design work.',
-      'Built with attention to typography and grid systems, creating an elegant showcase that honors the craft of graphic design.',
-    ],
-    previewColors: ['#B6CFFF', '#97B7D6', '#D8E4F0', '#ADC6DF'],
-    hoverColor: '182, 207, 255', // Pale blue RGB
-    tags: ['Gallery', 'Print-Inspired Layouts', 'Image Systems', 'Typography'],
-    impact: 'Visual archive with editorial presentation',
-    liveUrl: 'https://graphicdesigngallery.vercel.app',
-    githubUrl: 'https://github.com/austncarsn/graphic-design-gallery',
-  },
 ] as const;
 
 // ============================================================

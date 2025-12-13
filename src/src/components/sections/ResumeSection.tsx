@@ -150,15 +150,6 @@ const RESUME_DATA = {
         "Searchable patterns with live examples for consistent visual systems across projects.",
       ],
     },
-    {
-      title: "Graphic Design Gallery",
-      type: "Gallery",
-      year: "2025",
-      description: [
-        "Visual archive of graphic design work with print-inspired layouts and image systems.",
-        "Elegant showcase with editorial typography and grid systems honoring the craft of graphic design.",
-      ],
-    },
   ],
 } as const;
 

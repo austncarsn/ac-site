@@ -184,8 +184,6 @@ export const ProjectCard = memo(function ProjectCard({
                       ? `url('https://images.unsplash.com/photo-1613233629562-cee828d79999?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwaW5rJTIwcm9zZSUyMGlyaWRlc2NlbnQlMjBob2xvZ3JhcGhpYyUyMGZsb3JhbHxlbnwxfHx8fDE3NjUzMDQwNDB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
                       : project.name === "Cameo Web"
                       ? `url('https://images.unsplash.com/photo-1765104932623-841dd3ab3832?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhYnN0cmFjdCUyMGdyYWRpZW50JTIwaG9sb2dyYXBoaWMlMjBwYXN0ZWx8ZW58MXx8fHwxNzY1MzA0NDU2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
-                      : project.name === "Graphic Design Gallery"
-                      ? `url('https://images.unsplash.com/photo-1580122252289-8eccefa9ce2e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxibGFjayUyMHdoaXRlJTIwY3lhbiUyMGdyYWRpZW50JTIwbWluaW1hbHxlbnwxfHx8fDE3NjUzMDQwNDJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral') center/cover no-repeat`
                       : project.previewColors.length > 1
                       ? `linear-gradient(135deg, ${project.previewColors.join(", ")})`
                       : `rgba(${rgbColor}, 0.1)`,
@@ -193,15 +191,17 @@ export const ProjectCard = memo(function ProjectCard({
               >
                 {/* Category Label - Caption style, whispers classification */}
                 <motion.span
-                  className="font-mono uppercase bg-white/40 px-2.5 py-1 rounded backdrop-blur-sm"
+                  className="font-mono uppercase px-3 py-1.5 rounded backdrop-blur-md"
                   style={{ 
                     fontSize: '9px', 
                     letterSpacing: '0.08em', 
-                    fontWeight: 400,
-                    color: '#71717a', // Softer zinc-500
-                    opacity: 0.75, // Reduced opacity for whisper effect
+                    fontWeight: 500,
+                    color: '#18181B', // Dark text for contrast
+                    backgroundColor: 'rgba(255, 255, 255, 0.85)', // Strong white background
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.5)',
+                    border: '1px solid rgba(255, 255, 255, 0.3)',
                   }}
-                  animate={{ opacity: isActive ? 0 : 0.75 }}
+                  animate={{ opacity: isActive ? 0 : 1 }}
                 >
                   {project.category}
                 </motion.span>

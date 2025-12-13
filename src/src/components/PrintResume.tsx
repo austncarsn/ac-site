@@ -381,15 +381,6 @@ export function PrintResume() {
                     <li>Searchable patterns with live examples for consistent visual systems across projects.</li>
                   </ul>
                 </div>
-
-                <div className="project">
-                  <h3 className="project-title">Graphic Design Gallery</h3>
-                  <div className="project-meta">Gallery · 2025</div>
-                  <ul>
-                    <li>Visual archive of graphic design work with print-inspired layouts and image systems.</li>
-                    <li>Elegant showcase with editorial typography and grid systems honoring the craft of graphic design.</li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>
