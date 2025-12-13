@@ -255,9 +255,8 @@ export const ProjectCard = memo(function ProjectCard({
                   </span>
                 </div>
 
-                <p className="text-sm text-zinc-500 leading-relaxed">
-                  {project.description ||
-                    `An exploration in ${project.category.toLowerCase()} systems.`}
+                <p className="text-sm text-zinc-500 leading-relaxed mt-3">
+                  {project.summary}
                 </p>
               </div>
 
