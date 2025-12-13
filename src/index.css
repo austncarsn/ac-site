@@ -591,6 +591,10 @@
     z-index: 50;
   }
 
+  .z-\[60\] {
+    z-index: 60;
+  }
+
   .container {
     width: 100%;
   }
@@ -775,6 +779,10 @@
 
   .w-5\/6 {
     width: 83.3333%;
+  }
+
+  .w-6 {
+    width: calc(var(--spacing) * 6);
   }
 
   .w-10 {

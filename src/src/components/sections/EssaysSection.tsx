@@ -87,6 +87,18 @@ const ESSAYS: Essay[] = [
 export function EssaysSection() {
   const [selectedEssay, setSelectedEssay] = useState<Essay>(ESSAYS[0]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // ESC key to close modal
   useEffect(() => {
@@ -300,7 +312,8 @@ export function EssaysSection() {
 
               {/* Content - Generous spacing for long-form reading */}
               <div className="space-y-8">
-                {selectedEssay.content.map((paragraph, i) => (
+                {/* Show only first 3 paragraphs as preview */}
+                {selectedEssay.content.slice(0, 3).map((paragraph, i) => (
                   <p 
                     key={i}
                     style={{
@@ -314,23 +327,39 @@ export function EssaysSection() {
                     {paragraph}
                   </p>
                 ))}
+                {/* Show ellipsis if there's more content */}
+                {selectedEssay.content.length > 3 && (
+                  <p 
+                    style={{
+                      fontSize: '16px',
+                      fontWeight: 300,
+                      color: '#71717a', // More subtle color for ellipsis
+                      lineHeight: '2.0',
+                      letterSpacing: '0.01em',
+                    }}
+                  >
+                    ...
+                  </p>
+                )}
               </div>
 
-              {/* Read Full Entry Button */}
-              <motion.button
-                onClick={() => setIsModalOpen(true)}
-                className="mt-12 flex items-center gap-2 uppercase tracking-widest transition-colors"
-                style={{
-                  fontSize: '12px',
-                  fontFamily: 'monospace',
-                  color: '#71717a', // zinc-500
-                  letterSpacing: '0.15em',
-                }}
-                whileHover={{ color: '#ffffff' }}
-                transition={{ duration: 0.2 }}
-              >
-                Read Full Entry <span>→</span>
-              </motion.button>
+              {/* Read Full Entry Button - Only show if there's more content */}
+              {selectedEssay.content.length > 3 && (
+                <motion.button
+                  onClick={() => setIsModalOpen(true)}
+                  className="mt-12 flex items-center gap-2 uppercase tracking-widest transition-colors"
+                  style={{
+                    fontSize: '12px',
+                    fontFamily: 'monospace',
+                    color: '#71717a', // zinc-500
+                    letterSpacing: '0.15em',
+                  }}
+                  whileHover={{ color: '#ffffff' }}
+                  transition={{ duration: 0.2 }}
+                >
+                  Read Full Entry <span>→</span>
+                </motion.button>
+              )}
             </div>
           </motion.div>
         </div>
@@ -361,52 +390,82 @@ export function EssaysSection() {
                 className="relative w-full max-w-4xl max-h-[90vh] overflow-hidden"
                 style={{
                   backgroundColor: '#18181b', // zinc-900
-                  borderRadius: '2rem',
+                  borderRadius: isMobile ? '1.5rem' : '2rem',
                   boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.8)',
                   border: '1px solid rgba(255, 255, 255, 0.1)',
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Modal Header */}
-                <div
-                  className="flex items-center justify-between px-8 h-16 border-b"
-                  style={{
-                    backgroundColor: '#09090b', // zinc-950
-                    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
-                  }}
-                >
-                  <div
-                    className="uppercase tracking-widest"
-                    style={{
-                      fontFamily: 'monospace',
-                      fontSize: '10px',
-                      color: '#52525b', // zinc-600
-                      letterSpacing: '0.15em',
-                    }}
-                  >
-                    /system/logs/essays/{selectedEssay.dateShort.toLowerCase().replace(' ', '-')}
-                  </div>
+                {/* Sticky Close Button for Mobile - Floating in top right */}
+                {isMobile && (
                   <motion.button
                     onClick={() => setIsModalOpen(false)}
-                    className="p-2 rounded-lg transition-colors"
+                    className="fixed z-[60] rounded-full"
                     style={{
-                      color: '#71717a', // zinc-500
-                    }}
-                    whileHover={{
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                      top: '1rem',
+                      right: '1rem',
+                      width: '48px',
+                      height: '48px',
+                      backgroundColor: '#18181b',
+                      border: '2px solid rgba(255, 255, 255, 0.15)',
                       color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
                     }}
-                    whileTap={{ scale: 0.95 }}
+                    whileTap={{ scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2 }}
                   >
-                    <X className="w-5 h-5" />
+                    <X className="w-6 h-6" strokeWidth={2.5} />
                   </motion.button>
-                </div>
+                )}
+
+                {/* Modal Header - Desktop only */}
+                {!isMobile && (
+                  <div
+                    className="flex items-center justify-between px-8 h-16 border-b"
+                    style={{
+                      backgroundColor: '#09090b', // zinc-950
+                      borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+                    }}
+                  >
+                    <div
+                      className="uppercase tracking-widest"
+                      style={{
+                        fontFamily: 'monospace',
+                        fontSize: '10px',
+                        color: '#52525b', // zinc-600
+                        letterSpacing: '0.15em',
+                      }}
+                    >
+                      /system/logs/essays/{selectedEssay.dateShort.toLowerCase().replace(' ', '-')}
+                    </div>
+                    <motion.button
+                      onClick={() => setIsModalOpen(false)}
+                      className="p-2 rounded-lg transition-colors"
+                      style={{
+                        color: '#71717a', // zinc-500
+                      }}
+                      whileHover={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        color: '#ffffff',
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <X className="w-5 h-5" />
+                    </motion.button>
+                  </div>
+                )}
 
                 {/* Scrollable Content */}
                 <div
-                  className="overflow-y-auto p-8 md:p-12"
+                  className="overflow-y-auto p-6 md:p-12"
                   style={{
-                    maxHeight: 'calc(90vh - 4rem)',
+                    maxHeight: isMobile ? '90vh' : 'calc(90vh - 4rem)',
+                    paddingTop: isMobile ? '4rem' : undefined, // Add space for floating close button on mobile
                   }}
                 >
                   {/* Tags */}
