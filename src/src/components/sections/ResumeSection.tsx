@@ -704,12 +704,14 @@ export function ResumeSection() {
             {/* Name - Primary anchor */}
             <h1 
               style={{ 
-                marginBottom: '0.375rem', // Tighter spacing to role
-                fontSize: 'clamp(2rem, 5vw, 2.75rem)',
-                fontWeight: 400,
-                letterSpacing: '-0.02em',
+                marginBottom: '0.375rem',
+                fontSize: 'clamp(2.5rem, 5.5vw, 3.5rem)',
+                fontWeight: 200,
+                letterSpacing: '0.18em',
                 lineHeight: 1.1,
                 color: '#1A1A19',
+                textTransform: 'uppercase',
+                textWrap: 'balance',
               }}
             >
               {RESUME_DATA.name}

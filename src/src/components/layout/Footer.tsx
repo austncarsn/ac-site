@@ -22,26 +22,27 @@ export function Footer() {
     <footer 
       className="border-t" 
       style={{ 
-        paddingTop: 'clamp(4rem, 8vw, 6rem)', 
-        paddingBottom: 'clamp(3rem, 6vw, 4rem)',
-        borderTopColor: 'rgba(0, 0, 0, 0.12)', // More visible border
-        backgroundColor: 'rgba(246, 247, 249, 0.8)', // More visible background
+        paddingTop: 'clamp(5rem, 10vw, 8rem)', 
+        paddingBottom: 'clamp(4rem, 8vw, 6rem)',
+        borderTopColor: 'rgba(0, 0, 0, 0.08)',
+        backgroundColor: '#FAFAFA',
       }}
     >
       <div className="container-main">
         {/* Optional quiet line of authorship */}
         <div 
           style={{ 
-            marginBottom: 'clamp(2.5rem, 4vw, 3rem)',
-            fontSize: 'clamp(13px, 1.8vw, 14px)',
-            color: '#52525b', // zinc-600 - increased contrast
-            letterSpacing: '0.02em',
-            fontWeight: 400, // Slightly stronger
-            lineHeight: 1.6,
-            maxWidth: '520px',
+            marginBottom: 'clamp(3rem, 5vw, 4rem)',
+            fontSize: 'clamp(14px, 2vw, 15px)',
+            color: '#71717A',
+            letterSpacing: '0.01em',
+            fontWeight: 300,
+            lineHeight: 1.7,
+            maxWidth: '540px',
+            opacity: 0.8,
           }}
         >
-          Built with intention. Designed for clarity.
+          Built with intention. Designed for clarity. Crafted for the future.
         </div>
 
         <div 
@@ -54,11 +55,12 @@ export function Footer() {
           <div 
             className="break-words" 
             style={{ 
-              fontSize: 'clamp(14px, 2vw, 15px)',
-              color: '#3f3f46', // zinc-700 - much stronger contrast
-              letterSpacing: '0.01em',
-              fontWeight: 300, // Light weight to match headers
+              fontSize: 'clamp(13px, 1.8vw, 14px)',
+              color: '#3F3F46',
+              letterSpacing: '0.03em',
+              fontWeight: 400,
               lineHeight: 1.5,
+              textTransform: 'uppercase',
             }}
           >
             © {currentYear} Austin Carson
@@ -69,34 +71,36 @@ export function Footer() {
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              // Immediate scroll to top
               window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-              // Fallback without smooth scroll
               document.documentElement.scrollTop = 0;
               document.body.scrollTop = 0;
             }}
             type="button"
-            className="transition-all duration-300 hover:opacity-100 hover:text-[#1a1a19] active:opacity-60"
+            className="transition-all duration-300 hover:opacity-100 active:opacity-60 active:scale-95"
             style={{ 
-              fontSize: 'clamp(13px, 1.8vw, 14px)',
-              color: '#52525b', // zinc-600 - increased contrast
-              opacity: 0.8, // More visible
-              letterSpacing: '0.02em',
-              fontWeight: 400,
-              minHeight: '44px', // Comfortable tap target
+              fontSize: 'clamp(12px, 1.6vw, 13px)',
+              color: '#71717A',
+              opacity: 0.6,
+              letterSpacing: '0.05em',
+              fontWeight: 500,
+              textTransform: 'uppercase',
+              minHeight: '44px',
               minWidth: '44px',
-              padding: '10px 12px', // Better tap area
+              padding: '10px 16px',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '0.375rem',
+              gap: '0.5rem',
               cursor: 'pointer',
-              touchAction: 'manipulation', // Prevents double-tap zoom delay on mobile
-              WebkitTapHighlightColor: 'transparent', // Removes default mobile tap highlight
+              touchAction: 'manipulation',
+              WebkitTapHighlightColor: 'transparent',
+              border: '1px solid rgba(0, 0, 0, 0.08)',
+              borderRadius: '8px',
+              backgroundColor: 'white',
             }}
             aria-label="Scroll to top"
           >
-            Back to top <span style={{ fontSize: '12px' }}>↑</span>
+            Back to top <span style={{ fontSize: '14px', opacity: 0.7 }}>↑</span>
           </button>
         </div>
       </div>

@@ -3,6 +3,9 @@
   --color-brand: #B6CFFF;
   --color-brand-dark: #97B7D6;
   --color-brand-light: #D8E4F0;
+  --color-accent: #E8F4FF;
+  --color-neutral-50: #FAFAFA;
+  --color-neutral-100: #F5F5F5;
 }
 
 /* =========================== Accessibility & Performance =========================== */
@@ -172,7 +175,7 @@
     font-size: 3rem; /* 48px */
     line-height: 1.1;
     letter-spacing: -0.02em;
-    font-weight: 300; /* Light, editorial weight */
+    font-weight: 200; /* Extra-light, ultra-thin editorial weight */
     text-wrap: balance; /* Prevents orphans - makes headlines look hand-typeset */
   }
   

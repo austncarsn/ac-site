@@ -115,43 +115,62 @@ export function Navigation() {
             </motion.a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center" style={{ gap: 'var(--space-12)' }}>
+            <div className="hidden md:flex items-center" style={{ gap: 'var(--space-8)' }}>
               {navItems.map((item) => {
                 const sectionId = item.href.substring(1);
                 const isActive = activeSection === sectionId;
                 
                 return (
-                  <a
+                  <motion.a
                     key={item.label}
                     href={item.href}
                     onClick={(e) => handleNavClick(e, item.href)}
-                    className="relative transition-all hover:opacity-100"
+                    className="relative transition-all no-highlight"
                     style={{
-                      fontSize: '17px',
-                      fontWeight: 400,
-                      letterSpacing: '0.05em',
+                      fontSize: '14px',
+                      fontWeight: 500,
+                      letterSpacing: '0.08em',
                       textTransform: 'uppercase',
-                      opacity: isActive ? 1 : 0.5,
-                      padding: '8px 16px',
-                      borderRadius: '8px',
-                      backgroundColor: isActive ? 'rgba(20, 184, 166, 0.08)' : 'transparent',
+                      opacity: isActive ? 0.9 : 0.45,
+                      padding: '10px 18px',
+                      borderRadius: '10px',
                       transitionDuration: '0.3s',
                       transitionTimingFunction: 'cubic-bezier(0.25, 1, 0.5, 1)',
-                      willChange: 'opacity, background-color',
+                      willChange: 'opacity',
                     }}
-                    onMouseEnter={(e) => {
-                      if (!isActive) {
-                        e.currentTarget.style.backgroundColor = 'rgba(20, 184, 166, 0.05)';
-                      }
+                    whileHover={{
+                      opacity: 0.9,
+                      scale: 1.03,
+                      transition: { duration: 0.2, ease: 'easeOut' }
                     }}
-                    onMouseLeave={(e) => {
-                      if (!isActive) {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                      }
+                    whileTap={{
+                      scale: 0.97,
+                      transition: { duration: 0.1 }
                     }}
                   >
                     {item.label}
-                  </a>
+                    
+                    {/* Active indicator - refined minimal line */}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeSection"
+                        className="absolute bottom-0 left-1/2"
+                        style={{
+                          width: '20px',
+                          height: '2px',
+                          background: 'linear-gradient(90deg, rgba(182, 207, 255, 0.6), rgba(182, 207, 255, 0.9), rgba(182, 207, 255, 0.6))',
+                          borderRadius: '1px',
+                          transform: 'translateX(-50%)',
+                        }}
+                        initial={false}
+                        transition={{
+                          type: 'spring',
+                          stiffness: 500,
+                          damping: 40,
+                        }}
+                      />
+                    )}
+                  </motion.a>
                 );
               })}
             </div>

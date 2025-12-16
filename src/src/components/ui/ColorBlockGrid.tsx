@@ -1,7 +1,7 @@
 import { motion, useReducedMotion } from 'motion/react';
-import { useMemo, useCallback } from 'react';
+import { useMemo, useCallback, useState } from 'react';
 import { EASE_OUT_EXPO, EASE_OUT_CIRC, DURATION, MOBILE_DURATION, STAGGER } from '../../lib/constants';
-import { VIBRANT_COLORS, MONOCHROME_PALETTE, getComplementaryColor } from '../../lib/colors';
+import { MONOCHROME_PALETTE, getComplementaryColor } from '../../lib/colors';
 
 // Grid configuration constants
 const GRID_COLS = 10;
@@ -129,24 +129,31 @@ interface ColorBlockGridProps {
 /**
  * ColorBlockGrid - Interactive grid of color blocks in hero section
  * Features ambient wave animation and clickable vibrant colors that change page background
+ * Enhanced with year 2050 aesthetic: liquid morphing, ripple effects, holographic depth
  */
 export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
   const prefersReducedMotion = useReducedMotion();
   const colorBlocks = useMemo(() => generateColorBlocks(), []);
   const mobileColorBlocks = useMemo(() => generateMobileColorBlocks(), []);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [clickedIndex, setClickedIndex] = useState<number | null>(null);
   
   const duration = isMobile ? MOBILE_DURATION : DURATION;
 
   /**
-   * Handles color block click - changes background and border colors
+   * Handles color block click - changes background and border colors with ripple effect
    */
-  const handleColorClick = useCallback((color: string) => {
+  const handleColorClick = useCallback((color: string, index: number) => {
     document.body.style.backgroundColor = color;
     document.body.style.transition = 'background-color 0.6s ease';
     
     // Set complementary border color as CSS variable
     const complementary = getComplementaryColor(color);
     document.documentElement.style.setProperty('--border', complementary);
+    
+    // Trigger ripple animation
+    setClickedIndex(index);
+    setTimeout(() => setClickedIndex(null), 1000);
   }, []);
 
   const gridVariants = {
@@ -188,11 +195,12 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
       {/* Desktop Color Block Grid */}
       <motion.div
         variants={gridVariants}
-        className="hidden lg:grid grid-cols-10 auto-rows-fr"
+        className="hidden lg:grid grid-cols-10 auto-rows-fr relative"
         style={{ 
           gap: '8px',
           willChange: 'opacity, transform',
           transform: 'translateZ(0)',
+          transformStyle: 'preserve-3d',
         }}
         role="presentation"
         aria-hidden="true"
@@ -207,21 +215,48 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
           
           const variation = getCircleVariation(index, colorBlocks.length);
           
+          // Calculate distance from clicked circle for ripple effect
+          const isRippling = clickedIndex !== null;
+          const clickedRow = clickedIndex !== null ? Math.floor(clickedIndex / GRID_COLS) : 0;
+          const clickedCol = clickedIndex !== null ? clickedIndex % GRID_COLS : 0;
+          const distance = Math.sqrt(Math.pow(row - clickedRow, 2) + Math.pow(col - clickedCol, 2));
+          const rippleDelay = distance * 0.05;
+          
           return (
             <motion.div
               key={`color-block-${index}`}
               variants={blockVariants}
-              onClick={isLastRow ? () => handleColorClick(color) : undefined}
+              onClick={isLastRow ? () => handleColorClick(color, index) : undefined}
+              onHoverStart={() => !isMobile && setHoveredIndex(index)}
+              onHoverEnd={() => !isMobile && setHoveredIndex(null)}
               animate={
                 prefersReducedMotion
                   ? undefined
                   : {
-                      opacity: [1, 0.85, 0.92, 0.88, 1],
+                      opacity: isRippling && index !== clickedIndex
+                        ? [1, 0.6, 1]
+                        : [1, 0.85, 0.92, 0.88, 1],
+                      scale: isRippling && index !== clickedIndex
+                        ? [1, 0.95, 1]
+                        : hoveredIndex === index && isLastRow
+                        ? 1.15
+                        : 1,
+                      rotateZ: hoveredIndex === index && isLastRow ? [0, 5, -5, 0] : 0,
                     }
               }
               transition={
                 prefersReducedMotion
                   ? undefined
+                  : isRippling && index !== clickedIndex
+                  ? {
+                      opacity: { duration: 0.4, delay: rippleDelay },
+                      scale: { duration: 0.4, delay: rippleDelay },
+                    }
+                  : hoveredIndex === index && isLastRow
+                  ? {
+                      scale: { duration: 0.3, ease: EASE_OUT_CIRC },
+                      rotateZ: { duration: 0.6, ease: "easeInOut" },
+                    }
                   : {
                       opacity: {
                         duration: 8,
@@ -232,22 +267,63 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
                       },
                     }
               }
-              className={`${isLastRow ? 'cursor-pointer' : ''}`}
+              className={`${isLastRow ? 'cursor-pointer' : ''} relative`}
               style={{ 
                 background: color,
                 width: `${40 * variation.sizeFactor}px`,
                 height: `${40 * variation.sizeFactor}px`,
-                willChange: prefersReducedMotion ? 'auto' : 'opacity',
-                transform: `translateZ(0) translateY(${variation.verticalOffset}px)`,
-                borderRadius: '50%', // Circle shape
-                // Subtle matte inset with gentle variation - soft, tactile, not glossy
+                willChange: prefersReducedMotion ? 'auto' : 'opacity, transform',
+                transform: `translateZ(${isLastRow ? '20px' : '0'}) translateY(${variation.verticalOffset}px)`,
+                borderRadius: '50%',
+                // Enhanced shadows for depth and holographic feel
                 boxShadow: `
                   inset ${variation.shadowBlur}px ${variation.shadowBlur}px ${variation.shadowSpread}px rgba(0, 0, 0, ${variation.innerShadowOpacity}),
-                  inset -1px -1px 4px rgba(255, 255, 255, ${variation.innerHighlightOpacity})
+                  inset -1px -1px 4px rgba(255, 255, 255, ${variation.innerHighlightOpacity}),
+                  ${isLastRow ? '0 8px 20px rgba(182, 207, 255, 0.15), 0 2px 8px rgba(182, 207, 255, 0.1)' : '0 1px 3px rgba(0, 0, 0, 0.05)'}
                 `,
+                transition: 'box-shadow 0.3s ease',
               }}
               aria-hidden="true"
-            />
+            >
+              {/* Holographic ring on hover for interactive circles */}
+              {!prefersReducedMotion && isLastRow && hoveredIndex === index && (
+                <motion.div
+                  className="absolute inset-0 rounded-full pointer-events-none"
+                  initial={{ scale: 1, opacity: 0 }}
+                  animate={{ scale: 1.4, opacity: [0, 0.6, 0] }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  style={{
+                    border: '2px solid rgba(182, 207, 255, 0.6)',
+                    boxShadow: '0 0 20px rgba(182, 207, 255, 0.4)',
+                  }}
+                />
+              )}
+              
+              {/* Ripple effect on click */}
+              {!prefersReducedMotion && clickedIndex === index && (
+                <>
+                  <motion.div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    initial={{ scale: 1, opacity: 0.8 }}
+                    animate={{ scale: 2.5, opacity: 0 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    style={{
+                      border: '2px solid rgba(182, 207, 255, 0.8)',
+                    }}
+                  />
+                  <motion.div
+                    className="absolute inset-0 rounded-full pointer-events-none"
+                    initial={{ scale: 1, opacity: 0.6 }}
+                    animate={{ scale: 2, opacity: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+                    style={{
+                      border: '3px solid rgba(182, 207, 255, 0.6)',
+                      boxShadow: '0 0 30px rgba(182, 207, 255, 0.5)',
+                    }}
+                  />
+                </>
+              )}
+            </motion.div>
           );
         })}
       </motion.div>
@@ -278,7 +354,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
             <motion.div
               key={`mobile-color-block-${index}`}
               variants={blockVariants}
-              onClick={isLastRow ? () => handleColorClick(color) : undefined}
+              onClick={isLastRow ? () => handleColorClick(color, index) : undefined}
               animate={
                 prefersReducedMotion
                   ? undefined
