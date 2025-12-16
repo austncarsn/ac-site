@@ -511,6 +511,10 @@
     pointer-events: none;
   }
 
+  .\!visible {
+    visibility: visible !important;
+  }
+
   .visible {
     visibility: visible;
   }
@@ -1132,10 +1136,6 @@
     background-color: color-mix(in oklab, oklch(1 0 0) 95%, transparent);
   }
 
-  .bg-background\/98 {
-    background-color: color-mix(in oklab, oklch(1 0 0) 98%, transparent);
-  }
-
   .bg-black\/50 {
     background-color: #00000080;
   }
@@ -1687,8 +1687,8 @@
   }
 
   @media (hover: hover) {
-    .hover\:opacity-60:hover {
-      opacity: .6;
+    .hover\:opacity-70:hover {
+      opacity: .7;
     }
   }
 
@@ -1754,8 +1754,8 @@
     scale: .98;
   }
 
-  .active\:opacity-40:active {
-    opacity: .4;
+  .active\:opacity-50:active {
+    opacity: .5;
   }
 
   .active\:opacity-60:active {
