@@ -29,6 +29,15 @@ export function ProgressiveImage({
   const [error, setError] = useState(false);
   const prefersReducedMotion = useReducedMotion();
 
+  const handleImageLoad = () => {
+    setIsLoaded(true);
+    onLoad?.();
+  };
+
+  const handleImageError = () => {
+    setError(true);
+  };
+
   useEffect(() => {
     if (!src) return;
 
@@ -39,11 +48,8 @@ export function ProgressiveImage({
       setIsLoaded(true);
       onLoad?.();
     } else {
-      img.onload = () => {
-        setIsLoaded(true);
-        onLoad?.();
-      };
-      img.onerror = () => setError(true);
+      img.onload = handleImageLoad;
+      img.onerror = handleImageError;
     }
 
     return () => {
@@ -68,21 +74,26 @@ export function ProgressiveImage({
         <motion.img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover"
+          className={className}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+          onLoad={handleImageLoad}
+          onError={handleImageError}
           loading={priority ? 'eager' : 'lazy'}
           initial={prefersReducedMotion ? { opacity: 1 } : { 
             opacity: 0, 
-            filter: 'blur(20px)',
             scale: 1.05
           }}
           animate={prefersReducedMotion ? { opacity: 1 } : {
             opacity: isLoaded ? 1 : 0,
-            filter: isLoaded ? 'blur(0px)' : 'blur(20px)',
             scale: isLoaded ? 1 : 1.05
           }}
           transition={{
-            duration: prefersReducedMotion ? 0.15 : 0.6,
-            ease: [0.25, 1, 0.5, 1]
+            duration: 0.5,
+            ease: [0.16, 1, 0.3, 1],
           }}
         />
       )}

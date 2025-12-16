@@ -2210,7 +2210,6 @@
   }
 
   .glass-panel {
-    -webkit-backdrop-filter: saturate(180%) blur(12px);
     border-bottom: 1px solid var(--border);
     background-color: #fffc;
   }

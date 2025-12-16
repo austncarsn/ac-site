@@ -106,3 +106,21 @@ export function createFadeVariants(reducedMotion: boolean, isMobile: boolean = f
     },
   };
 }
+
+// Standard animation variants with GPU acceleration
+export const createStandardVariants = (reducedMotion: boolean, isMobile: boolean, duration: any) => {
+  return {
+    hidden: { 
+      opacity: 0, 
+      y: reducedMotion ? 0 : (isMobile ? 12 : 20),
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: reducedMotion ? duration.fast : duration.normal,
+        ease: EASE_OUT_EXPO,
+      },
+    },
+  };
+};

@@ -28,12 +28,10 @@ const createGridAnimationVariants = (prefersReducedMotion: boolean, isMobile: bo
       hidden: {
         opacity: 0,
         y: prefersReducedMotion ? 0 : (isMobile ? 20 : 30),
-        filter: prefersReducedMotion ? 'none' : `blur(${isMobile ? '4px' : '6px'})`,
       },
       visible: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
         transition: {
           duration: prefersReducedMotion ? 0.3 : (isMobile ? 0.6 : 0.8),
           ease: EASE_OUT_EXPO,

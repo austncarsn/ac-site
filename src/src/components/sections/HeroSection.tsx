@@ -12,7 +12,6 @@ import { ColorBlockGrid } from '../ui/ColorBlockGrid';
 // Extract animation variants to prevent recreation on each render
 const createAnimationVariants = (isMobile: boolean, prefersReducedMotion: boolean, duration: any) => {
   const yOffset = isMobile ? 16 : 24;
-  const blurAmount = isMobile ? '6px' : '10px';
   const animationDuration = prefersReducedMotion ? duration.fast : duration.slowest;
 
   return {
@@ -30,12 +29,10 @@ const createAnimationVariants = (isMobile: boolean, prefersReducedMotion: boolea
       hidden: { 
         opacity: 0, 
         y: prefersReducedMotion ? 0 : yOffset,
-        filter: prefersReducedMotion ? 'none' : `blur(${blurAmount})`,
       },
       visible: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
         transition: {
           duration: animationDuration,
           ease: EASE_OUT_EXPO,
@@ -46,12 +43,10 @@ const createAnimationVariants = (isMobile: boolean, prefersReducedMotion: boolea
       hidden: { 
         opacity: 0,
         y: prefersReducedMotion ? 0 : (isMobile ? 12 : 18),
-        filter: prefersReducedMotion ? 'none' : `blur(${isMobile ? '4px' : '8px'})`,
       },
       visible: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
         transition: {
           duration: prefersReducedMotion ? duration.fast : (isMobile ? duration.slower : 1.6),
           ease: EASE_OUT_EXPO,
@@ -62,12 +57,10 @@ const createAnimationVariants = (isMobile: boolean, prefersReducedMotion: boolea
       hidden: { 
         opacity: 0,
         y: prefersReducedMotion ? 0 : (isMobile ? 10 : 14),
-        filter: prefersReducedMotion ? 'none' : `blur(${isMobile ? '3px' : '6px'})`,
       },
       visible: {
         opacity: 0.6,
         y: 0,
-        filter: 'blur(0px)',
         transition: {
           duration: prefersReducedMotion ? duration.fast : (isMobile ? duration.slower : 1.4),
           ease: EASE_OUT_EXPO,
@@ -78,12 +71,10 @@ const createAnimationVariants = (isMobile: boolean, prefersReducedMotion: boolea
       hidden: { 
         opacity: 0,
         y: prefersReducedMotion ? 0 : (isMobile ? 10 : 14),
-        filter: prefersReducedMotion ? 'none' : `blur(${isMobile ? '3px' : '6px'})`,
       },
       visible: {
         opacity: 1,
         y: 0,
-        filter: 'blur(0px)',
         transition: {
           duration: animationDuration,
           ease: EASE_OUT_QUART,
@@ -213,7 +204,6 @@ export function HeroSection() {
               width: '400px',
               height: '400px',
               background: 'radial-gradient(circle, rgba(182, 207, 255, 0.15) 0%, transparent 70%)',
-              filter: 'blur(60px)',
               x: particle1X,
               y: particle1Y,
             }}
@@ -236,7 +226,6 @@ export function HeroSection() {
               width: '350px',
               height: '350px',
               background: 'radial-gradient(circle, rgba(182, 207, 255, 0.12) 0%, transparent 70%)',
-              filter: 'blur(70px)',
               x: particle2X,
               y: particle2Y,
             }}

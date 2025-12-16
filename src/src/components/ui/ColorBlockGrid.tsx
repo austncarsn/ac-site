@@ -156,21 +156,19 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
     setTimeout(() => setClickedIndex(null), 1000);
   }, []);
 
-  const gridVariants = {
+  const containerVariants = {
     hidden: { 
       opacity: 0, 
       scale: prefersReducedMotion ? 1 : 0.96,
-      filter: prefersReducedMotion ? 'none' : (isMobile ? 'blur(10px)' : 'blur(16px)'),
     },
     visible: {
       opacity: 1,
       scale: 1,
-      filter: 'blur(0px)',
       transition: {
         duration: prefersReducedMotion ? duration.fast : (isMobile ? duration.slower : 1.8),
         ease: EASE_OUT_EXPO,
-        staggerChildren: prefersReducedMotion ? 0 : STAGGER.tight,
-        delayChildren: prefersReducedMotion ? 0 : (isMobile ? 0.4 : 0.6),
+        delayChildren: prefersReducedMotion ? 0 : (isMobile ? 0.1 : 0.2),
+        staggerChildren: prefersReducedMotion ? 0 : STAGGER.slower,
       },
     },
   };
@@ -194,7 +192,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
     <>
       {/* Desktop Color Block Grid */}
       <motion.div
-        variants={gridVariants}
+        variants={containerVariants}
         className="hidden lg:grid grid-cols-10 auto-rows-fr relative"
         style={{ 
           gap: '8px',
@@ -330,7 +328,7 @@ export function ColorBlockGrid({ isMobile = false }: ColorBlockGridProps) {
 
       {/* Mobile Color Block Grid */}
       <motion.div
-        variants={gridVariants}
+        variants={containerVariants}
         className="lg:hidden grid grid-cols-6 auto-rows-fr"
         style={{ 
           gap: '8px',

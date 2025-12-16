@@ -368,10 +368,8 @@ function DownloadButton({
         backgroundSize: '200% 200%',
         animation: 'gradientShift 8s ease infinite',
         
-        // Enhanced glassmorphism - frosted glass effect
-        backdropFilter: 'blur(16px) saturate(180%)',
-        WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-        backgroundColor: 'rgba(255, 255, 255, 0.15)', // Moderate white tint for glass
+        // Enhanced styling without blur
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
         border: '1px solid rgba(255, 255, 255, 0.3)',
         boxShadow: `
           0 8px 32px rgba(92, 127, 184, 0.2),
